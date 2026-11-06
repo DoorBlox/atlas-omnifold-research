@@ -1,0 +1,72 @@
+name: ATLAS Phase 7 preflight
+
+on:
+  push:
+    paths:
+      - "src/**"
+      - "tests/**"
+      - "requirements.txt"
+      - ".github/workflows/atlas-phase7.yml"
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: "smoke = software only; schema = download official ATLAS archive and audit HDF5"
+        type: choice
+        required: true
+        default: smoke
+        options:
+          - smoke
+          - schema
+      include_target:
+        description: "Extract all large alternative/target HDF5 files (more storage required)"
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: atlas-phase7-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  atlas:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install locked-range dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Check disk and runtime
+        run: |
+          df -h .
+          python --version
+      - name: Run deterministic software tests
+        run: python -m pytest -q tests
+      - name: Run smoke test
+        if: ${{ github.event_name != 'workflow_dispatch' || inputs.stage == 'smoke' }}
+        run: python -m src.atlas_preflight --stage smoke --out outputs
+      - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.stage == 'schema' }}
+        run: |
+          if [[ "${{ inputs.include_target }}" == "true" ]]; then
+            python -m src.atlas_preflight --stage schema --include-target --out outputs
+          else
+            python -m src.atlas_preflight --stage schema --out outputs
+          fi
+      - name: Upload lightweight audit artifacts (never raw ATLAS data)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase7-preflight-${{ github.run_number }}
+          path: outputs/
+          retention-days: 14
+          if-no-files-found: ignore
