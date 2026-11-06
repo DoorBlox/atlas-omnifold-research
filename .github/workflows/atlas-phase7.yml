@@ -7,6 +7,7 @@ on:
       - "tests/**"
       - "requirements.txt"
       - ".github/workflows/atlas-phase7.yml"
+      - "ops/schema-request.txt"
   workflow_dispatch:
     inputs:
       stage:
@@ -52,10 +53,10 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ github.event_name != 'workflow_dispatch' || inputs.stage == 'smoke' }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
-        if: ${{ github.event_name == 'workflow_dispatch' && inputs.stage == 'schema' }}
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-schema]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'schema') }}
         run: |
           if [[ "${{ inputs.include_target }}" == "true" ]]; then
             python -m src.atlas_preflight --stage schema --include-target --out outputs
