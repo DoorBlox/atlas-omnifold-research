@@ -1,0 +1,6 @@
+numpy>=1.26,<3
+pandas>=2.2,<3
+tables>=3.9,<4
+h5py>=3.10,<4
+requests>=2.31,<3
+pytest>=8,<10
