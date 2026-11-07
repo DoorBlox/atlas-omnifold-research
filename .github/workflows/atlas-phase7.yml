@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty"
+        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty; closure = pseudo truth check"
         type: choice
         required: true
         default: smoke
@@ -20,6 +20,7 @@ on:
           - schema
           - projection
           - covariance
+          - closure
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -56,10 +57,10 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
-        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance')) }}
+        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]') || contains(github.event.head_commit.message, '[atlas-closure]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance' || inputs.stage == 'closure')) }}
         env:
           HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           REQUESTED_STAGE: ${{ inputs.stage }}
@@ -67,6 +68,8 @@ jobs:
         run: |
           if [[ "$INCLUDE_TARGET" == "true" ]]; then
             python -m src.atlas_preflight --stage schema --include-target --out outputs
+          elif [[ "$HEAD_COMMIT_MESSAGE" == *"[atlas-closure]"* || "$REQUESTED_STAGE" == "closure" ]]; then
+            python -m src.atlas_preflight --stage schema --include-closure --out outputs
           elif [[ "$HEAD_COMMIT_MESSAGE" == *"[atlas-covariance]"* || "$REQUESTED_STAGE" == "covariance" ]]; then
             python -m src.atlas_preflight --stage schema --include-alternatives --out outputs
           else
@@ -78,6 +81,9 @@ jobs:
       - name: Provisional source-wise 2x2 covariance (G15 permanently NO-GO)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-covariance]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'covariance') }}
         run: python -m src.phase7_covariance --root work --out outputs
+      - name: Official 2x2 pseudodata known-target closure (uncalibrated)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'closure') }}
+        run: python -m src.phase7_closure --root work --out outputs
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
