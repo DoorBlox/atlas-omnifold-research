@@ -63,3 +63,23 @@ Next useful step: examine the actual **released replica-shape distributions** fo
 - python -m src.phase7_conditional_null --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/conditional-toys --toys 5000
 
 **G15 NO-GO. No real-data p-value was evaluated.**
+
+
+## Subsequent empirical-replica stress test — actual frozen source shapes (run 42391320503)
+
+[Verified CI run 42391320503](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391320503) succeeded with **77 tests passed**. Artifact: phase7-lite-audits-13, ID **13582115356**. The new source src/phase7_empirical_replica_null.py reads all original frozen normalized four-cell replica shapes from v2, with the actual counts (real data bootstrap 100; pseudo bootstrap 25; MC 25; NN 100). It validates exact equality of the unbiased replica-shape source matrices before simulation.
+
+The distinct HYBRID conditional null resamples centered real source-family shape offsets, scaling their sample covariance to match the R-1 covariance. The NN mean is approximated by resampling R empirical network offsets and averaging, with the corresponding finite empirical-population correction. Remaining measured source terms are treated as fixed-covariance Gaussian draws. Unlike the previous all-Gaussian model, this probes observed bootstrap skewness; however it still reuses replicas of **one** unfolded dataset and does not recreate independent detector-level measurements or retraining.
+
+**10,000 trials per scenario; nominal reference three-contrast 95% threshold 7.8147279.**
+
+| Source correlation model | Pseudodata empirical-hybrid rejection | Real-data-source empirical-hybrid rejection |
+|---|---:|---:|
+| Both fully correlated | 4.95% | 5.55% |
+| DD four independent, Sherpa full | 4.82% | 5.12% |
+| DD full, Sherpa four independent | 5.26% | 5.01% |
+| Both four independent | 4.99% | 4.82% |
+
+Descriptive skewness of three fixed contrast coordinates (no normality-test decision): pseudodata data-bootstrap with R=25: **[-0.808, -0.296, +0.013]**; real data-bootstrap with R=100: **[+0.183, +0.178, +0.210]**. NN ensemble has 100 replicas and relatively modest marginal skew in both samples. With R=25, sample skewness and kurtosis estimates are noisy, so do not overinterpret. Exact per-family kurtosis and Monte Carlo Wilson intervals are in replica-null/empirical_replica_null.json in the referenced Actions artifact.
+
+**Scientific conclusion:** The hybrid conditional null has not exposed a gross non-Gaussian discrepancy relative to the separately simulated source-wise Gaussian null at this threshold. This is NOT a measurement of ATLAS coverage, a source-correlation validation, a formal goodness-of-fit test, or a permission to report real-data p-values. G5 remains PROVISIONAL; G8 and G12 remain experimentally UNVERIFIED; G15 NO-GO. No additional original ATLAS archive download was required.
