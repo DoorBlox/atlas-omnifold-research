@@ -15,6 +15,7 @@ on:
       - "src/phase7_v2_reconstruct.py"
       - "src/phase7_twopoint_protocol.py"
       - "src/phase7_official_helper_audit.py"
+      - "src/phase7_official_excerpts.py"
       - "tests/test_phase7_snapshot.py"
       - "tests/test_phase7_divisor_audit.py"
       - "tests/test_phase7_interaction.py"
@@ -66,6 +67,8 @@ jobs:
         run: python -m src.phase7_twopoint_protocol --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/twopoint
       - name: Probe CERN official helper source without executing fetched code
         run: python -m src.phase7_official_helper_audit --out outputs/official-helper
+      - name: Extract official function bodies for human source-method reconciliation
+        run: python -m src.phase7_official_excerpts
       - name: Upload only small derived audit reports
         if: always()
         uses: actions/upload-artifact@v4
