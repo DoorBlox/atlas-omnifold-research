@@ -49,3 +49,26 @@ The code computes the pseudodata-versus-independent-target diagnostics **before*
 **Reproduce with no raw-data download:** `python -m src.phase7_twopoint_protocol --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/twopoint`.
 
 Scientific implementation: `src/phase7_twopoint_protocol.py`; regression protection: `tests/test_phase7_twopoint_protocol.py`.
+
+## Exact-normalization versus first-order Jacobian check (pinned v2, 2026-11-07)
+
+A source of approximation in the code is linearizing a normalized count-level nuisance shift `delta`. For nominal source counts `h`, total `H=sum(h)`, nominal normalized shape `p=h/H` and `D=sum(delta)`, the **exact** shifted normalized difference and its first-order approximation are related by the *identity*:
+
+```text
+shift_exact = (h+delta)/(H+D) - h/H
+shift_linear = (delta - p*D)/H
+shift_exact = shift_linear / (1 + D/H)
+```
+
+Therefore the Euclidean relative difference between linear and exact shift vectors is exactly `abs(D/H)`, when the shift is nonzero and `H+D>0`. This measures only **normalization nonlinearity**, not the validity of the correlation assumption.
+
+Computed directly from checksum-pinned official `data/derived/phase7-v2/moments.json` signed four-cell sums:
+
+| Sample | Two-point source | `abs(D/H)` = relative shift-vector difference | Maximum absolute normalized cell shift difference |
+|---|---|---:|---:|
+| Real | DD unfolding | 0.7341% | 0.00005963 |
+| Real | Sherpa hidden variable | 0.5009% | 0.00004659 |
+| Pseudodata | DD unfolding | 0.9258% | 0.00007499 |
+| Pseudodata | Sherpa hidden variable | 0.4094% | 0.00003024 |
+
+These are small **normalization-approximation differences** in this frozen 2x2 partition, and do not validate 2D source correlations or make the real-data quadratic a calibrated significance test. The ATLAS helper's 1D smoothing code remains independently inaccessible. **G15 NO-GO.**
