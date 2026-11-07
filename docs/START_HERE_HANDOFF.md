@@ -1,5 +1,18 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## Latest optimization milestone — permanent derived results (2026-11-07)
+
+**Verified:** [one-time archival CI 42380892986](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42380892986) committed `data/derived/phase7-v1/`, preserving **33,594 bytes** in 12 original four-cell result files with pinned SHA-256 hashes, both covariance `.npz` archives, signed source *covariance matrices* (not raw shifts), real/pseudo cell summaries, original uncertainty manifests and provenance. No raw HDF5 data were copied. This survives the original Actions artifact expiration. The default analysis pipeline now calls `python -m src.phase7_snapshot verify` against **local committed files**, with no Zenodo or GitHub artifact download for `sensitivity`, `calibration`, or `audit`.
+
+**Independent confirmation:** [zero-download sensitivity CI run 42380984689](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42380984689) succeeded: **29 Python tests passed**, checksum verification passed and all nine model sensitivity scenarios executed. These are provisional statistical diagnostics; **G15 NO-GO** is unchanged.
+
+**New method audit:** [PHASE7_NOTEBOOK_METHOD_RECONCILIATION.md](PHASE7_NOTEBOOK_METHOD_RECONCILIATION.md) maps line-by-line official `2_pseudo_results.ipynb` cell 26 formulas to our normalized 2x2 extension. The external CERN GitLab helper bodies `fill_cov_matrix` / `smooth_uncertainty` remain inaccessible and **unverified**; do not present our 2D covariance recipe as official. For signed per-cell variations or new selection/binning, the current summary is insufficient; plan a **single additional targeted original-data extraction**, only after deciding required fields. See [DERIVED_SNAPSHOT.md](DERIVED_SNAPSHOT.md).
+
+**Next action for the new assistant:** confirm new HEAD and CI on GitHub, read the two new documents, and continue obtaining/verifying official `multifold_util.py` or designing a defensible pre-specified source-correlation 2D treatment. **Do not repeat the 3.65 GB archive download** merely to rerun existing covariance sensitivity or toy calibration.
+
+---
+
+
 **Checkpoint date:** 2026-11-07 (Asia/Jakarta).  
 **Purpose:** preserve the complete actionable project context if the original ChatGPT conversation reaches its context/length limit. Read this before editing or making physics claims.  
 **Repository:** https://github.com/DoorBlox/atlas-omnifold-research — branch `main`, GitHub account **DoorBlox**.  
