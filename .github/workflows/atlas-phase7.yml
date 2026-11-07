@@ -1,4 +1,4 @@
-name: ATLAS Phase 7 preflight
+name: ATLAS Phase 7 analysis
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2 central weights"
+        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty"
         type: choice
         required: true
         default: smoke
@@ -19,6 +19,7 @@ on:
           - smoke
           - schema
           - projection
+          - covariance
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -27,6 +28,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
 
 concurrency:
   group: atlas-phase7-${{ github.ref }}
@@ -54,19 +56,24 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
-        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection')) }}
+        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance')) }}
         run: |
           if [[ "${{ inputs.include_target }}" == "true" ]]; then
             python -m src.atlas_preflight --stage schema --include-target --out outputs
+          elif [[ "${{ github.event.head_commit.message }}" == *"[atlas-covariance]"* || "${{ inputs.stage }}" == "covariance" ]]; then
+            python -m src.atlas_preflight --stage schema --include-alternatives --out outputs
           else
             python -m src.atlas_preflight --stage schema --out outputs
           fi
       - name: Real ATLAS descriptive 2x2 projection (G15 stays blocked)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-projection]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'projection') }}
         run: python -m src.projection --root work --out outputs
+      - name: Provisional source-wise 2x2 covariance (G15 permanently NO-GO)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-covariance]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'covariance') }}
+        run: python -m src.phase7_covariance --root work --out outputs
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
@@ -75,3 +82,11 @@ jobs:
           path: outputs/
           retention-days: 14
           if-no-files-found: ignore
+      - name: Report completed workflow status to research issue
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_STATUS: ${{ job.status }}
+        run: |
+          gh issue comment 1 --body "ATLAS Phase 7 CI run: ${RUN_URL}; job result: ${RUN_STATUS}. Scientific G15 remains **NO-GO** pending official covariance calibration and pseudodata closure. See artifacts and step logs for details." || true
