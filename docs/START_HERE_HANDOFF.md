@@ -1,6 +1,16 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
 
+## Latest verified Sherpa 2D smoothing limitation and no-repeat workflow (2026-11-07)
+
+**[Run 42391936651](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391936651) PASSED — 91 tests**, all on frozen v1/v2 2×2 signed moments; **no original ATLAS archive download**. New bounded test src/phase7_sherpa_2d_smoothing.py and matching tests use the CERN 1D smooth_uncertainty width rule (full bin-center range / 10), but deliberately do **not** claim that any 2D kernel is official. For a hypothetical factorized **two-level by two-level** Gaussian kernel, the axis off-diagonal weight equals exp(-50)/(1+exp(-50)) = **1.92874985e-22**; the 2D smoothing is numerical **identity on both saved signed Sherpa shifts**. Conversely arbitrarily flattening four categories onto fictitious 1D centers changes Sherpa covariance by **0.708151% pseudo and 1.820378% real**, but is order-dependent and physically inappropriate; it is **not used in inference**. See [source-aligned method evidence](PHASE7_SOURCE_ALIGNED_JOINT_AND_CONDITIONAL_TOYS.md). These results do not fix DD/Sherpa 2D nuisance correlations or validate any 2D model.
+
+**Current strongest CI milestone: 91 passing regression tests; source code, method comparisons, mock/real integration and physics safeguards verified.** Formal scientific evidence gap remains a pre-specified validated 2D source/correlation and null sampling model and, for claims of *experimental* coverage, independent full-unfolding pseudodata repetitions. [GO requirements](PHASE7_GO_EVIDENCE_REQUIREMENTS.md) lists current vs unavailable input precisely. **G5 PROVISIONAL; G8/G12 experimentally UNVERIFIED; G15 NO-GO, no real-data p-value.**
+
+---
+
+
+
 ## Newest 2D replica-method sensitivity and exact GO evidence requirements (2026-11-07)
 
 **[GitHub Actions run 42391604664](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391604664) PASSED — 85 tests**; no original ATLAS archive download. [Source-aligned covariance methods](PHASE7_SOURCE_ALIGNED_JOINT_AND_CONDITIONAL_TOYS.md) now include a **direct comparison of individually normalized R−1 four-cell replica covariances against projecting the official raw-count R−1 sample covariance through the nominal shape Jacobian**. Two methods exactly agree for constant replica total weight, but differ slightly when total changes. Maximum absolute per-family covariance TRACE relative difference **0.1080% pseudodata, 0.1357% real**; the four prespecified DD/Sherpa model diagnostic quadratics change by at most **0.000863% pseudo and 0.003695% real**. Source traces, all three replica families, three-contrast rank, and 2D source models are independently tested. Artifact: **phase7-lite-audits-14**, ID **13581811875**. G5 is closer to resolving mathematically, but model validity remains separate from negligible normalization error. No real-data p-value was calculated.
