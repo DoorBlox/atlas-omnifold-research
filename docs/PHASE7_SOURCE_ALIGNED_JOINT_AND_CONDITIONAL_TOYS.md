@@ -103,3 +103,14 @@ For constant-total-weight replicas the two are algebraically identical; when the
 The corresponding maximum **absolute percent change of uncalibrated quadratic** across the four fixed DD/Sherpa scenarios is **0.000863% pseudodata** and **0.003695% real**. The direct comparison is numerically small for these frozen bins. It does **not** prove exactness or validate the other 2D source correlations. The baseline v1 and v2 files are untouched.
 
 **Status:** Source-verified R-1 denominator, bounded 2D normalization-convention sensitivity, and synthetic/real regression tests are all completed. G5 remains PROVISIONAL because these are not a single ATLAS-recommended covariance model for a new 2D observable; G8/G12 remain without genuine repeated unfolding validation; G15 remains NO-GO.
+
+
+## Next bounded Sherpa 2D smoothing check — run 42391936651 (91 tests)
+
+[Verified GitHub Actions 42391936651](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391936651) **SUCCESS, 91 tests**, no full ATLAS download. New independently tested code: src/phase7_sherpa_2d_smoothing.py and tests/test_phase7_sherpa_2d_smoothing.py. The primary CERN one-dimensional routine uses Gaussian width equal to an ordered one-dimensional bin-center span / 10. **This does not specify physical 2D bin centers or a canonical kernel for our two threshold-defined categories on each axis.** As a bounded mathematical alternative only, construct a factorized two-axis kernel with **two discrete levels per axis** using the same dimensionless Nsig=10 convention.
+
+For exactly two levels on any such axis, its normalized off-diagonal Gaussian weight is exp(-50)/(1+exp(-50)) = **1.9287498479639178e-22**. The product kernel on LL,LH,HL,HH is therefore numerical identity: raw signed Sherpa shifts, and hence the normalized source covariance, are unchanged at available floating precision in both real and pseudodata.
+
+An **arbitrarily flattened 1D vector** of those four threshold categories is physically unjustified: using illustrative artificial centers 0,1,2,3 would instead change the Sherpa covariance Frobenius norm by **0.708151% pseudo** or **1.820378% real**, and the result depends on the arbitrary category order. This is labelled a **non-inferential stress example** only; it is not included in the chosen four models.
+
+**Crucial distinction:** a mathematically natural factorized two-level kernel being numerically identity does NOT mean ATLAS endorsed unsmoothed 2D Sherpa or validated the two-point nuisance correlation. There are no source-specified physical 2D distances/bandwidths for the unbounded low/high categories. **G12 remains UNVERIFIED, G15 NO-GO**.
