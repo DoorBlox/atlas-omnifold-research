@@ -3,8 +3,15 @@ name: ATLAS Phase 7 analysis
 on:
   push:
     paths:
-      - "src/**"
-      - "tests/**"
+      - "src/atlas_preflight.py"
+      - "src/projection.py"
+      - "src/phase7_covariance.py"
+      - "src/phase7_closure.py"
+      - "src/shape.py"
+      - "tests/test_projection.py"
+      - "tests/test_shape.py"
+      - "tests/test_phase7_covariance.py"
+      - "tests/test_phase7_closure.py"
       - "requirements.txt"
       - ".github/workflows/atlas-phase7.yml"
       - "ops/schema-request.txt"
