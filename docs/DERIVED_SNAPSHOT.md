@@ -28,3 +28,21 @@ These matrices are **not sufficient for every future question**. In particular, 
 The original public ATLAS data must be credited, and no restricted/unlicensed event-level records should be copied into the repository. Do not overwrite `phase7-v1`: future improved analyses should use a new `phase7-v2` with its own provenance and gate documentation.
 
 **Scientific gate:** **G15 NO-GO**. A cache hit or verified checksum is a computational-integrity result, not a statistical-inference endorsement.
+
+## Independent no-download equivalence check (verified)
+
+Two successfully executed GitHub Actions runs were compared file-by-file:
+
+- Before snapshot: [run 42328332652](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42328332652), artifact `phase7-preflight-21`, based on historical downloaded artifacts.
+- After snapshot: [run 42380984689](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42380984689), artifact `phase7-preflight-35`, using **only** checksum-pinned `data/derived/phase7-v1` committed files.
+
+**All four generated output files are byte-for-byte identical**, not merely numerically close:
+
+| Output file | SHA-256 (both runs) |
+|---|---|
+| `model_sensitivity.csv` | `ce7c6aa745b0f4af67172a6ff207acabaa653ab8a4c08bd6e1a457beb972a951` |
+| `model_sensitivity_status.json` | `117e31f02c6f2f342e84585238bd928f86ca6abc448f4d8ed1c9b43d892d0509` |
+| `pseudo_source_trace.csv` | `e5f138ecbad7c7aba640eb6580794dc852967630bb681ac845270d33531d4d2d` |
+| `real_source_trace.csv` | `d8795a6d3605f1d4763bf8f9e4cc241ccc46cc3602cb526b35e61cdc4a3e4183` |
+
+The no-download run reported **29 passing Python regression tests**. The equivalence test verifies that the optimization did not change the archived analysis's outputs; it **does not** resolve the provisional scientific modelling of DD/Sherpa correlations or permit G15 inference.
