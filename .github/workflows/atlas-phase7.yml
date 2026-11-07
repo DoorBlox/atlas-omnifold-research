@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty; closure = pseudo truth check"
+        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty; closure = pseudo truth check; sensitivity = compare existing results"
         type: choice
         required: true
         default: smoke
@@ -21,6 +21,7 @@ on:
           - projection
           - covariance
           - closure
+          - sensitivity
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -29,6 +30,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   issues: write
 
 concurrency:
@@ -57,7 +59,7 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]') && !contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
         if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]') || contains(github.event.head_commit.message, '[atlas-closure]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance' || inputs.stage == 'closure')) }}
@@ -84,6 +86,21 @@ jobs:
       - name: Official 2x2 pseudodata known-target closure (uncalibrated)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'closure') }}
         run: python -m src.phase7_closure --root work --out outputs
+      - name: Download verified published-result artifacts (no large data transfer)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p derived_input/real derived_input/pseudo
+          gh run download 42324639484 --name phase7-preflight-12 --dir derived_input/real
+          gh run download 42327464929 --name phase7-preflight-17 --dir derived_input/pseudo
+          test -f derived_input/real/source_covariances.npz
+          test -f derived_input/pseudo/pseudo_source_covariances.npz
+      - name: Run nine covariance model sensitivity scenarios (all uncalibrated)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
+        run: |
+          python -m src.phase7_model_sensitivity --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
