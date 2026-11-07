@@ -1,6 +1,18 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
 
+## Newest 2D replica-method sensitivity and exact GO evidence requirements (2026-11-07)
+
+**[GitHub Actions run 42391604664](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391604664) PASSED — 85 tests**; no original ATLAS archive download. [Source-aligned covariance methods](PHASE7_SOURCE_ALIGNED_JOINT_AND_CONDITIONAL_TOYS.md) now include a **direct comparison of individually normalized R−1 four-cell replica covariances against projecting the official raw-count R−1 sample covariance through the nominal shape Jacobian**. Two methods exactly agree for constant replica total weight, but differ slightly when total changes. Maximum absolute per-family covariance TRACE relative difference **0.1080% pseudodata, 0.1357% real**; the four prespecified DD/Sherpa model diagnostic quadratics change by at most **0.000863% pseudo and 0.003695% real**. Source traces, all three replica families, three-contrast rank, and 2D source models are independently tested. Artifact: **phase7-lite-audits-14**, ID **13581811875**. G5 is closer to resolving mathematically, but model validity remains separate from negligible normalization error. No real-data p-value was calculated.
+
+**[Exact evidence needed for final GO](PHASE7_GO_EVIDENCE_REQUIREMENTS.md)** has now been recorded and linked from README. ATLAS's [2024 Zenodo release](https://zenodo.org/records/11507450) lists a single 3.6 GB ZIP; the [PRL paper](https://doi.org/10.1103/PhysRevLett.133.261803) describes a high-statistics pseudodata and a data-like bootstrapped pseudodata sample, **not a released large ensemble of independently retrained detector-level pseudo-experiments**. Repeated physical coverage cannot be conjured from bootstrap replica arrays of one unfolded result. It remains possible to justify a **narrowly labelled model-conditional** significance route, but only after the full 2D covariance/null assumptions and their scope are independently reviewed and pre-specified. A descriptive KTI using the already verified 2×2 results, source decompositions, and pseudodata closure is feasible without G15.
+
+**Current science gate decisions: G5 PROVISIONAL; G8 MODEL-CONDITIONAL TOYS EXECUTED BUT EXPERIMENTAL COVERAGE UNVERIFIED; G11 SINGLE KNOWN-TARGET PSEUDODATA CLOSURE EXECUTED; G12 FOUR SCENARIOS TESTED BUT PRIMARY 2D MODEL UNVALIDATED; G15 NO-GO. No real-data p-value or sigma claim.** Continue pre-specified correlation/estimand review or independent pseudo-retraining feasibility, not repeatedly simulating the same assumed Gaussian null or re-downloading 3.6 GB. Source documents above distinguish available data from missing experiments.
+
+---
+
+
+
 ## Phase 7 source-aligned joint covariance, Gaussian and empirical-replica null audits (2026-11-07)
 
 **Latest verified lightweight CI: [42391320503](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391320503) PASSED, 77 tests.** Preceding milestones: [joint source-aligned covariance run 42390907347](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390907347), 68 tests; [corrected R-1 Gaussian null run 42391098288](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391098288), 73 tests. All from **immutable v1/v2 four-cell summaries, without re-downloading the 3.65 GB ATLAS archive**.
