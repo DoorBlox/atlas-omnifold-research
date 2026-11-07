@@ -1,0 +1,45 @@
+# Phase 7: what evidence is still required for GO
+
+**2026-11-07 checkpoint. G15 = NO-GO for a calibrated real-data generator-compatibility p-value.** This is distinct from readiness to produce a rigorous, descriptive KTI manuscript.
+
+## Official data inventory and confirmed achievements
+
+The ATLAS 2024 release [Zenodo 11507450](https://zenodo.org/records/11507450) publicly lists a single 3.6 GB files.zip archive containing real-data and pseudodata measurements. The [2024 PRL paper](https://doi.org/10.1103/PhysRevLett.133.261803) describes a reweighted high-statistics pseudodata sample and a **datalike sample produced by bootstrapping it**, on which the unfolding was validated. This does not establish a published large ensemble of independently retrained pseudo-experiments.
+
+- Frozen derived v1: checked four-cell real measurement, nominal generator, pseudodata unfolded distribution and **independent known truth**, 29 source components, source manifests, immutable hashes. Source GitHub runs 42324639484 and 42327464929.
+- Frozen signed v2: 251 real and 176 pseudo nominal source-weight columns and Sherpa/non-DY supports, per-cell signed first/second/mixed moments. Extract run 42386487963. All original source covariances reconstructed without ambiguity on the same frozen bins.
+- Source verified: upstream CERN 2024 multifold_util.py SHA-256 cf43074fb3635b5c484dd1f35b9dc95cea938d86d206b4a2e83ab1f739e73d7f (CI run 42390285792). Exact raw-count sample covariance divisor is R-1, NN ensemble has extra divisor R, DD source is an unsmoothed signed binwise variation, Sherpa smoothing is a 1D ordered-bin Gaussian option. The official one-dimensional covariance and family lists do **not** constitute a unique normalized four-cell prescription.
+- 2026-11-07 CI [42390907347](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390907347): 68 tests; real paired-event finite-MC covariance and independent pseudo-target covariance, 29 sources, four prespecified DD/Sherpa models.
+- [42391098288](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391098288): 73 tests, source R-1 corrected 5,000 Gaussian conditional null draws/model. [42391320503](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391320503): 77 tests, 10,000 empirical-replica hybrid null draws/model. **Neither establishes detector-level repeated unfolding coverage.**
+- [42391604664](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391604664): 85 tests; two R-1 replica normalized-shape covariance conventions explicitly compared. The maximum difference in any four-cell comparison quadratic was 0.003695% on real data and 0.000863% on pseudodata. Remaining DD/Sherpa/source-family uncertainty is much larger.
+
+## Gate-specific acceptance matrix
+
+| Gate | Verified | What is still required | Are existing v1/v2 data sufficient? |
+|---|---|---|---|
+| G5: covariance | Exact upstream R-1/Hessian helper, paired MC cross moments, direct v2 source reconstruction, numerical validity | A **pre-specified defensible choice** of 2D family inclusion, DD/HV bin-to-bin nuisance correlations and dependencies between training, systematics and reference | Enough for testing *candidate* models; not source-level authorization of one unique ATLAS 2D model |
+| G8: null calibration | Three-dimensional rank; source-aligned conditional Gaussian and empirical-shape hybrid simulations | A sampling model justified for the **actual inferential claim**; if claiming experimental frequentist coverage, suitable independent full-unfolding pseudo-experiments (or validated equivalent) | Conditional inference can be studied, but the frozen file contains **no independent full-unfolding repeated-experiment ensemble** |
+| G11: known-target closure | Genuine official pseudo unfolded distribution compared with independent known target, support checked | Ensure chosen 2D method passes the published pseudo-target closure diagnostics without post-hoc model switching | **YES for a single independent truth sample**; NO for experimental repeated-sampling coverage |
+| G12: 2D source model | Four prior defined fully correlated / independent-bin DD-Sherpa alternatives, raw signed shifts, null-mode checks | Select an **a priori** source-correlation model and demonstrate robustness/relevance without choosing it by real-data fit | Enough for sensitivity; not enough for a single experimentally validated source-correlation prescription |
+| G15: real-data test | Stable descriptive quadratics and conditional uncertainty summaries | Meet **G5/G8/G12** for the chosen estimand, with a coherent preregistered null and target statistical interpretation | **NO GO for a fully calibrated real-data p-value at present** |
+
+A conditional/model-based p-value may be mathematically possible without independently repeated physical measurements, but only with a fully specified model and an independently justified, transparently limited interpretation. **No such model has yet cleared the project's G15 acceptance criteria.** Do not quietly redefine G15 based on a reassuring toy rejection fraction.
+
+## Two scientifically defensible deliverables
+
+**A. Descriptive joint KTI — feasible today.** Report the four-cell distributions, marginal mass and multiplicity fractions, log-odds association, source-wise provisional uncertainty, paired-MC treatment, pseudodata known-truth closure, and sensitivity to four a priori 2D nuisance models. Clearly label model dependence and do not report a real-data compatibility p-value or significance. This is valuable science and does not require G15.
+
+**B. Full inferential KTI — additional evidence required.** Before releasing any inferential result, fix the null estimand, source inclusion, correlation structure, reference covariance, actual sampling model and calibration procedure. Show on pseudodata that this exact protocol behaves appropriately. If experimental coverage is claimed, establish genuinely independent retrained detector-level pseudo-experiments or a defensible alternative. The released 2024 archive alone does not establish that such an ensemble exists.
+
+## Bounded next work
+
+1. Write an evidence-based *single primary* normalized 2×2 covariance model with fully correlated sources as the declared default if justified, leaving other physically motivated alternatives as sensitivity checks. Do not use real-data compatibility to choose.
+2. Seek independent expert/statistics review whether a **narrow conditional significance interpretation** can be defended using the existing pseudo target and source-based covariance; this is a substantive methodological decision, not a reason to run more identically assumed Gaussian toys.
+3. If full experimental frequentist coverage is required, identify the **exact** independently generated pseudodata and unfolding training/checkpoint materials, access rights and practical compute budget. Do not claim 25 bootstrap weights are 25 independent measurements.
+4. Preserve versioned v1/v2, avoid a new 3.6 GB download unless a particular missing source field or reproducible re-training input is identified, and continue to enforce G15 NO-GO in software until all criteria are met.
+
+## Optional focused independent Deep Research prompt
+
+Independently audit statistical inference for a normalized 2×2 joint leading charged-particle jet mass × track multiplicity measurement made from the ATLAS 2024 OmniFold Z+jets dataset, DOI 10.5281/zenodo.11507450. The source-level CERN 1D covariance helper has been hash verified: fill_cov_matrix uses sample R-1 bootstrap covariance; DD is an unsmoothed signed count shift; Sherpa optionally uses ordered-bin Gaussian smoothing; 2D smoothing and source correlations are not uniquely specified. Evaluate whether the public User Guide section 2 recommendation 5 supports a defensible a priori 2D covariance and null procedure. Audit family inclusion (15 vs 29), shared nominal-generator/unfolded-event finite-MC covariance, data-bootstrap real/pseudo 100/25 replicas, correlations of NN training and systematics, and what can or cannot be concluded from the one known-target pseudodata closure plus 5k Gaussian and 10k empirical-shape hybrid conditional null simulations. Specify whether *any strictly qualified conditional p-value* is scientifically defensible, with precise assumptions and caveats; distinguish it from experimental frequentist coverage. Search for independent full-unfolding pseudo-experiment ensembles or public training/checkpoints with verified links. If unavailable, state precisely what cannot be verified, which new data would be required and the minimal feasible computational design. Do not invent pseudo data, official 2D algorithms, significance, coverage or references. Maintain G15 NO-GO unless stringent evidence supports a defined alternative gate.
+
+**This is a requirements record, not a change to G15.**
