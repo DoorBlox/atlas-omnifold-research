@@ -1,0 +1,67 @@
+name: Archive validated Phase 7 derived statistics
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "ops/archive-request.txt"
+
+permissions:
+  contents: write
+  actions: read
+  issues: write
+
+concurrency:
+  group: atlas-phase7-freeze-main
+  cancel-in-progress: false
+
+jobs:
+  freeze:
+    if: ${{ github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[atlas-freeze]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install lightweight snapshot dependencies
+        run: python -m pip install "numpy>=1.26,<3" "pytest>=8,<10"
+      - name: Verify snapshot implementation before archival
+        run: python -m pytest -q tests/test_phase7_snapshot.py
+      - name: Download only previous small verified result artifacts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p input/real input/pseudo
+          gh run download 42324639484 --name phase7-preflight-12 --dir input/real
+          gh run download 42327464929 --name phase7-preflight-17 --dir input/pseudo
+      - name: Freeze exact source bytes and validate all checksums
+        run: |
+          python -m src.phase7_snapshot build --real-source input/real --pseudo-source input/pseudo --out data/derived/phase7-v1
+          python -m src.phase7_snapshot verify --root data/derived/phase7-v1
+          du -sh data/derived/phase7-v1
+      - name: Commit only the allowlisted derived snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/derived/phase7-v1
+          if git diff --cached --quiet; then
+            echo "Snapshot already committed; no new revision needed."
+          else
+            git commit -m "Freeze verified Phase 7 derived 2x2 statistics from official ATLAS runs"
+            git push origin HEAD:main
+          fi
+      - name: Record snapshot execution for research continuity
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RESULT: ${{ job.status }}
+        run: |
+          gh issue comment 1 --body "Phase 7 one-time derived snapshot archival: ${RUN_URL}; job ${RESULT}. Source runs 42324639484 and 42327464929; snapshot stores only 2x2 sufficient summaries, not event-level data. G15 remains NO-GO." || true

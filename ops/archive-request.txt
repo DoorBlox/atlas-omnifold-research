@@ -1,0 +1,3 @@
+One-time authorization to freeze the previously executed official ATLAS Phase 7 2x2 derived outputs.
+Sources: GitHub Actions runs 42324639484 (real) and 42327464929 (pseudo).
+Only allowlisted, checksum-pinned aggregate statistics; no event-level ATLAS data.
