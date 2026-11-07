@@ -34,3 +34,14 @@ Published archive MD5: `9b838510f41e1d5a8b26d7f3c5b2ca42`.
 After a schema run, map actual measured/generator weight columns and uncertainty families to the official ATLAS implementation. Construct the *nominal-generator-only* frozen thresholds and four-cell support before projecting all source-specific variations. Only run 2D closure with the official pseudodata target once this mapping is verified.
 
 A successful setup is not a physics finding.
+
+
+## Provisional real 2×2 covariance stage (2026-11-07)
+
+On the Actions tab, manually choose `covariance`, or commit a change with `[atlas-covariance]` in the message. This stage downloads the checked official archive, extracts **only** the nominal real-data file plus the real-data Sherpa and non-DY alternative samples, and runs `python -m src.phase7_covariance`.
+
+It exports `real_2x2_cells.csv`, `source_manifest.csv`, `source_covariances.npz`, `covariance_total.npy`, `bin_spec_covariance.json`, and `provisional_covariance_status.json`. These are measurements and **provisional** uncertainty results, NOT an ATLAS-calibrated p-value. The 2D treatment of two-point modelling is not yet independently validated. Do not infer generator agreement/disagreement from the sign or size of uncalibrated differences.
+
+The workflow posts a run link and completion status to [research issue #1](../issues/1) through the connected GitHub Actions bot so run IDs can be discovered without manual copying. A successful software-only CI does not mean the tagged covariance stage was executed: inspect each individual job step.
+
+The official high-statistics pseudodata target is not extracted by this covariance stage. Its 2D closure, source correlation sensitivity and finite-covariance calibration remain outstanding (G8, G11, G12). The research-wide G15 stays **NO-GO**.
