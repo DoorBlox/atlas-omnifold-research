@@ -29,6 +29,7 @@ ALLOWED = {
 }
 SMALL_SET = {"files/data/multifold.h5", "files/pseudodata/multifold.h5"}
 COVARIANCE_SET = SMALL_SET | {"files/data/multifold_sherpa.h5", "files/data/multifold_nonDY.h5"}
+CLOSURE_SET = SMALL_SET | {"files/pseudodata/multifold_sherpa.h5", "files/pseudodata/multifold_nonDY.h5", "files/pseudodata/target.h5"}
 CHUNK = 8 * 1024 * 1024
 
 
@@ -62,8 +63,8 @@ def acquire(root: Path, archive_url: str = ARCHIVE_URL) -> Path:
     return archive
 
 
-def extract_selected(archive: Path, root: Path, include_target: bool = False, include_alternatives: bool = False) -> list[str]:
-    wanted = ALLOWED if include_target else (COVARIANCE_SET if include_alternatives else SMALL_SET)
+def extract_selected(archive: Path, root: Path, include_target: bool = False, include_alternatives: bool = False, include_closure: bool = False) -> list[str]:
+    wanted = ALLOWED if include_target else (CLOSURE_SET if include_closure else (COVARIANCE_SET if include_alternatives else SMALL_SET))
     extracted = []
     with zipfile.ZipFile(archive) as container:
         members = {entry.filename: entry for entry in container.infolist()}
@@ -113,13 +114,15 @@ def main() -> int:
                         help="Also extract large target and alternative HDF5 files")
     parser.add_argument("--include-alternatives", action="store_true",
                         help="Include nominal + independent real-data alternative HDF5 for covariance")
+    parser.add_argument("--include-closure", action="store_true",
+                        help="Extract real nominal, pseudodata nominal/alternatives and the known truth target")
     args = parser.parse_args()
     args.out.mkdir(parents=True, exist_ok=True)
     if args.stage == "smoke":
         print(json.dumps({"status": "PASS", "stage": "software-smoke", "python": sys.version}))
         return 0
     archive = acquire(args.root)
-    extracted = extract_selected(archive, args.root, include_target=args.include_target, include_alternatives=args.include_alternatives)
+    extracted = extract_selected(archive, args.root, include_target=args.include_target, include_alternatives=args.include_alternatives, include_closure=args.include_closure)
     report = {
         "stage": "official-schema-preflight",
         "status": "EXECUTED",
