@@ -1,5 +1,16 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## Latest verified no-download methodology advances (2026-11-07)
+
+**Run [42384082085](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384082085):** 12 regression tests passed on a new **NumPy-only lightweight Actions workflow**; the historical full-data workflow was **skipped**. An independent ATLAS-style reference comparison found that our provisional bootstrap source matrices used population `1/R`, whereas two accessible secondary implementations use sample `1/(R-1)`. The original CERN helper body is still not independently accessible. The algebraic candidate correction uses `R/(R-1)` on the saved matrices and changes the real covariance trace by **+0.02676%** and pseudodata by **+0.05247%**. The original 33,594-byte `phase7-v1` remains immutable. See [PHASE7_REPLICA_DENOMINATOR_AUDIT.md](PHASE7_REPLICA_DENOMINATOR_AUDIT.md); do **not** report corrected candidate matrices as officially validated.
+
+**Run [42384337294](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384337294):** 16 regression tests passed with no original-data download. [`src/phase7_target_mc.py`](../src/phase7_target_mc.py) now reconstructs the independent pseudodata truth finite-MC covariance from archived four-cell fractions and effective counts and evaluates the target log-odds gradient at **q**, not measurement **p**. Target-only log-odds SE is now **0.001342336** (earlier approximation **0.001415537**), and the independent-target model conditional combined SE is **0.056412160**. See [PHASE7_REFERENCE_MC_COVARIANCE_AUDIT.md](PHASE7_REFERENCE_MC_COVARIANCE_AUDIT.md). This does **not** validate shared-event generator/measurement covariance or full ATLAS coverage.
+
+**Next priority:** independently verify CERN `multifold_util.py` against the secondary-reference sample covariance, lock an **a priori** 2D Sherpa/DD/source-family protocol, then (only if needed) make **one** targeted full-archive pass for signed source-cell sums and shared-event mixed moments. Avoid repeated 3.65 GB downloads. **G5/G8/G12 unresolved; G15 NO-GO.**
+
+---
+
+
 ## Latest verified scientific progress — separate marginals vs joint association (2026-11-07)
 
 **GitHub Actions [run 42383898975](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42383898975) PASSED, with 33 regression tests**, checksum-pinned derived snapshot verification and the new `src/phase7_interaction.py` stage. No original ATLAS download or old Actions-artifact retrieval. See [PHASE7_ASSOCIATION_DECOMPOSITION.md](PHASE7_ASSOCIATION_DECOMPOSITION.md).
