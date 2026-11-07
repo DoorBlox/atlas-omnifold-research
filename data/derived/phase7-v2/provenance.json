@@ -1,0 +1,61 @@
+{
+  "archive_md5": "9b838510f41e1d5a8b26d7f3c5b2ca42",
+  "format": "atlas-omnifold-phase7-signed-moments-v2",
+  "moments_sha256": "a6cd9e96d7bb105948735043959f2360f3213944d5f8ead64f422dc8cf618619",
+  "original_archive_zenodo_doi": "10.5281/zenodo.11507450",
+  "scientific_gate": "G15_NO_GO",
+  "source_files": [
+    {
+      "path": "files/data/multifold.h5",
+      "rows_total": 418014,
+      "sha256": "1923a52a896bd4b751b9a54ab532773ec0544679bcb5ba0a5ae2f882a9728ed2",
+      "size_bytes": 675528667
+    },
+    {
+      "path": "files/data/multifold_sherpa.h5",
+      "rows_total": 326430,
+      "sha256": "72f633dd5059881e9b41ba0da088bf61ab6fc7f60184b8b8c7cbe57adc22f3dc",
+      "size_bytes": 103161198
+    },
+    {
+      "path": "files/data/multifold_nonDY.h5",
+      "rows_total": 433397,
+      "sha256": "eb9bd7a9aa389e0aae4294312baa6d44a922ebc4f80f1c5b35c2f9c6b76f02d3",
+      "size_bytes": 50283468
+    },
+    {
+      "path": "files/pseudodata/multifold.h5",
+      "rows_total": 418014,
+      "sha256": "3fd4e348b8846b3ffbf87aeb47a1d5c60b996511a144ddc4c713b3f9d645fa91",
+      "size_bytes": 498288228
+    },
+    {
+      "path": "files/pseudodata/multifold_sherpa.h5",
+      "rows_total": 326430,
+      "sha256": "1bb9eefa93437a60bb7f21b4993f18ec9e259e380ba3561f4b10f63ab4e3717d",
+      "size_bytes": 134515904
+    },
+    {
+      "path": "files/pseudodata/multifold_nonDY.h5",
+      "rows_total": 433397,
+      "sha256": "e6b282f55112101916f299eb33e3e95d1c3d0c63dc4b6ed1f9f9d4b25ac95a47",
+      "size_bytes": 135233280
+    }
+  ],
+  "v1_crosscheck": {
+    "pseudo": {
+      "fraction_check": "PASS",
+      "max_abs_error": 0.0,
+      "nominal_rows_selected": 417401
+    },
+    "real": {
+      "fraction_check": "PASS",
+      "max_abs_error": 0.0,
+      "nominal_rows_selected": 417401
+    }
+  },
+  "v1_source_runs": {
+    "pseudo": 42327464929,
+    "real": 42324639484
+  }
+}
