@@ -226,7 +226,7 @@ def _read_reference(v1,kind):
     return q,rows
 
 
-def analyze(v1:Path,v2:Path) -> dict:
+def analyze(v1:Path,v2:Path, *, return_components=False):
     """No new HDF5 downloads; G15 is hard-blocked for both samples."""
     from src.phase7_snapshot import verify as verify_v1
     from src.phase7_v2_extract import verify_v2
@@ -252,6 +252,7 @@ def analyze(v1:Path,v2:Path) -> dict:
                              'No real-data p-value or generator-compatibility decision'],
               'G5':'PROVISIONAL','G8':'UNVERIFIED','G12':'UNVERIFIED',
               'G15':'NO_GO','inference_permission':'NO_GO'}
+    model_component_matrices = {}
     for kind in ('pseudo','real'):
         sample = store['samples'][kind]
         nom = sample['nominal']
@@ -292,6 +293,7 @@ def analyze(v1:Path,v2:Path) -> dict:
                 raise ValueError('Generator reference no longer matches frozen moments')
         models=build_joint_scenarios(parts,h,delta_dd,delta_hv,kind=kind,
                                      shared_finite_mc=shared_C,target_covariance=truth_C)
+        model_component_matrices[kind] = models
         models_out=[]
         gp,gq = _observable_gradients(hp),_observable_gradients(q)
         for label,matrices in models.items():
@@ -326,7 +328,9 @@ def analyze(v1:Path,v2:Path) -> dict:
             'nuisance_source_count':29,
             'finite_reference_model':'independent_weighted_Poisson' if kind=='pseudo' else 'paired_weighted_Poisson_same_events',
             'models':models_out}
-    return result
+    # Optional internal return for null simulations; NumPy matrices never
+    # enter normal JSON reports or any observed significance calculation.
+    return (result, model_component_matrices) if return_components else result
 
 
 def run(v1:Path,v2:Path,out:Path)->dict:
