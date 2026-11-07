@@ -1,5 +1,18 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## Latest primary CERN source-level covariance audit (2026-11-07)
+
+**Verified:** [CI run 42390285792](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390285792) **PASSED, 57 regression tests** with no ATLAS archive download. This run fetched the actual official CERN `multifold_util.py` source and matched SHA-256 `cf43074fb3635b5c484dd1f35b9dc95cea938d86d206b4a2e83ab1f739e73d7f` plus exact reviewed hashes of **all three function bodies**. The original functions were also printed and inspected in [CI run 42390199178](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390199178), successful, after a [source-probe run 42390105795](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390105795) passed 56 tests. Direct local network retrieval failed, but GitHub Actions runner retrieval succeeded. **The old statement that the primary source is wholly inaccessible is superseded for this hash-pinned snapshot.**
+
+**Primary implementation confirmed:** `fill_cov_matrix` (lines 49–58) uses signed Hessian outer products, or **sample replica covariance with divisor R−1**. The official `corr_matrix` (307–434) uses actual replica arrays, **not** its unused literal `n_bootstraps = 25` (the real vs pseudo manifest values remain 100 vs 25 data-bootstrap replicas); NN ensemble is divided by 100. DD is an **unsmoothed signed raw-count shift**. Sherpa HV is a signed shift with **optional 1D Gaussian smoothing** by `smooth_uncertainty` (621–644), kernel width full ordered bin-center coordinate range / 10, in log coordinates for positive centers. The 1D `corr_matrix` includes luminosity but excludes the event/track/muon nuisance families from its assembled total; the 1D pseudodata notebook chi-square recipe excludes even luminosity. **Neither 1D inclusion rule is an approved normalized 2D uncertainty model.**
+
+**Source-hash guards:** `src/phase7_official_helper_audit.py`, `src/phase7_official_excerpts.py` and `tests/test_phase7_official_helper_audit.py`; 14 focused local tests passed with 82% statement coverage before integration; 57 total regression tests passed in CI. The official Python is parsed, **not executed remotely**; any changed full-file or function-body hash fails closed. Detailed reproducible findings: [PHASE7_PRIMARY_SOURCE_COVARIANCE_AUDIT.md](PHASE7_PRIMARY_SOURCE_COVARIANCE_AUDIT.md). **Source-level 1D helper verification is now complete for the pinned file**, but **2D modelling and coverage are not**. A source-hash match does not authenticate an immutable CERN Git commit (the raw URL is `master`).
+
+**Next step:** lock an independently justified **normalized 2x2 source-family inclusion/cross-covariance model and 2D Sherpa/DD correlations** (compare the four already pre-specified alternatives on pseudodata first); repeated-sampling calibration is still absent. Never flatten the 2x2 cells and apply the 1D smoother as if that were official. Retain prior signed v2 moments and v1 snapshot, avoiding another 3.65 GB download. **G5 PROVISIONAL; G8/G12 UNVERIFIED; G15 NO-GO: no real-data p-value, sigma or formal generator compatibility verdict.**
+
+---
+
+
 
 ## Phase 7 v2: all required frozen-bin signed moments captured (2026-11-07)
 
