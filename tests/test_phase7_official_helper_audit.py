@@ -13,6 +13,7 @@ from src.phase7_official_helper_audit import (
     covariance_port,
     run,
     smooth_1d_port,
+    matches_reviewed_primary_source, REVIEWED_PRIMARY_SHA256, REVIEWED_FUNCTION_SHA256,
 )
 
 
@@ -101,3 +102,20 @@ def test_retrieved_syntax_failure_does_not_claim_verified(tmp_path):
     assert result['parse_status'] == 'INVALID_PYTHON'
     assert result['functions']['fill_cov_matrix']['status'] == 'SYNTAX_UNAVAILABLE'
     assert result['G15'] == 'NO_GO'
+
+def test_primary_pin_requires_exact_file_and_every_reviewed_function_digest():
+    report = {
+        "parse_status": "PARSED_PYTHON",
+        "source_sha256": REVIEWED_PRIMARY_SHA256,
+        "functions": {name: {"body_sha256": digest}
+                      for name, digest in REVIEWED_FUNCTION_SHA256.items()},
+    }
+    assert matches_reviewed_primary_source(report)
+    report["functions"]["smooth_uncertainty"]["body_sha256"] = "bad"
+    assert not matches_reviewed_primary_source(report)
+    report["functions"]["smooth_uncertainty"]["body_sha256"] = REVIEWED_FUNCTION_SHA256["smooth_uncertainty"]
+    report["source_sha256"] = "bad"
+    assert not matches_reviewed_primary_source(report)
+    report["source_sha256"] = REVIEWED_PRIMARY_SHA256
+    report["parse_status"] = "INVALID_PYTHON"
+    assert not matches_reviewed_primary_source(report)
