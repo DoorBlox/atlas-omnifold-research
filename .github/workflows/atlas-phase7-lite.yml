@@ -1,0 +1,45 @@
+name: ATLAS Phase 7 lightweight scientific checks
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/phase7_divisor_audit.py"
+      - "src/phase7_interaction.py"
+      - "tests/test_phase7_divisor_audit.py"
+      - "tests/test_phase7_interaction.py"
+      - ".github/workflows/atlas-phase7-lite.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  derived:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - name: Install minimal no-data dependencies
+        run: python -m pip install "numpy>=1.26,<3" "pytest>=8,<10"
+      - name: Validate stored snapshot and new calculation regressions
+        run: |
+          python -m pytest -q tests/test_phase7_snapshot.py tests/test_phase7_divisor_audit.py tests/test_phase7_interaction.py
+          python -m src.phase7_snapshot verify --root data/derived/phase7-v1
+      - name: Evaluate covariance denominator correction without raw data
+        run: python -m src.phase7_divisor_audit --snapshot data/derived/phase7-v1 --out outputs/divisor
+      - name: Separate mass/track marginals from joint interaction
+        run: python -m src.phase7_interaction --snapshot data/derived/phase7-v1 --out outputs/interaction
+      - name: Upload only small derived audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase7-lite-audits-${{ github.run_number }}
+          path: outputs/
+          retention-days: 14
+          if-no-files-found: warn
