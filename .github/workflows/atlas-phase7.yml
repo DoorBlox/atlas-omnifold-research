@@ -60,10 +60,14 @@ jobs:
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
         if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance')) }}
+        env:
+          HEAD_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          REQUESTED_STAGE: ${{ inputs.stage }}
+          INCLUDE_TARGET: ${{ inputs.include_target }}
         run: |
-          if [[ "${{ inputs.include_target }}" == "true" ]]; then
+          if [[ "$INCLUDE_TARGET" == "true" ]]; then
             python -m src.atlas_preflight --stage schema --include-target --out outputs
-          elif [[ "${{ github.event.head_commit.message }}" == *"[atlas-covariance]"* || "${{ inputs.stage }}" == "covariance" ]]; then
+          elif [[ "$HEAD_COMMIT_MESSAGE" == *"[atlas-covariance]"* || "$REQUESTED_STAGE" == "covariance" ]]; then
             python -m src.atlas_preflight --stage schema --include-alternatives --out outputs
           else
             python -m src.atlas_preflight --stage schema --out outputs
