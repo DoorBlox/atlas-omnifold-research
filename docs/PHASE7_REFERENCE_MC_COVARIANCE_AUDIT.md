@@ -93,3 +93,21 @@ M = np.eye(4) - np.outer(q, np.ones(4))
 C_target = M @ np.diag(q*q / neff) @ M.T
 assert np.allclose(C_target @ np.ones(4), np.zeros(4), atol=1e-15)
 ```
+
+## 5. Independently executed truth-gradient correction (2026-11-07)
+
+The reusable code in [`src/phase7_target_mc.py`](../src/phase7_target_mc.py) now checks the weighted-MC Jacobian identity and computes the **log-odds target gradient at the target truth fractions**, rather than borrowing the unfolded measurement gradient. For four independent weighted-Poisson target cells, this produces the additional exact identity under the specified model:
+
+```text
+Var_target[log((q_LL*q_HH)/(q_LH*q_HL))]
+    = 1/N_eff,LL + 1/N_eff,LH + 1/N_eff,HL + 1/N_eff,HH
+```
+
+**Verified GitHub Actions run:** [42384337294](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384337294), artifact `phase7-lite-audits-2`. All **16 lightweight regression tests passed**, including tests with direct weighted histogram sums, distinct gradients, invalid inputs and the actual frozen official target summary. The 3.65 GB ATLAS dataset was **not** downloaded, and the full-data workflow was **skipped**.
+
+- Target-only log-odds finite-MC standard error: **0.0013423359141068556** (previous approximation using the measurement gradient was **0.001415537090647602**).
+- Measurement-only provisional log-odds standard error: **0.056396186877402374**.
+- Combined model-conditional independent-shape standard error: **0.05641215968226347**.
+- Target truth finite-MC represents **0.05662% of the combined variance** for this observable under the stated independent-target model.
+
+The corrected values leave the original four-cell fractions and archived provisional source covariance unchanged. **The finite-MC target correction is not a substitute for 2D Sherpa/DD covariance validation, independent repeated-unfolding coverage, or the still-missing real shared-event `sum(w_nominal * weight_mc)` moments. G15 remains NO-GO.**
