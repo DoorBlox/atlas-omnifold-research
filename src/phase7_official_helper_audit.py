@@ -28,6 +28,25 @@ SECONDARY_PORT = (
 )
 FUNCTIONS = ("fill_cov_matrix", "smooth_uncertainty", "corr_matrix")
 
+# CERN master content fetched in GitHub CI run 42390199178 on 2026-11-07.
+# Function bodies examined in the CI logs. Hash pinning authenticates this
+# reviewed source snapshot, not a release tag or an approved 2D covariance.
+REVIEWED_PRIMARY_SHA256 = "cf43074fb3635b5c484dd1f35b9dc95cea938d86d206b4a2e83ab1f739e73d7f"
+REVIEWED_FUNCTION_SHA256 = {
+    "fill_cov_matrix": "3783c2b851eabe440b95b629a048c4b575b82400c0e6185e662f06fe816530b4",
+    "smooth_uncertainty": "86484ad56858e46a4082d98446aea1ce4c01ef07cd11fa5f41ac36d2870d3429",
+    "corr_matrix": "77f617b0639f3ae012a6e3a2469860251de9d12cb192c1fa29de746da305a4f2",
+}
+
+
+def matches_reviewed_primary_source(result: dict) -> bool:
+    """Require exact full-file and all three function-body hashes."""
+    return (result.get("parse_status") == "PARSED_PYTHON"
+            and result.get("source_sha256") == REVIEWED_PRIMARY_SHA256
+            and all(result.get("functions", {}).get(name, {}).get("body_sha256") == digest
+                    for name, digest in REVIEWED_FUNCTION_SHA256.items()))
+
+
 
 def covariance_port(differences, mean=None):
     """SECONDARY-port hypothesis: Hessian sum or unbiased replica covariance."""
@@ -106,6 +125,11 @@ def audit_source_text(content: str) -> dict:
             "body_sha256": hashlib.sha256(body.encode("utf-8")).hexdigest(),
             "calls": calls,
         }
+    result["reviewed_primary_source_hash_match"] = matches_reviewed_primary_source(result)
+    result["official_source_semantics_verified"] = result["reviewed_primary_source_hash_match"]
+    if result["reviewed_primary_source_hash_match"]:
+        for name in FUNCTIONS:
+            result["functions"][name]["status"] = "REVIEWED_PRIMARY_SOURCE_BODY_HASH_MATCH"
     return result
 
 
