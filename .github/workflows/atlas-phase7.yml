@@ -25,6 +25,7 @@ on:
           - calibration
           - audit
           - interaction
+          - bounds
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -63,7 +64,7 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]') && !contains(github.event.head_commit.message, '[atlas-sensitivity]') && !contains(github.event.head_commit.message, '[atlas-calibration]') && !contains(github.event.head_commit.message, '[atlas-audit]') && !contains(github.event.head_commit.message, '[atlas-interaction]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]') && !contains(github.event.head_commit.message, '[atlas-sensitivity]') && !contains(github.event.head_commit.message, '[atlas-calibration]') && !contains(github.event.head_commit.message, '[atlas-audit]') && !contains(github.event.head_commit.message, '[atlas-interaction]') && !contains(github.event.head_commit.message, '[atlas-bounds]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
         if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]') || contains(github.event.head_commit.message, '[atlas-closure]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance' || inputs.stage == 'closure')) }}
@@ -91,7 +92,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'closure') }}
         run: python -m src.phase7_closure --root work --out outputs
       - name: Verify permanent Phase 7 derived snapshot (zero downloads)
-        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-sensitivity]') || contains(github.event.head_commit.message, '[atlas-calibration]') || contains(github.event.head_commit.message, '[atlas-audit]') || contains(github.event.head_commit.message, '[atlas-interaction]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'sensitivity' || inputs.stage == 'calibration' || inputs.stage == 'audit' || inputs.stage == 'interaction')) }}
+        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-sensitivity]') || contains(github.event.head_commit.message, '[atlas-calibration]') || contains(github.event.head_commit.message, '[atlas-audit]') || contains(github.event.head_commit.message, '[atlas-interaction]') || contains(github.event.head_commit.message, '[atlas-bounds]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'sensitivity' || inputs.stage == 'calibration' || inputs.stage == 'audit' || inputs.stage == 'interaction' || inputs.stage == 'bounds')) }}
         run: python -m src.phase7_snapshot verify --root data/derived/phase7-v1
       - name: Run nine covariance model sensitivity scenarios (all uncalibrated)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
@@ -110,6 +111,12 @@ jobs:
       - name: Source-wise 2x2 joint association and marginal uncertainty diagnostics (no data download)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-interaction]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'interaction') }}
         run: python -m src.phase7_interaction --snapshot data/derived/phase7-v1 --out outputs
+      - name: Cauchy-Schwarz finite evaluation-MC cross-covariance envelope (G15 blocked)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-bounds]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'bounds') }}
+        run: python -m src.phase7_crosscov_bounds --snapshot data/derived/phase7-v1 --out outputs
+      - name: Population versus sample replica-denominator sensitivity (candidate only)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-bounds]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'bounds') }}
+        run: python -m src.phase7_divisor_audit --snapshot data/derived/phase7-v1 --out outputs
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
