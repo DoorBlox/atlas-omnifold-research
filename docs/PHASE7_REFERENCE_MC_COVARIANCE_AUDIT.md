@@ -28,11 +28,9 @@ For the provisional unfolded pseudodata measurement covariance `C_p`, we evaluat
 |---|---:|---:|---:|---:|
 | Mass-low fraction | 0.0197820428 | 0.0001296555 | 0.0197824677 | 0.00430% |
 | Multiplicity-low fraction | 0.0084077168 | 0.0001288166 | 0.0084087035 | 0.02347% |
-| Joint log-odds association | 0.0563961869 | 0.0014155371 | 0.0564139490 | 0.06296% |
+| Joint log-odds association | 0.0563961869 | 0.0013423359 | 0.0564121597 | 0.05662% |
 
-The target sampling term is **small under this model**. These are **not** validated coverage statements; the 2D Sherpa/DD measurement covariance remains provisional. The log-odds gradient for the **target** uses `1/q_i` values (not measurement `1/p_i`), a distinction that matters in the correct delta-method propagation. For the table above, the target term was evaluated with the measurement log-odds gradient as an exploratory first-order same-point approximation. Thus the last-row precise target and combined SE are an **approximation**, not a final source-calibrated standard error. Re-evaluate the target term with its own gradient `(1/q_LL,-1/q_LH,-1/q_HL,1/q_HH)` before using the result in an analysis claim.
-
-> **Correction priority:** the target truth log-odds delta-method standard error must use the target gradient. The numbers in the last row are explicitly marked provisional pending this independent reevaluation.
+The target sampling term is **small under this model**. These are **not** validated coverage statements; the 2D Sherpa/DD measurement covariance remains provisional. The log-odds gradient for the **target** uses `1/q_i` values (not measurement `1/p_i`), a distinction that matters in the correct delta-method propagation. For the table above, the independent target contribution to the log-odds difference uses its own **target gradient** `(1/q_LL,-1/q_LH,-1/q_HL,1/q_HH)`, rather than the unfolded measurement's gradient. The combined number remains **provisional** because the measurement covariance and source-correlation assumptions are not independently validated.
 
 ## 2. A distinct open question: covariance shared by real ATLAS weights and nominal generator
 
