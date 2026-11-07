@@ -5,3 +5,5 @@ Raw ATLAS data must never be uploaded as an artifact or committed.
 Covariance stage authorized after 2 synthetic regression tests; no real-data p-value.
 
 2026-11-07: execute ATLAS official pseudodata 2x2 closure against known target using frozen real nominal generator bins. No inferential p-values.
+
+2026-11-07: lightweight no-download sensitivity run, using existing official real and pseudodata artifacts, G15 NO-GO.
