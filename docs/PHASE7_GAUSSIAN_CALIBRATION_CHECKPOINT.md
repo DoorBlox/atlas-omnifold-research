@@ -1,3 +1,5 @@
+> **SUPERSEDED for real-data replica-count calibration (2026-11-07).** The first real-data Gaussian toy study incorrectly assumed 25 rather than 100 data-bootstrap replicas. Its old real-data toy result (5.25% plug-in rejection) must not be cited as corrected. See [verified corrected audit and calibration](PHASE7_REFERENCE_AUDIT_CORRECTED_CALIBRATION.md) and [GitHub run #42377662887](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42377662887): corrected real-data 4.60%, pseudodata 4.78%. Original results below are kept for historical provenance only. G15 remains **NO-GO**.
+
 # Phase 7 Gaussian finite-covariance toy calibration — executed checkpoint
 
 **Execution:** [GitHub Actions run 42331285712](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42331285712), artifact `phase7-preflight-25`, file `finite_covariance_toy_calibration.json`. Source: nominal real and pseudodata source-wise covariances from runs 42324639484 and 42327464929. **19 GitHub regression tests passed.**
