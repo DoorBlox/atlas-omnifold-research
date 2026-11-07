@@ -83,3 +83,23 @@ The distinct HYBRID conditional null resamples centered real source-family shape
 Descriptive skewness of three fixed contrast coordinates (no normality-test decision): pseudodata data-bootstrap with R=25: **[-0.808, -0.296, +0.013]**; real data-bootstrap with R=100: **[+0.183, +0.178, +0.210]**. NN ensemble has 100 replicas and relatively modest marginal skew in both samples. With R=25, sample skewness and kurtosis estimates are noisy, so do not overinterpret. Exact per-family kurtosis and Monte Carlo Wilson intervals are in replica-null/empirical_replica_null.json in the referenced Actions artifact.
 
 **Scientific conclusion:** The hybrid conditional null has not exposed a gross non-Gaussian discrepancy relative to the separately simulated source-wise Gaussian null at this threshold. This is NOT a measurement of ATLAS coverage, a source-correlation validation, a formal goodness-of-fit test, or a permission to report real-data p-values. G5 remains PROVISIONAL; G8 and G12 remain experimentally UNVERIFIED; G15 NO-GO. No additional original ATLAS archive download was required.
+
+
+## Further primary-method ambiguity check — raw-count projection vs normalized replica covariance (run 42391604664)
+
+[CI run 42391604664](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391604664) **SUCCEEDED: 85 regression tests passed**, artifact **phase7-lite-audits-14**, ID **13581811875**. The new, separately tested src/phase7_replica_projection_audit.py compares two mathematics-consistent 2D conversions of the now source-confirmed CERN 1D R-1 replica sample covariance:
+
+- **Individually normalized replica covariance:** normalize every four-cell replica first, then compute R-1 sample covariance. This is the current source-aligned project prototype.
+- **Project nominal raw-count Jacobian projection:** compute an R-1 covariance of four-cell **raw-count** replica histograms and map through the common nominal normalization Jacobian. The raw-count part matches the official 1D estimator; the projection is still a project-defined 2D method.
+
+For constant-total-weight replicas the two are algebraically identical; when the total source weight fluctuates they differ beyond first order. The code checks exact replica-family membership and the normalization-null mode, then evaluates the two choices without selecting the one that makes real data more compatible.
+
+| Relative trace change when using raw-count Jacobian instead of per-replica normalization | Pseudodata | Real |
+|---|---:|---:|
+| Data bootstrap | +0.108012% | +0.087033% |
+| MC-training bootstrap | −0.053456% | +0.135660% |
+| NN ensemble | +0.088556% | +0.135137% |
+
+The corresponding maximum **absolute percent change of uncalibrated quadratic** across the four fixed DD/Sherpa scenarios is **0.000863% pseudodata** and **0.003695% real**. The direct comparison is numerically small for these frozen bins. It does **not** prove exactness or validate the other 2D source correlations. The baseline v1 and v2 files are untouched.
+
+**Status:** Source-verified R-1 denominator, bounded 2D normalization-convention sensitivity, and synthetic/real regression tests are all completed. G5 remains PROVISIONAL because these are not a single ATLAS-recommended covariance model for a new 2D observable; G8/G12 remain without genuine repeated unfolding validation; G15 remains NO-GO.
