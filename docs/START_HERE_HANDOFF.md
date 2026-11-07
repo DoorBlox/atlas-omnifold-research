@@ -1,5 +1,18 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## Latest finite-MC cross-covariance envelope and CI routing (2026-11-07)
+
+**Verified scientific run:** [42384589187](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384589187) — **46 tests passed**, frozen 33,594-byte snapshot verified, **no ATLAS archive download**, `src/phase7_crosscov_bounds.py` executed and existing sample-denominator audit completed. The **real-data mass–multiplicity log-odds conditional finite-evaluation-MC** standard-error range is **0.091636–0.094311**, compared with **0.092422** when treating the generator as fixed. The interval uses Cauchy–Schwarz for the **finite-MC cross-covariance only**, with all other provisional source families assumed reference-independent. **This is not a bound on the full real measurement covariance.**
+
+**Verified CI optimization:** [lightweight run 42384751385](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384751385) — **34 tests passed** with only NumPy/pytest. `.github/workflows/atlas-phase7-lite.yml` now owns derived-only analysis/test changes; the heavy workflow's `on.push.paths` is narrowed to event-level code and explicit triggers. This workflow change incurred one-time verification runs but prevents routine duplicate heavy CI on future derived-source edits. The original `data/derived/phase7-v1` and all real/pseudo central measurements remain unchanged.
+
+**Denominator sensitivity:** changing the prototype replica covariance divisor from `R` to `R-1` (a **candidate**, not independently confirmed in CERN's helper) changes provisional covariance trace by **+0.02676% real** and **+0.05247% pseudo**. Both changes are much smaller than 2D Sherpa/DD source-model dependence. No real-data p-values were calculated.
+
+**Full report:** [PHASE7_SHARED_MC_BOUNDS_AND_CI_OPTIMIZATION.md](PHASE7_SHARED_MC_BOUNDS_AND_CI_OPTIMIZATION.md). **Next:** source-level verification of `multifold_util.fill_cov_matrix` and `smooth_uncertainty`; pre-specified 2D uncertainty model and calibration. If a signed-weight/cross-product extraction is needed, plan a single targeted 3.65 GB source pass into versioned `phase7-v2` **only after fixing the required summaries**. **G15 NO-GO**.
+
+---
+
+
 ## Latest verified no-download methodology advances (2026-11-07)
 
 **Run [42384082085](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384082085):** 12 regression tests passed on a new **NumPy-only lightweight Actions workflow**; the historical full-data workflow was **skipped**. An independent ATLAS-style reference comparison found that our provisional bootstrap source matrices used population `1/R`, whereas two accessible secondary implementations use sample `1/(R-1)`. The original CERN helper body is still not independently accessible. The algebraic candidate correction uses `R/(R-1)` on the saved matrices and changes the real covariance trace by **+0.02676%** and pseudodata by **+0.05247%**. The original 33,594-byte `phase7-v1` remains immutable. See [PHASE7_REPLICA_DENOMINATOR_AUDIT.md](PHASE7_REPLICA_DENOMINATOR_AUDIT.md); do **not** report corrected candidate matrices as officially validated.
