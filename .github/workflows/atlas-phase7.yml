@@ -32,7 +32,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
   issues: write
 
 concurrency:
@@ -88,31 +87,23 @@ jobs:
       - name: Official 2x2 pseudodata known-target closure (uncalibrated)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'closure') }}
         run: python -m src.phase7_closure --root work --out outputs
-      - name: Download verified published-result artifacts (no large data transfer)
+      - name: Verify permanent Phase 7 derived snapshot (zero downloads)
         if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-sensitivity]') || contains(github.event.head_commit.message, '[atlas-calibration]') || contains(github.event.head_commit.message, '[atlas-audit]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'sensitivity' || inputs.stage == 'calibration' || inputs.stage == 'audit')) }}
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          mkdir -p derived_input/real derived_input/pseudo
-          gh run download 42324639484 --name phase7-preflight-12 --dir derived_input/real
-          gh run download 42327464929 --name phase7-preflight-17 --dir derived_input/pseudo
-          test -f derived_input/real/source_covariances.npz
-          test -f derived_input/pseudo/pseudo_source_covariances.npz
+        run: python -m src.phase7_snapshot verify --root data/derived/phase7-v1
       - name: Run nine covariance model sensitivity scenarios (all uncalibrated)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
         run: |
-          python -m src.phase7_model_sensitivity --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs
+          python -m src.phase7_model_sensitivity --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs
       - name: Conditional Gaussian covariance-estimation null calibration (not ATLAS coverage)
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-calibration]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'calibration') }}
         run: |
-          python -m src.phase7_calibration --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs --toys 10000
+          python -m src.phase7_calibration --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs --toys 10000
       - name: Audit 1D ATLAS reference source families versus 2D prototype
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-audit]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'audit') }}
-        run: python -m src.phase7_reference_audit --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs
+        run: python -m src.phase7_reference_audit --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs
       - name: Repeat finite-covariance toys with corrected bootstrap manifest counts
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-audit]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'audit') }}
-        run: python -m src.phase7_calibration --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs --toys 10000
+        run: python -m src.phase7_calibration --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs --toys 10000
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
