@@ -11,3 +11,5 @@ Covariance stage authorized after 2 synthetic regression tests; no real-data p-v
 2026-11-07: conditional Gaussian finite-covariance calibration run using official saved source matrices; G8 model-conditional only, G15 blocked.
 
 2026-11-07 source-audit: compare official 1D pseudodata uncertainty family list with 2D prototype and correct real 100 vs pseudodata 25 bootstrap replica calibration; never compute real p-values.
+
+2026-11-07: verify no-download sensitivity execution exclusively from checksum-pinned permanent data/derived/phase7-v1 snapshot; never fetch raw Zenodo archive.
