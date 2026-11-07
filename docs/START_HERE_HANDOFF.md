@@ -1,5 +1,18 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## Latest verified scientific progress — separate marginals vs joint association (2026-11-07)
+
+**GitHub Actions [run 42383898975](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42383898975) PASSED, with 33 regression tests**, checksum-pinned derived snapshot verification and the new `src/phase7_interaction.py` stage. No original ATLAS download or old Actions-artifact retrieval. See [PHASE7_ASSOCIATION_DECOMPOSITION.md](PHASE7_ASSOCIATION_DECOMPOSITION.md).
+
+The diagnostic separates low-mass and low-multiplicity fractions from the joint **log odds ratio**, using the **provisional** 29-source measurement covariance and *fixed* generator/target reference. Real unfolded minus generator log odds = **-0.05973348** (provisional measurement-only SE **0.09242250**); pseudodata minus target = **+0.05223614** (provisional measurement-only SE **0.05639619**). The Sherpa hidden-variable covariance term accounts for **94.86%** (real) and **87.93%** (pseudodata) of the *modelled joint-association variance*. This is a **variance decomposition, not a significance test**. Sherpa/DD 2D treatment still has no independently verified official prescription; **G15 NO-GO**.
+
+**Further no-download feasibility finding:** [PHASE7_REFERENCE_MC_COVARIANCE_AUDIT.md](PHASE7_REFERENCE_MC_COVARIANCE_AUDIT.md) derives independent known-target finite-MC shape covariance from the existing four cell fractions and effective counts, verified algebraically with 100 synthetic weighted samples. Its contribution to the provisional pseudodata log-odds difference variance is **~0.05662%** under the stated independent-target model. However, real nominal generator and unfolded weights share event support. A future *unconditional* comparison requires their per-cell cross-product moment `sum(weight_mc * weights_nominal)`, **not saved in v1**. Do not add nominal-generator covariance as if it were independent.
+
+**Next priority:** independently obtain exact official CERN `multifold_util.py` helper definitions or specify a defensible a priori two-dimensional source-correlation protocol. Only then plan **one** targeted v2 count-moment/sign-preserving extraction if necessary. Do **not** download 3.65 GB for current snapshot-based diagnostics. G5/G8/G12 remain unresolved and G15 stays **NO-GO**.
+
+---
+
+
 ## Latest optimization milestone — permanent derived results (2026-11-07)
 
 **Verified:** [one-time archival CI 42380892986](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42380892986) committed `data/derived/phase7-v1/`, preserving **33,594 bytes** in 12 original four-cell result files with pinned SHA-256 hashes, both covariance `.npz` archives, signed source *covariance matrices* (not raw shifts), real/pseudo cell summaries, original uncertainty manifests and provenance. No raw HDF5 data were copied. This survives the original Actions artifact expiration. The default analysis pipeline now calls `python -m src.phase7_snapshot verify` against **local committed files**, with no Zenodo or GitHub artifact download for `sensitivity`, `calibration`, or `audit`.
