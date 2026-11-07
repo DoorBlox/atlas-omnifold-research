@@ -1,0 +1,1 @@
+Single official-data pass authorized on 2026-11-07 to freeze signed four-cell sums, squared weights, and per-cell mixed generator/unfolded products. Six HDF5 inputs only; high-stat target omitted. V1 comparison, source SHA256, size cap and G15 NO-GO are mandatory. No raw event data may be committed.
