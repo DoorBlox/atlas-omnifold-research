@@ -8,14 +8,17 @@ remain fixed at their observed estimates.
 from __future__ import annotations
 
 import argparse
+import csv
+import re
 import json
 from pathlib import Path
 import numpy as np
 from src.phase7_model_sensitivity import load_components, model_components
 from src.shape import A
 
-REPLICA_COUNTS = {'data_bootstrap': 25, 'mc_training_bootstrap': 25, 'nn_ensemble': 100}
-REPLICA_DIVISORS = {'data_bootstrap': 1, 'mc_training_bootstrap': 1, 'nn_ensemble': 100}
+REPLICA_PREFIXES = {'data_bootstrap': 'weights_bootstrap_data',
+                    'mc_training_bootstrap': 'weights_bootstrap_mc',
+                    'nn_ensemble': 'weights_ensemble'}
 CHI2_3_95 = 7.814727903251179
 
 
@@ -30,10 +33,38 @@ def _sqrt_psd(c):
     return (vecs * np.sqrt(np.maximum(vals, 0.0))) @ vecs.T
 
 
-def study(components: dict, *, toys=10000, seed=20261107, batch=512) -> dict:
+def manifest_replica_counts(path: Path) -> dict[str, int]:
+    """Read the actual source manifest: real data have 100 data bootstraps; pseudo 25."""
+    counts = {}
+    with Path(path).open(newline='', encoding='utf-8') as stream:
+        for row in csv.DictReader(stream):
+            source = row.get('source')
+            if source not in REPLICA_PREFIXES:
+                continue
+            if source in counts:
+                raise ValueError(f'Duplicate source family: {source}')
+            prefix = REPLICA_PREFIXES[source]
+            names = [x.strip() for x in row['input'].split(',') if x.strip()]
+            indices = []
+            for name in names:
+                matched = re.fullmatch(rf'{re.escape(prefix)}_(\d+)', name)
+                if matched is None:
+                    raise ValueError(f'Invalid replica name in {source}: {name}')
+                indices.append(int(matched.group(1)))
+            if len(indices) < 2 or sorted(indices) != list(range(len(indices))):
+                raise ValueError(f'{source} requires unique contiguous replica indices 0..N-1')
+            counts[source] = len(indices)
+    if set(counts) != set(REPLICA_PREFIXES):
+        raise ValueError(f'Missing replica families from {path}: {sorted(set(REPLICA_PREFIXES)-set(counts))}')
+    return counts
+
+
+def study(components: dict, *, replica_counts: dict[str, int], toys=10000, seed=20261107, batch=512) -> dict:
     if toys < 500 or batch < 1:
         raise ValueError('At least 500 toys and a positive batch size required')
-    if any(key not in components for key in REPLICA_COUNTS):
+    if set(replica_counts) != set(REPLICA_PREFIXES) or any(not isinstance(n, int) or n < 2 for n in replica_counts.values()):
+        raise ValueError("Replica counts must identify all three actual families with >=2 replicas")
+    if any(key not in components for key in REPLICA_PREFIXES):
         raise KeyError('Missing replica covariance families')
     c_source = {name: _sym(A @ c4 @ A.T) for name, c4 in components.items()}
     total = _sym(sum(c_source.values()))
@@ -41,13 +72,12 @@ def study(components: dict, *, toys=10000, seed=20261107, batch=512) -> dict:
     if eig[0] <= 1e-10 * eig[-1]:
         raise ValueError('Total covariance not positive definite in contrast space')
     chol_total = _sqrt_psd(total)
-    stable = _sym(total - sum(c_source[n] for n in REPLICA_COUNTS))
+    stable = _sym(total - sum(c_source[n] for n in REPLICA_PREFIXES))
     replicator = {}
-    for name, count in REPLICA_COUNTS.items():
-        # NN covariance describes mean-of-100 uncertainty. Undo /100 for
-        # individual ensemble draws before reapplying it to their estimator.
-        replicator[name] = (count, REPLICA_DIVISORS[name],
-                            _sqrt_psd(c_source[name] * REPLICA_DIVISORS[name]))
+    for name, count in replica_counts.items():
+        # Stored ensemble covariance includes division by the actual ensemble count.
+        divisor = count if name == 'nn_ensemble' else 1
+        replicator[name] = (count, divisor, _sqrt_psd(c_source[name] * divisor))
     random = np.random.default_rng(seed)
     known_T, plugin_T = [], []
     inv_total = np.linalg.inv(total)
@@ -69,14 +99,14 @@ def study(components: dict, *, toys=10000, seed=20261107, batch=512) -> dict:
     return {
         'model': 'CONDITIONAL_GAUSSIAN_TOY_REESTIMATED_REPLICA_COVARIANCE',
         'toys': int(toys), 'seed': int(seed),
-        'replica_counts': REPLICA_COUNTS,
-        'nn_ensemble_divisor': 100,
+        'replica_counts': dict(replica_counts),
+        'nn_ensemble_divisor': replica_counts['nn_ensemble'],
         'nominal_chi2_3_95_threshold_reference': CHI2_3_95,
         'known_cov_rejection_at_chi2_3_95': float(np.mean(known_T > CHI2_3_95)),
         'plugin_cov_rejection_at_chi2_3_95': float(np.mean(plugin_T > CHI2_3_95)),
         'known_cov_empirical_95th_percentile': float(np.quantile(known_T, .95)),
         'plugin_cov_empirical_95th_percentile': float(np.quantile(plugin_T, .95)),
-        'fixed_components': sorted(set(components) - set(REPLICA_COUNTS)),
+        'fixed_components': sorted(set(components) - set(REPLICA_PREFIXES)),
         'limitations': (
             'Gaussian independent-source approximation; observed source covariances assumed true; '
             'all non-replica components fixed; shared generator support and source correlations '
@@ -90,14 +120,20 @@ def study(components: dict, *, toys=10000, seed=20261107, batch=512) -> dict:
 def run(real_dir: Path, pseudo_dir: Path, out: Path, *, toys: int, seed: int) -> dict:
     out.mkdir(parents=True, exist_ok=True)
     all_outputs = {
-        'real_original': study(load_components(real_dir / 'source_covariances.npz'), toys=toys, seed=seed),
-        'pseudo_original': study(load_components(pseudo_dir / 'pseudo_source_covariances.npz'), toys=toys, seed=seed + 1),
+        'real_original': study(load_components(real_dir / 'source_covariances.npz'),
+                               replica_counts=manifest_replica_counts(real_dir / 'source_manifest.csv'),
+                               toys=toys, seed=seed),
+        'pseudo_original': study(load_components(pseudo_dir / 'pseudo_source_covariances.npz'),
+                                 replica_counts=manifest_replica_counts(pseudo_dir / 'pseudo_source_manifest.csv'),
+                                 toys=toys, seed=seed + 1),
     }
     # Secondary scenario is a predefined extreme stress test; never select the
     # model yielding the most favorable apparent real-data statistic.
     all_outputs['pseudo_without_sherpa_STRESS_ONLY'] = study(
         model_components(load_components(pseudo_dir / 'pseudo_source_covariances.npz'),
-                         'exclude_sherpa_stress_only'), toys=toys, seed=seed + 2
+                         'exclude_sherpa_stress_only'),
+        replica_counts=manifest_replica_counts(pseudo_dir / 'pseudo_source_manifest.csv'),
+        toys=toys, seed=seed + 2
     )
     payload = {'status': 'TOY_EXECUTED_NOT_EXPERIMENTAL_COVERAGE', 'studies': all_outputs,
                'G8': 'CONDITIONAL_MODEL_TOY_ONLY', 'G15': 'NO-GO'}
