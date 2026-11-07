@@ -7,3 +7,5 @@ Covariance stage authorized after 2 synthetic regression tests; no real-data p-v
 2026-11-07: execute ATLAS official pseudodata 2x2 closure against known target using frozen real nominal generator bins. No inferential p-values.
 
 2026-11-07: lightweight no-download sensitivity run, using existing official real and pseudodata artifacts, G15 NO-GO.
+
+2026-11-07: conditional Gaussian finite-covariance calibration run using official saved source matrices; G8 model-conditional only, G15 blocked.
