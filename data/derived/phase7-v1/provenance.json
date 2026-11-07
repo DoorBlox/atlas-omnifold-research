@@ -1,0 +1,33 @@
+{
+  "archive_md5": "9b838510f41e1d5a8b26d7f3c5b2ca42",
+  "format": "atlas-omnifold-derived-2x2/v1",
+  "scientific_gate": "G15_NO_GO",
+  "scope": "Lossless official 4-cell fractions, provisional covariances and manifests; no events",
+  "sources": {
+    "pseudo": {
+      "artifact": "phase7-preflight-17",
+      "files": {
+        "pseudo_bin_spec.json": "e372bebc46427a5b16007b5d9b846a6440caae0dac4cff1b404f3b5fcf652893",
+        "pseudo_closure_cells.csv": "e2dc66b6ca263efd3735978e97ebbae82c08a0b608a5e603c1407e8aa4961037",
+        "pseudo_closure_status.json": "2dd2f646b6e97ab4fb8d1f3529f060d4dbf2c4fbccccdd2e8c434866ec07102f",
+        "pseudo_covariance_total.npy": "059e30bf98b122512cd2292a3821c449668ce70d1c26dd0df2e01d739a8bb653",
+        "pseudo_source_covariances.npz": "7467c5725d943b368d124911357c3d522f1e3862e88b5d446f8bccea5b60305c",
+        "pseudo_source_manifest.csv": "e3ad5b1de6f1eaf1652bcd89d0d620baadc31d014ec31beaf376d8256038988a"
+      },
+      "run_id": 42327464929
+    },
+    "real": {
+      "artifact": "phase7-preflight-12",
+      "files": {
+        "bin_spec_covariance.json": "90c7bddf7bd5c61be63d18e3a8d9d3d80680ebcc09c398528a937010f25f8ab4",
+        "covariance_total.npy": "b78c81356f88a2c6405e7e3221c9d7230991a020fd1a4ee6ac4fd2bb2629fb28",
+        "provisional_covariance_status.json": "f1564bccc2b24c87d19193df09c07d63ef1e2aed4261bbeb39c061637a104b7e",
+        "real_2x2_cells.csv": "89d84c06602793a6d5381f35d170034c19e8d8753854525465d3a4204d9da040",
+        "source_covariances.npz": "2dfcbf303eef95e1dca17e31f064ac130c46a862d506122bc603103ce0595ec5",
+        "source_manifest.csv": "592724253ea70dd03dda0c889d8dac456cefc05cf52d9d9249132344012c776d"
+      },
+      "run_id": 42324639484
+    }
+  },
+  "zenodo_doi": "10.5281/zenodo.11507450"
+}

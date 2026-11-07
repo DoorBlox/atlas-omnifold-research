@@ -1,0 +1,69 @@
+{
+  "status": "EXECUTED_PROVISIONAL_PSEUDODATA_CLOSURE",
+  "analysis": "frozen real-generator-defined 2x2 mass by charged multiplicity",
+  "official_reference": "ATLAS 2_pseudo_results.ipynb, target.weight_mc and pseudo.weights_nominal",
+  "pseudo_selected_rows": 417401,
+  "target_selected_rows": 23888304,
+  "number_uncertainty_sources": 29,
+  "unmapped_weight_columns": [],
+  "G3": "PASS frozen real nominal-generator binning",
+  "G4": "PSEUDO_SUPPORT_PASS",
+  "G5": "PROVISIONAL: source-specific 2D covariance and two-point modelling not independently audited",
+  "G6": "NUMERICAL_PASS",
+  "G8": "UNVERIFIED: calibrated null reference still absent",
+  "G11": "SINGLE_TARGET_CLOSURE_EXECUTED_NOT_COVERAGE_VALIDATION",
+  "G12": "AMPLITUDE_STRESS_TEST_ONLY, no source-correlation validation",
+  "G15": "NO_GO",
+  "inference_permission": "NO_GO",
+  "closure": {
+    "target_fraction": [
+      0.4489994511773743,
+      0.0831352714007221,
+      0.10968280507866973,
+      0.35818247234323386
+    ],
+    "pseudo_unfolded_fraction": [
+      0.43662394907950713,
+      0.0725351126854934,
+      0.12009470690534267,
+      0.37074623132965684
+    ],
+    "pseudodata_minus_truth": [
+      -0.012375502097867142,
+      -0.010600158715228708,
+      0.01041190182667294,
+      0.01256375898642298
+    ],
+    "squared_mahalanobis_UNCALIBRATED": 1.802995969008288,
+    "contrast_rank": 3,
+    "contrast_condition_number": 58.60068942060034,
+    "basis_invariance_absolute_error": 6.661338147750939e-16,
+    "log_odds_difference_UNCALIBRATED": 0.052236144797521256,
+    "covariance_eigenvalues": [
+      1.5663641876532996e-05,
+      8.441946088675849e-05,
+      0.0009179002128022192
+    ],
+    "scientific_status": "single official-target projection, not repeated-ensemble closure",
+    "warning": "An uncalibrated quadratic IS NOT a p-value and does not establish empirical coverage"
+  },
+  "covariance_diagnostics": {
+    "normalisation_null_residual": 1.2468324983583301e-18,
+    "contrast_rank": 3,
+    "contrast_eigenvalues": [
+      1.5663641876532996e-05,
+      8.441946088675849e-05,
+      0.0009179002128022192
+    ],
+    "contrast_condition_number": 58.60068942060034,
+    "positive_definite": true,
+    "null_mode_valid": true
+  },
+  "target_truth_support_neff": [
+    5732317.4692378985,
+    1074698.0316459588,
+    1869092.3026940722,
+    6176530.145232235
+  ],
+  "sensitivity_variants": 6
+}

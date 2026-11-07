@@ -1,0 +1,6 @@
+{
+  "mass_star": 10.594606399536133,
+  "tracks_star": 11,
+  "selection": "pT_trackj1 > 5 GeV",
+  "threshold_source": "nominal_generator_only"
+}

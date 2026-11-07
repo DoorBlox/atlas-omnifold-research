@@ -1,0 +1,25 @@
+{
+  "stage": "provisional_real_covariance",
+  "selected_rows": 417401,
+  "number_of_sources": 29,
+  "source_manifest_unmapped": [],
+  "G3": "PASS (generator-only)",
+  "G4": "PASS",
+  "G5": "PROVISIONAL: 2D two-point and correlation assumptions need validation",
+  "G6": "NUMERICAL PASS",
+  "G8": "UNVERIFIED: no calibrated null",
+  "G11": "UNVERIFIED: no official 2D pseudodata closure",
+  "G15": "NO-GO: NEVER REPORT A REAL-DATA P-VALUE",
+  "covariance_diagnostics": {
+    "normalisation_null_residual": 2.710505431213761e-19,
+    "contrast_rank": 3,
+    "contrast_eigenvalues": [
+      4.2437396699381725e-05,
+      0.00020034710209677084,
+      0.0006260910999306866
+    ],
+    "contrast_condition_number": 14.753287162400492,
+    "positive_definite": true,
+    "null_mode_valid": true
+  }
+}
