@@ -11,13 +11,14 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "smoke = software only; schema = download official ATLAS archive and audit HDF5"
+        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2 central weights"
         type: choice
         required: true
         default: smoke
         options:
           - smoke
           - schema
+          - projection
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -53,16 +54,19 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
-        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-schema]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'schema') }}
+        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection')) }}
         run: |
           if [[ "${{ inputs.include_target }}" == "true" ]]; then
             python -m src.atlas_preflight --stage schema --include-target --out outputs
           else
             python -m src.atlas_preflight --stage schema --out outputs
           fi
+      - name: Real ATLAS descriptive 2x2 projection (G15 stays blocked)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-projection]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'projection') }}
+        run: python -m src.projection --root work --out outputs
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
