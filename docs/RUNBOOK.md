@@ -45,3 +45,12 @@ It exports `real_2x2_cells.csv`, `source_manifest.csv`, `source_covariances.npz`
 The workflow posts a run link and completion status to [research issue #1](../issues/1) through the connected GitHub Actions bot so run IDs can be discovered without manual copying. A successful software-only CI does not mean the tagged covariance stage was executed: inspect each individual job step.
 
 The official high-statistics pseudodata target is not extracted by this covariance stage. Its 2D closure, source correlation sensitivity and finite-covariance calibration remain outstanding (G8, G11, G12). The research-wide G15 stays **NO-GO**.
+
+
+## Official 2x2 pseudodata target closure (2026-11-07)
+
+The `closure` GitHub Actions stage was added. It selects the real nominal HDF5 file (only to define the frozen generator thresholds), the three pseudodata unfolding HDF5 files, and the independent high-statistics `pseudodata/target.h5`. It uses `target.weight_mc` as the known truth and `pseudodata/multifold.h5::weights_nominal` for the pseudo-measurement. All datasets use exactly the same `pT_trackj1 > 5 GeV` selection and four generator-defined cells. The target is streamed to avoid loading the multi-GB data into memory.
+
+Run the stage with a commit containing `[atlas-closure]`, or select it from manual `workflow_dispatch`. Generated outputs: `pseudo_bin_spec.json`, `pseudo_closure_cells.csv`, `pseudo_source_manifest.csv`, `pseudo_source_covariances.npz`, `pseudo_covariance_total.npy`, `pseudo_covariance_sensitivity.csv`, `pseudo_closure_status.json`.
+
+**Scientific limits:** One pseudodata known-target comparison is not a coverage study. The Mahalanobis quadratic is deliberately marked UNCALIBRATED, not a p-value. The six amplitude-sensitivity variants are stress tests, not documented alternative ATLAS correlation prescriptions. The provisional DD and Sherpa covariance terms remain unvalidated; G8/G12/G15 remain NO-GO or UNVERIFIED. The `closure` stage does not execute the final real-measurement-versus-generator inference.
