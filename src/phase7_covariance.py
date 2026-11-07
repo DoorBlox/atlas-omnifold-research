@@ -39,7 +39,10 @@ def replica_covariance(replicas, divisor=1.):
     if r.ndim != 2 or r.shape[1] != 4 or len(r) < 2 or divisor <= 0:
         raise ValueError('Invalid replica family')
     centered = r - r.mean(axis=0)
-    # Population 1/R convention, as in the official ATLAS reference notebooks.
+    # HISTORICAL v1: population 1/R. Do not attribute this to the official
+    # CERN helper: independent implementations suggest sample 1/(R-1).
+    # See phase7_divisor_audit.py for an exact post-hoc covariance candidate.
+    # Keep this unchanged to reproduce the versioned Phase 7 v1 results.
     return (centered.T @ centered) / (len(r) * divisor)
 
 
