@@ -1,3 +1,5 @@
 Authorized schema preflight for ATLAS OmniFold Zenodo archive.
 This commit intentionally runs the download + HDF5 inventory job once.
 Raw ATLAS data must never be uploaded as an artifact or committed.
+
+Covariance stage authorized after 2 synthetic regression tests; no real-data p-value.
