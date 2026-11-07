@@ -12,7 +12,7 @@ A reproducible, independent **downstream research analysis** of the [ATLAS 2024 
 
 **[Master research handoff](docs/START_HERE_HANDOFF.md)** — the authoritative continuity document for resuming after a chat context limit. It contains the full scientific scope, provenance, exact GitHub Actions runs, corrected earlier assumptions, validation gates, current blockers, and a ready-to-use continuation prompt.
 
-**[Scientific results & limitations](docs/PHASE7_REFERENCE_AUDIT_CORRECTED_CALIBRATION.md)** · **[Notebook-method audit](docs/PHASE7_NOTEBOOK_METHOD_RECONCILIATION.md)** · **[Covariance sensitivity](docs/PHASE7_MODEL_SENSITIVITY_CHECKPOINT.md)** · **[Finite-MC cross-covariance audit](docs/PHASE7_SHARED_MC_BOUNDS_AND_CI_OPTIMIZATION.md)**
+**[Latest v2 extraction and safeguards](docs/PHASE7_V2_EXTRACTION_PLAN.md)** · **[ATLAS-guided four-bin covariance protocols](docs/PHASE7_CORRELATION_PROTOCOL_V2.md)** · **[Scientific results & limitations](docs/PHASE7_REFERENCE_AUDIT_CORRECTED_CALIBRATION.md)** · **[Notebook-method audit](docs/PHASE7_NOTEBOOK_METHOD_RECONCILIATION.md)** · **[Covariance sensitivity](docs/PHASE7_MODEL_SENSITIVITY_CHECKPOINT.md)** · **[Finite-MC cross-covariance audit](docs/PHASE7_SHARED_MC_BOUNDS_AND_CI_OPTIMIZATION.md)**
 
 ## Measurement and reproducibility
 
@@ -26,11 +26,11 @@ A reproducible, independent **downstream research analysis** of the [ATLAS 2024 
 | Independent pseudodata target | **23,888,304** selected target rows |
 | Source-level uncertainty prototype | 29 components; **not yet a validated 2D covariance model** |
 
-Frozen output from official-data processing: [real covariance run #42324639484](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42324639484), [pseudodata closure run #42327464929](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42327464929). A corrected reference-family audit ran in [#42377662887](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42377662887). The latest conditional finite-MC bounds and covariance-denominator audit passed **46 tests** in [#42384589187](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384589187); [lightweight CI #42384751385](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42384751385) passed **34 tests**.
+Frozen output from official-data processing: [real covariance run #42324639484](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42324639484), [pseudodata closure run #42327464929](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42327464929). A corrected reference-family audit ran in [#42377662887](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42377662887). The original-data **v2 signed-statistics capture** succeeded in [run #42386487963](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42386487963). [No-download v2 covariance reconstruction #42388030573](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42388030573) passed **38 tests** with **zero reconstruction error for every one of the 29 source matrices**. The [publication-guided four-bin correlation audit #42388258968](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42388258968) passed **43 tests**.
 
 ## No-repeat-download data strategy
 
-The permanent [`data/derived/phase7-v1/`](data/derived/phase7-v1) stores **33,594 bytes of byte-preserved, SHA-256-pinned four-cell results**: real/pseudodata cell fractions, frozen boundaries, all 29 source covariance matrices and manifests, and the scientific gate statements. It contains **no raw event records**, and does not allow arbitrary rebinning or reconstruction of signed source shifts. [Provenance and integrity documentation](docs/DERIVED_SNAPSHOT.md).
+The permanent [`data/derived/phase7-v1/`](data/derived/phase7-v1) preserves **33,594 bytes** of SHA-256-pinned original four-cell fractions, uncertainty matrices, manifest and bin definitions. **New:** [`data/derived/phase7-v2/`](data/derived/phase7-v2) now preserves ~188 KB of verified **signed four-cell weight sums and squared/mixed moments** from six official HDF5 inputs. V2 captures **251 real nominal weight columns and 176 pseudodata nominal weight columns**, plus the Sherpa/non-DY alternative supports. Both nominal samples exactly reproduce v1's 417,401 selected rows and cell fractions. Original archive and individual HDF5 hashes are retained in provenance; **no raw event records or original ZIP files are stored in the repository**. These summaries support source-level covariance reconstruction for the same frozen bins but do not support arbitrary rebinning, retraining, or repeated-unfolding coverage. See [v1 integrity](docs/DERIVED_SNAPSHOT.md) and [v2 extraction plan](docs/PHASE7_V2_EXTRACTION_PLAN.md).
 
 For routine no-download analysis on the cloned repository (Python 3.11):
 
@@ -40,14 +40,16 @@ python -m pytest -q tests
 python -m src.phase7_snapshot verify --root data/derived/phase7-v1
 python -m src.phase7_interaction --snapshot data/derived/phase7-v1 --out outputs
 python -m src.phase7_crosscov_bounds --snapshot data/derived/phase7-v1 --out outputs
+python -m src.phase7_v2_reconstruct --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/v2-audit
+python -m src.phase7_twopoint_protocol --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/twopoint
 ```
 
-Two workflows reduce GitHub Actions usage:
+The one-time [v2 archival workflow](.github/workflows/atlas-phase7-v2.yml) completed successfully; regular small-data analysis will not repeat it. Two primary workflows reduce GitHub Actions usage:
 
 - **[`atlas-phase7-lite.yml`](.github/workflows/atlas-phase7-lite.yml):** quick derived-statistics regression and sensitivity work, using the committed snapshot and a minimal NumPy/pytest installation.
 - **[`atlas-phase7.yml`](.github/workflows/atlas-phase7.yml):** original event-level extraction and scientific stages, invoked deliberately when the existing snapshot lacks essential statistics.
 
-When new signed four-cell variation sums or shared generator–unfolded weight products are indispensable, the next versioned extraction should produce **small, checksum-verified `phase7-v2` sufficient statistics in a single official-data pass**. It must not overwrite v1 or quietly change bin boundaries.
+The **one-time v2 extraction is complete**. Signed source-bin variation sums and mixed generator–unfolded products are now reusable for this four-cell grid. They enabled a direct conditional shared-event finite-MC calculation and four **pre-specified** DD/Sherpa correlation models, without any further 3.65 GB downloads. The primary model is fully correlated across bins; the alternative treats each of the four raw-count cells as an independent nuisance. Those options are grounded in [the official ATLAS supplemental user guide](https://cds.cern.ch/record/2899105/files/2405.20041.pdf?version=5) but are still a provisional normalized 2D extension, not official CERN implementation. See [methodology protocol](docs/PHASE7_CORRELATION_PROTOCOL_V2.md).
 
 ## What remains unresolved
 
