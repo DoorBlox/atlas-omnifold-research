@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty; closure = pseudo truth check; sensitivity = compare existing results"
+        description: "smoke = tests; schema = HDF5 audit; projection = descriptive 2x2; covariance = provisional source-wise uncertainty; closure = pseudo truth check; sensitivity = compare existing results; calibration = conditional Gaussian toys"
         type: choice
         required: true
         default: smoke
@@ -22,6 +22,7 @@ on:
           - covariance
           - closure
           - sensitivity
+          - calibration
       include_target:
         description: "Extract all large alternative/target HDF5 files (more storage required)"
         type: boolean
@@ -59,7 +60,7 @@ jobs:
       - name: Run deterministic software tests
         run: python -m pytest -q tests
       - name: Run smoke test
-        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]') && !contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
+        if: ${{ (github.event_name == 'push' && !contains(github.event.head_commit.message, '[atlas-schema]') && !contains(github.event.head_commit.message, '[atlas-projection]') && !contains(github.event.head_commit.message, '[atlas-covariance]') && !contains(github.event.head_commit.message, '[atlas-closure]') && !contains(github.event.head_commit.message, '[atlas-sensitivity]') && !contains(github.event.head_commit.message, '[atlas-calibration]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'smoke') }}
         run: python -m src.atlas_preflight --stage smoke --out outputs
       - name: Official ATLAS HDF5 schema preflight (download ~3.6 GB)
         if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-schema]') || contains(github.event.head_commit.message, '[atlas-projection]') || contains(github.event.head_commit.message, '[atlas-covariance]') || contains(github.event.head_commit.message, '[atlas-closure]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'schema' || inputs.stage == 'projection' || inputs.stage == 'covariance' || inputs.stage == 'closure')) }}
@@ -87,7 +88,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-closure]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'closure') }}
         run: python -m src.phase7_closure --root work --out outputs
       - name: Download verified published-result artifacts (no large data transfer)
-        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
+        if: ${{ (github.event_name == 'push' && (contains(github.event.head_commit.message, '[atlas-sensitivity]') || contains(github.event.head_commit.message, '[atlas-calibration]'))) || (github.event_name == 'workflow_dispatch' && (inputs.stage == 'sensitivity' || inputs.stage == 'calibration')) }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -101,6 +102,10 @@ jobs:
         if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-sensitivity]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'sensitivity') }}
         run: |
           python -m src.phase7_model_sensitivity --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs
+      - name: Conditional Gaussian covariance-estimation null calibration (not ATLAS coverage)
+        if: ${{ (github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-calibration]')) || (github.event_name == 'workflow_dispatch' && inputs.stage == 'calibration') }}
+        run: |
+          python -m src.phase7_calibration --real-dir derived_input/real --pseudo-dir derived_input/pseudo --out outputs --toys 10000
       - name: Upload lightweight audit artifacts (never raw ATLAS data)
         if: always()
         uses: actions/upload-artifact@v4
