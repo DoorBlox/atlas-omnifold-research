@@ -1,5 +1,7 @@
 # Official ATLAS notebook 1D covariance: exact-scope reconciliation
 
+**2026-11-08 supersession notice:** This document records the original notebook-only audit. Its historical statement below that the CERN helper was inaccessible is **superseded** by the [primary hash-pinned source-level audit](PHASE7_PRIMARY_SOURCE_COVARIANCE_AUDIT.md) (CI 42390285792). The 1D helper's Hessian, R−1 replica covariance, DD raw shift, and optional 1D Sherpa smoother are now verified for that pinned snapshot. **No 2D source-correlation model or calibrated real-data p-value is thereby verified.** See the [Deep Research adjudication](PHASE7_DEEP_RESEARCH_ADJUDICATION_2026_11_08.md).
+
 **Reference actually inspected:** user's supplied official ATLAS `2_pseudo_results.ipynb`, code **cell 26** (117 lines), plus cell 11 (uncertainty plotting). The notebook downloads `multifold_util.py` from CERN GitLab:
 `https://gitlab.cern.ch/atlas-physics/public/sm-z-jets-omnifold-2024/-/raw/master/multifold_util.py`.
 
