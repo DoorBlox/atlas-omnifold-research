@@ -12,8 +12,8 @@ The codebase retains historical `phase7_` module names for compatibility; the pr
 | [src/phase7_joint_reference.py](../src/phase7_joint_reference.py) | Paired real reference covariance and four source model scenarios | Mathematical model prototype, **not official ATLAS 2D recipe** |
 | [src/phase7_source_accounting.py](../src/phase7_source_accounting.py) | 29 archived component inventory | Source names are project-side labels, not a proven exact paper mapping |
 | [tests/test_phase7_kti_bundle.py](../tests/test_phase7_kti_bundle.py) | Frozen numeric expectations and model invariants | Existing tests are numerical checks |
-| [results/README.md](../results/README.md) | Stable result index | Use this instead of implying Nov-18 is a finished calendar date |
-| [results/kti-nov18](../results/kti-nov18) | Immutable 8-Nov completed milestone evidence | Retain original path and per-file hashes |
+| [results/README.md](../results/README.md) | Stable result index | Stable pointer to the pinned scientific release |
+| [results/four-cell-v1](../results/four-cell-v1) | Version-one four-cell numerical evidence | CSV/SVG contents retained, new release labels and manifest hashes verified |
 | [.github/workflows/atlas-phase7-lite.yml](../.github/workflows/atlas-phase7-lite.yml) | No-download derived regression workflow | Uses old output dirname because of historical compatibility |
 | [.github/workflows/atlas-phase7.yml](../.github/workflows/atlas-phase7.yml) | Expensive full original-event workflow | Avoid without an explicit reason requiring new event moments |
 | [docs/REPORT_REGISTER.md](REPORT_REGISTER.md) | Classifies 20+ historical method and manuscript reports | New issues belong in short current register |
