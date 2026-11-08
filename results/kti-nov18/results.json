@@ -1,0 +1,118 @@
+{
+  "G12": "UNVERIFIED",
+  "G15": "NO_GO",
+  "G5": "PROVISIONAL",
+  "G8": "UNVERIFIED",
+  "bin_spec": {
+    "mass_star_GeV": 10.594606399536133,
+    "selection": "pT_trackj1 > 5 GeV",
+    "threshold_source": "nominal_generator_only",
+    "tracks_star": 11
+  },
+  "checks": {
+    "all_four_by_four_covariances_have_rank_three_and_null_mode": true,
+    "checksum_verified_v1_and_v2": true,
+    "four_positive_cells_per_shape": true,
+    "four_prespecified_source_correlation_models": true,
+    "generator_defined_fixed_2x2_thresholds": true,
+    "no_real_data_significance_permission": true,
+    "normalized_four_cell_sum_and_zero_residual_sum": true,
+    "pseudodata_independent_known_truth_used": true,
+    "real_reference_paired_finite_MC_used": true,
+    "sample_replica_counts_and_R_minus_1_reconciled": true,
+    "source_variances_sum_to_comparator_aware_total": true,
+    "twenty_nine_systematic_and_stochastic_components_audited": true
+  },
+  "inference_permission": "NO_GO",
+  "limitations": [
+    "Not an ATLAS-approved two-dimensional covariance prescription",
+    "DD and Sherpa nuisance correlations are pre-specified sensitivity assumptions",
+    "Other source families and learned-weight training dependencies may be correlated",
+    "A single known-target pseudodata closure is not repeated experimental coverage",
+    "No real-data generator-compatibility inference is authorized"
+  ],
+  "provenance": {
+    "ATLAS_paper": "https://doi.org/10.1103/PhysRevLett.133.261803",
+    "Zenodo_release": "https://doi.org/10.5281/zenodo.11507450",
+    "official_1d_helper_sha256": "cf43074fb3635b5c484dd1f35b9dc95cea938d86d206b4a2e83ab1f739e73d7f",
+    "original_archive_md5": "9b838510f41e1d5a8b26d7f3c5b2ca42",
+    "pseudo_source_run": 42327464929,
+    "real_source_run": 42324639484,
+    "v2_moments_sha256": "a6cd9e96d7bb105948735043959f2360f3213944d5f8ead64f422dc8cf618619"
+  },
+  "samples": {
+    "pseudo": {
+      "measurement": [
+        0.4366239490795071,
+        0.07253511268549338,
+        0.12009470690534266,
+        0.3707462313296568
+      ],
+      "measurement_label": "ATLAS unfolded pseudodata",
+      "reference": [
+        0.4489994511773743,
+        0.0831352714007221,
+        0.10968280507866973,
+        0.35818247234323386
+      ],
+      "reference_kind": "independent_known_truth",
+      "reference_label": "independent known target truth"
+    },
+    "real": {
+      "measurement": [
+        0.4287152163666504,
+        0.07496344481873442,
+        0.13275274626019576,
+        0.3635685925544194
+      ],
+      "measurement_label": "ATLAS unfolded real data",
+      "reference": [
+        0.43416258768444055,
+        0.06583598813397021,
+        0.141995627265506,
+        0.35800579691608325
+      ],
+      "reference_kind": "shared_nominal_generator",
+      "reference_label": "shared nominal generator"
+    }
+  },
+  "scenario_order": [
+    "both_fully_correlated",
+    "dd_decorrelated_sherpa_correlated",
+    "dd_correlated_sherpa_decorrelated",
+    "both_four_bin_decorrelated"
+  ],
+  "source_accounting": {
+    "pseudo": {
+      "notebook_1d_omitted": 14,
+      "notebook_1d_selected": 15,
+      "notebook_1d_trace_share": 0.6172799515656057,
+      "official_2d_model_verified": false,
+      "one_to_one_paper_mapping_verified": false,
+      "replica_counts": {
+        "data_bootstrap": 25,
+        "mc_training_bootstrap": 25,
+        "nn_ensemble": 100
+      },
+      "stochastic": 4,
+      "systematic_labelled": 25,
+      "total_project_components": 29
+    },
+    "real": {
+      "notebook_1d_omitted": 14,
+      "notebook_1d_selected": 15,
+      "notebook_1d_trace_share": 0.5589331297637549,
+      "official_2d_model_verified": false,
+      "one_to_one_paper_mapping_verified": false,
+      "replica_counts": {
+        "data_bootstrap": 100,
+        "mc_training_bootstrap": 25,
+        "nn_ensemble": 100
+      },
+      "stochastic": 4,
+      "systematic_labelled": 25,
+      "total_project_components": 29
+    }
+  },
+  "status": "CHECKSUM_VERIFIED_DESCRIPTIVE_KTI_NOV18_BUNDLE"
+}
