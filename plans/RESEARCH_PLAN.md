@@ -12,9 +12,9 @@ The version-one four-cell numerical evidence was completed on **8 November 2026*
 
 | Work ID | Owner/review | Task | Completion evidence |
 | --- | --- | --- | --- |
-| W1 | Analysis + human HEP review | Review the newly amended v0.4 `D`-versus-log-odds interpretation; author/adviser decide the scientific suitability | Correctly reproduced source fractions; reviewer-approved interpretation |
+| W1 | Analysis + human HEP review | Review the current v0.6 `D`-versus-log-odds interpretation; author/adviser decide the scientific suitability | Correctly reproduced source fractions; reviewer-approved interpretation |
 | W2 | Student/adviser | Confirm descriptive KTI meets school's actual novelty, citation and writing criteria | Written adviser decision, documented requirements |
-| W3 | Student/editor | Review and approve v0.4 evidence-tied prose and conditional uncertainty wording; complete targeted corrections if needed | DOCX diff, line-by-line CSV and figure consistency check |
+| W3 | Student/editor | Review and approve v0.6 question-led prose and conditional uncertainty wording; complete targeted corrections if needed | DOCX diff, line-by-line CSV and figure consistency check |
 | W4 | Student/Zotero | Verify 14 reference-list entries, each in-text citation, source-to-claim support and legitimate venue formatting | Bidirectional citation inventory and exported Zotero bibliography |
 | W5 | Student/adviser | Supply human authorship, affiliation, contributions, funding/conflict, data-license attribution and AI assistance disclosure | Author-approved declarations |
 | W6 | Independent reviewer | Review domain novelty, DD/Sherpa assumptions and claim calibration | Signed/acknowledged scientific/editorial review record |
