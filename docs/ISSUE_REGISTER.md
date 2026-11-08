@@ -14,7 +14,7 @@
 | ED-01 | Citation/reference consistency | **PENDING**: bibliography DOI checks were partial; Zotero library and every in-text/reference bidirectional match still require audit | [manuscript review](MANUSCRIPT_REVIEW.md) |
 | ED-02 | Complete school/journal template, author identity and AI disclosure | **PENDING HUMAN SIGNOFF**; school/adviser/venue policies have not been confirmed | [writing/integrity review](MANUSCRIPT_REVIEW.md) |
 | ED-03 | Language repetitive / academic voice | **EDITORIAL DRAFT REVISED**: 64 earlier passages plus 13 further v0.4 evidence-based revisions; the Turnitin 69% refers to v0.2, not v0.4. Author approval and appropriate disclosure remain pending | [manuscript review](MANUSCRIPT_REVIEW.md) |
-| OPS-01 | `kti-nov18` misleading future-looking folder | **DOCUMENTATION RESOLVED**: a target *milestone label* assigned to a completed 8-Nov evidence bundle; stable `results/README.md` entry | [stable evidence index](../results/README.md) |
+| OPS-01 | Misleading date-based release name | **RESOLVED BY MIGRATION**: canonical result path, generator, tests and workflow use `four-cell-v1`; manifest updated for renamed reporting labels | [migration record](RELEASE_MIGRATION.md) |
 | OPS-02 | Append-only 60-kB handoff and duplicate blueprints | **DOCUMENTATION RESOLVED**: short handoff, status, issues and roadmap as current docs; original preserved for audit | [history](HANDOFF_HISTORY.md), [document map](REPORT_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md) |
 
 ### Epistemic rule
