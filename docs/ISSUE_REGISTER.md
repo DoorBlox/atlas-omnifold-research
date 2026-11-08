@@ -13,7 +13,7 @@
 | SCI-07 | Novelty for a specialist HEP journal | **NOT ESTABLISHED**; limited, defensible novelty is reproducible, transparent reuse and sensitivity case study | [bibliography and novelty audit](KTI_BIBLIOGRAPHY_AND_NOVELTY_AUDIT_2026_11_08.md) |
 | ED-01 | Citation/reference consistency | **PENDING**: bibliography DOI checks were partial; Zotero library and every in-text/reference bidirectional match still require audit | [manuscript review](MANUSCRIPT_REVIEW.md) |
 | ED-02 | Complete school/journal template, author identity and AI disclosure | **PENDING HUMAN SIGNOFF**; school/adviser/venue policies have not been confirmed | [writing/integrity review](MANUSCRIPT_REVIEW.md) |
-| ED-03 | Language repetitive / academic voice | **PARTIALLY ADDRESSED**: 64 passages edited; separate Turnitin score unchanged 69%, not an objective proxy for authorship | [manuscript review](MANUSCRIPT_REVIEW.md) |
+| ED-03 | Language repetitive / academic voice | **EDITORIAL DRAFT REVISED**: 64 earlier passages plus 13 further v0.4 evidence-based revisions; the Turnitin 69% refers to v0.2, not v0.4. Author approval and appropriate disclosure remain pending | [manuscript review](MANUSCRIPT_REVIEW.md) |
 | OPS-01 | `kti-nov18` misleading future-looking folder | **DOCUMENTATION RESOLVED**: a target *milestone label* assigned to a completed 8-Nov evidence bundle; stable `results/README.md` entry | [stable evidence index](../results/README.md) |
 | OPS-02 | Append-only 60-kB handoff and duplicate blueprints | **DOCUMENTATION RESOLVED**: short handoff, status, issues and roadmap as current docs; original preserved for audit | [history](HANDOFF_HISTORY.md), [document map](REPORT_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md) |
 
