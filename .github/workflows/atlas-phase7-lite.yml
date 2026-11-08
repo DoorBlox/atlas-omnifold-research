@@ -96,7 +96,7 @@ jobs:
       - name: Audit paper 25 systematics plus four stochastic terms versus 15 notebook terms
         run: python -m src.phase7_source_accounting --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs/source-accounting
       - name: Generate pinned historical four-cell evidence bundle (completed 8 Nov 2026)
-        run: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+        run: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1
       - name: Audit the additional binary-indicator association coordinate
         run: python -m src.joint_association_audit --out outputs/joint-association-audit.json
       - name: Probe CERN official helper source without executing fetched code

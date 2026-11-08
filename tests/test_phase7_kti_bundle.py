@@ -1,4 +1,4 @@
-"""Regression tests for the frozen, descriptive KTI November-18 evidence bundle.
+"""Regression tests for the frozen, descriptive four-cell descriptive evidence release (v1).
 
 All numeric expectations below come from checksum-pinned ATLAS-derived CSVs,
 not illustrative values in an external Deep Research report.
@@ -30,7 +30,7 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 
 @pytest.fixture(scope="module")
 def bundle(tmp_path_factory):
-    out = tmp_path_factory.mktemp("kti-nov18") / "bundle"
+    out = tmp_path_factory.mktemp("four-cell-v1") / "bundle"
     result = generate(V1, V2, out)
     return out, result
 
@@ -185,3 +185,15 @@ def test_no_real_data_significance_or_go_permission(bundle):
     report = (out / "MANUSCRIPT_RESULTS.md").read_text(encoding="utf-8")
     assert "not a calibrated" in report.lower()
     assert "G15 NO-GO" in report
+
+
+def test_repository_four_cell_release_matches_generated_manifest(bundle):
+    """The renamed permanent release must equal a fresh v1 rebuild byte for byte."""
+    out, _ = bundle
+    stored = ROOT / "results" / "four-cell-v1"
+    manifest = json.loads((stored / "manifest.json").read_text(encoding="utf-8"))
+    rebuilt = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    assert rebuilt == manifest
+    for relative, expected_digest in manifest["files"].items():
+        assert hashlib.sha256((out / relative).read_bytes()).hexdigest() == expected_digest
+        assert hashlib.sha256((stored / relative).read_bytes()).hexdigest() == expected_digest

@@ -4,7 +4,7 @@ This is algebra on published four-cell fractions, not experimental covariance,
 coverage, significance, or a generator-compatibility test.
 
 Usage:
-    python -m src.joint_association_audit --cells results/kti-nov18/tables/joint_cells.csv
+    python -m src.joint_association_audit --cells results/four-cell-v1/tables/joint_cells.csv
 """
 from __future__ import annotations
 import argparse
@@ -84,7 +84,7 @@ def analyze_csv(csv_path: Path) -> dict[str,dict]:
 def main() -> None:
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--cells",type=Path,
-                        default=Path("results/kti-nov18/tables/joint_cells.csv"))
+                        default=Path("results/four-cell-v1/tables/joint_cells.csv"))
     parser.add_argument("--out",type=Path,default=None)
     args=parser.parse_args()
     out={"status":"DESCRIPTIVE_ARITHMETIC_ONLY",
