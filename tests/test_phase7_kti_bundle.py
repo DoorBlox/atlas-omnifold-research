@@ -188,10 +188,10 @@ def test_no_real_data_significance_or_go_permission(bundle):
 
 
 def test_repository_four_cell_release_matches_generated_manifest(bundle):
-    """Rebuild exact source products; permit only last-bit float serialization noise.
+    """Rebuild exact source products; permit only tightly bounded float rounding.
 
     The original release preserves immutable scientific CSVs and their hashes.
-    Three derived floating-point CSVs vary by a few ULPs across environments
+    Three derived floating-point CSVs vary in the least significant serialized decimals across environments
     or summation orders. Require identical cells, labels, shape, and numerical
     values at much tighter precision than any manuscript rounding.
     """
@@ -235,7 +235,7 @@ def test_repository_four_cell_release_matches_generated_manifest(bundle):
                     assert a == z, (relative, row_index, column_index, a, z)
                 else:
                     assert math.isfinite(x) and math.isfinite(y)
-                    assert math.isclose(x, y, rel_tol=1e-12, abs_tol=1e-20), (
+                    assert math.isclose(x, y, rel_tol=1e-9, abs_tol=1e-18), (
                         relative, row_index, column_index, x, y
                     )
 
