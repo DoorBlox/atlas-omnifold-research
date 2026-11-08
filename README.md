@@ -19,7 +19,7 @@ An **independent student research project** using the [ATLAS 2024 OmniFold 24-di
 | [Start-here handoff](docs/START_HERE_HANDOFF.md) | Short instructions for future sessions |
 | [Repository/document map](docs/REPOSITORY_MAP.md) · [report register](docs/REPORT_REGISTER.md) | Code and historical report navigation |
 
-**Why a folder says `kti-nov18`:** the name was chosen for a **planned 18 November 2026 milestone**, but the complete version-one numerical deliverable was **already produced and committed on 8 November 2026**. It does not record an event on November 18 or predict any future outcome. The [`results/README.md`](results/README.md) is the stable result alias; the original `results/kti-nov18/` directory is retained to preserve reproducibility and SHA-256 manifest coverage.
+**Frozen release:** [`results/four-cell-v1/`](results/four-cell-v1/README.md) holds the checksum-verified descriptive evidence generated on **8 November 2026**. The directory name identifies the four-cell analysis and its version. [Release migration record](docs/RELEASE_MIGRATION.md).
 
 ## Central descriptive results
 
@@ -39,7 +39,7 @@ A path-dependent marginal/association counterfactual is [documented here](docs/J
 ```bash
 python -m pip install -r requirements.txt
 python -m pytest -q tests/test_phase7_kti_bundle.py
-python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1
 ```
 
 The repository contains derived signed/mixed moments and generated outputs, **not** the original multi-GB public ATLAS event ZIP, private detector samples or trained OmniFold checkpoints. [Earlier frozen-code CI run](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) recorded 107 passing tests and 12 positive bundle checks. **These demonstrate computational reproducibility only.** The released source families and DD/Sherpa correlations are not an official ATLAS 2D uncertainty prescription.
