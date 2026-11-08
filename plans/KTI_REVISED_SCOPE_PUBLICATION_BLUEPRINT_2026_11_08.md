@@ -6,7 +6,7 @@
 
 ## 1. Canonical scope: one story across plan, methods, article and figures
 
-**Working title (under 20 words):** *Reproducible Joint-Shape Analysis of Charged-Jet Mass and Track Multiplicity in ATLAS 2024 Unbinned Z+Jets Data.*
+**Working title (under 20 words):** *A Reproducible Four-Cell Analysis of Leading Charged-Jet Mass and Track Multiplicity in ATLAS 2024 OmniFold Z+Jets Data.*
 
 **Design:** quantitative, observational, reproducible **secondary analysis of public particle-physics measurement products**, not a new detector experiment, causal study, randomized trial, systematic literature review, or novel unfolding algorithm. The published ATLAS detector measurement and OmniFold algorithm are the data-producing methods; this project makes an independent downstream four-cell projection and audit.
 
