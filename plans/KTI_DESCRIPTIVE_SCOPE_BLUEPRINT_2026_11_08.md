@@ -4,6 +4,7 @@
 **Canonical public-facing title:** **A Reproducible Four-Cell Analysis of Leading Charged-Jet Mass and Track Multiplicity in ATLAS 2024 OmniFold Z+Jets Data**.  
 **Project:** [DoorBlox/atlas-omnifold-research](https://github.com/DoorBlox/atlas-omnifold-research).  
 **Living school document:** [79_Muhammad Wahid Hisyam, RESEARCH PLAN / IMRAD / ARTICLE tabs](https://docs.google.com/document/d/1rTafCdT6ESCpH43HtrssArHpiUzVEhoYABzwQJewQ00/edit).
+**Manuscript progress update (8 Nov 2026):** Full standalone Word draft achieved (202-word abstract, 3 tables, 4 figures, 14 references); **not yet final or copied to the Google Doc**. Read [the manuscript checkpoint](../docs/KTI_MANUSCRIPT_DRAFT_CHECKPOINT_2026_11_08.md) for file SHA-256, remaining audit, and manuscript-versus-ARTICLE distinction.
 
 ## 1. Binding scope decision and change rationale
 
@@ -96,12 +97,14 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 - **Acceptance/evidence:** **DOI/claim mapping DONE:** 13 peer-reviewed sources independently matched to their subjects and DOI records; 12 are listed in the school's required three-part citation-entry format, plus the 2024 dataset DOI and a separate novelty comparator. **NOT YET COMPLETE:** Zotero-managed records, confirmed manuscript citation placements, and independent authoritative journal fit/indexing/fee checks. Do not mark this entire B03 stage done before those tasks and adviser review.
 - **Rollback:** keep a previous bibliography version; do not replace uncertain references with plausible fabricated citations.
 
-### B04 — Final manuscript integration and visual QA [PENDING]
+### B04 — Full standalone manuscript draft PRODUCED; integration and visual QA PENDING
 - **Goal:** school-ready IMRAD narrative whose Results exactly reproduce the pinned numbers and whose Discussion interprets without overclaiming.
 - **Prerequisites:** **B01 + B02 + B03**. **Files/interfaces:** Google Doc ARTICLE tab; [MANUSCRIPT_RESULTS.md](../results/kti-nov18/MANUSCRIPT_RESULTS.md); four SVG figures; school/journal style guide.
 - **Implementation:** unify title/abstract/objectives/conclusion; strengthen literature-supported introduction and physics motivation; insert 4 figures/essential tables with captions, units and provenance; present real and pseudo separately; remove internal gate codes; explicitly state model-conditional uncertainty and lack of calibrated p-values; check originality/attribution and rendering.
 - **Acceptance/evidence:** adviser can trace every numerical sentence to a table; each figure/table cited in Results; no unsupported “significant”, “agreement”, “closure passed” or “ATLAS-approved”; PDF/page inspection and peer review.
 - **Rollback:** preserve working article revision and previous image/table placements; revert only edited sections.
+
+**8 November 2026 checkpoint:** The later Word artifact `Manuscript_Draft(1).docx` contains the full abstract-through-references draft, 3 tables, 4 figures and 14 reference entries. Its file hash and exact status are documented [here](../docs/KTI_MANUSCRIPT_DRAFT_CHECKPOINT_2026_11_08.md). This closes the *initial full-draft writing* subtask but **does not close B04**: numerical/citation verification, figure and final PDF-layout inspection, adviser edits, and any user-approved Google Doc ARTICLE integration remain.
 
 ### B05 — Independent scientific/editorial publishability review [PENDING]
 - **Goal:** decide whether the *current* descriptive paper is appropriate for school KTI, reproducibility/education outlet, or specialist HEP research journal.
@@ -177,7 +180,7 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 
 **Publication reality:** a transparent school KTI/competition report is feasible with review; specialist journals EPJ C, SciPost Physics Core and Physical Review D remain **aspirational unverified candidates**. Do not assume that a descriptive four-cell secondary analysis satisfies their novelty threshold. Confirm school SINTA/Scopus requirement, official current indexing, article types, APC/SCOAP³ policy, author guidelines and novelty fit. Consider a reproducibility/education/technical-note or conference route **only if** an appropriate verified venue exists. Journal acceptance is not promised; external submission requires human author/adviser approval.
 
-**Editorial acceptance:** (a) title <20 words; (b) 150–250-word abstract; (c) 3–5 keywords; (d) exactly two RQs and two matched objectives; (e) real and pseudo references never swapped; (f) all four SVGs and four main tables integrated and visually inspected in PDF; (g) no internal gate codes or unsupported significance in ARTICLE; (h) at least ten verified Zotero sources if school rule stands; (i) data/code/AI/author statements complete; (j) reviewer-approved final text. Passing 107 code tests does not certify any of (f)–(j).
+**Editorial acceptance:** (a) title <20 words; (b) 150–250-word abstract; (c) 3–5 keywords; (d) exactly two RQs and two matched objectives; (e) real and pseudo references never swapped; (f) all four source-backed SVG figures and the necessary numerical tables (currently three in the Word draft) integrated and visually inspected in PDF; (g) no internal gate codes or unsupported significance in ARTICLE; (h) at least ten verified Zotero sources if school rule stands; (i) data/code/AI/author statements complete; (j) reviewer-approved final text. Passing 107 code tests does not certify any of (f)–(j).
 
 **Publication decision questions for adviser:** Is the revised descriptive scope acceptable as the complete KTI? Does the school require an actual indexed journal publication, only a target venue, or a school competition report? What are the required language, length, format, and actual deadline? The numerical package is finished; these editorial decisions are still pending.
 
