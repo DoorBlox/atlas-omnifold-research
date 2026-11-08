@@ -1,0 +1,14 @@
+{
+  "all_four_by_four_covariances_have_rank_three_and_null_mode": true,
+  "checksum_verified_v1_and_v2": true,
+  "four_positive_cells_per_shape": true,
+  "four_prespecified_source_correlation_models": true,
+  "generator_defined_fixed_2x2_thresholds": true,
+  "no_real_data_significance_permission": true,
+  "normalized_four_cell_sum_and_zero_residual_sum": true,
+  "pseudodata_independent_known_truth_used": true,
+  "real_reference_paired_finite_MC_used": true,
+  "sample_replica_counts_and_R_minus_1_reconciled": true,
+  "source_variances_sum_to_comparator_aware_total": true,
+  "twenty_nine_systematic_and_stochastic_components_audited": true
+}
