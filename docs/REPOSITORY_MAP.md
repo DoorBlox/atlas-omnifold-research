@@ -7,6 +7,8 @@ The codebase retains historical `phase7_` module names for compatibility; the pr
 | [data/derived/phase7-v1](../data/derived/phase7-v1) | Frozen early real/pseudo cells and covariance source snapshots | Pinned evidence: don't silently change |
 | [data/derived/phase7-v2](../data/derived/phase7-v2) | Signed and mixed weight moments from verified earlier extraction | Pinned evidence: don't silently change |
 | [src/phase7_kti_bundle.py](../src/phase7_kti_bundle.py) | Deterministic CSV/SVG bundle generator | Changes must have tests, updated manifest, and actual CI evidence |
+| [src/joint_association_audit.py](../src/joint_association_audit.py) | Additional algebraic description D and path-sensitive log-odds decomposition | Non-inferential; numerical test only |
+| [tests/test_joint_association_audit.py](../tests/test_joint_association_audit.py) | Reproducibility expectations for the additional D and log-odds arithmetic | Does not validate experimental coverage |
 | [src/phase7_joint_reference.py](../src/phase7_joint_reference.py) | Paired real reference covariance and four source model scenarios | Mathematical model prototype, **not official ATLAS 2D recipe** |
 | [src/phase7_source_accounting.py](../src/phase7_source_accounting.py) | 29 archived component inventory | Source names are project-side labels, not a proven exact paper mapping |
 | [tests/test_phase7_kti_bundle.py](../tests/test_phase7_kti_bundle.py) | Frozen numeric expectations and model invariants | Existing tests are numerical checks |

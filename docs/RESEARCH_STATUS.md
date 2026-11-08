@@ -21,7 +21,7 @@ Selected events satisfy `pT_trackj1 > 5 GeV`; the fixed mass threshold is `10.59
 - Real unfolded minus nominal-generator: low-mass `+0.0036800854`, low-multiplicity `-0.0146902523`, joint log odds `-0.0597334776`; pseudo versus independent target: `-0.0229756608`, `-0.0019636003`, `+0.0522361448`.
 - Four DD/Sherpa conditional SE models: real log-odds SE `0.092321–0.146783`; pseudo `0.056651–0.112847`. These are **scenario-dependent**, not validated uncertainty intervals.
 - A v0.3 Word **review draft** now incorporates the new D analysis: **13 rendered pages, 3 unchanged numerical tables, 4 unchanged figures, 14 unchanged bibliography entries**. The earlier v0.2 had 12 pages. Neither Word file is in GitHub or synchronized to Google Doc ARTICLE. The latest file hash is recorded in [manuscript review](MANUSCRIPT_REVIEW.md).
-- An independent additional algebraic check now distinguishes log odds from the binary indicator covariance `D` in [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md). This is supplemental descriptive analysis, **not** a new accepted uncertainty model or experimental validation.
+- An additional algebraic check distinguishes log odds from binary-indicator covariance `D` in [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md); its [code](../src/joint_association_audit.py) and [tests](../tests/test_joint_association_audit.py) are versioned separately. Check new-branch CI for these new tests; the earlier 107-test result predates them. This is supplemental descriptive analysis, **not** a new accepted uncertainty model or experimental validation.
 
 ## Current gate register
 

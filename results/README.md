@@ -17,7 +17,7 @@ The original GitHub folder [`results/kti-nov18/`](kti-nov18/README.md) is an **i
 | Generated reporting | [MANUSCRIPT_RESULTS.md](kti-nov18/MANUSCRIPT_RESULTS.md) | Generated prose from frozen inputs, not a standalone peer-reviewed manuscript |
 | Check and reproducibility evidence | [checks.json](kti-nov18/checks.json), [manifest.json](kti-nov18/manifest.json), [results.json](kti-nov18/results.json) | Twelve true QA checks, hashes, and machine-readable metadata |
 
-The six corresponding model coordinates are described and independently recomputed in [the association audit](../docs/JOINT_ASSOCIATION_AUDIT.md). CI evidence is [run 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) (**107 tests passed in the historical frozen numerical workflow**), not a guarantee of physical model coverage or a new test run after documentation changes.
+The separate binary-indicator covariance coordinate and path-dependent log-odds calculation are documented in [the association audit](../docs/JOINT_ASSOCIATION_AUDIT.md) and implemented in [`src/joint_association_audit.py`](../src/joint_association_audit.py). This new calculation runs **outside the immutable bundle** and does not change the pinned manifest. CI evidence is [run 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) (**107 tests passed in the historical frozen numerical workflow**), not a guarantee of physical model coverage or a new test run after documentation changes.
 
 ### Rebuild the historical release
 

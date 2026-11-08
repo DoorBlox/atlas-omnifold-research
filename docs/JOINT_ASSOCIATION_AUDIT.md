@@ -58,6 +58,15 @@ This is a **path-dependent arithmetic diagnostic**, not a unique causal, physica
 
 These numbers depend on which coordinate is held fixed and the order of changes. The real-data log-odds contrast in this counterfactual is therefore **largely reproduced by the marginal adjustment** under fixed binary-indicator covariance. In pseudodata, the pattern differs. **Neither result should be elevated to a tested physics effect or a proof of no association difference.**
 
+## Automated calculation and regression tests
+
+The same computations are implemented in [`src/joint_association_audit.py`](../src/joint_association_audit.py), with pinned expectations and invalid-shape checks in [`tests/test_joint_association_audit.py`](../tests/test_joint_association_audit.py). The lightweight GitHub workflow runs these tests and generates a separate JSON diagnostic. That diagnostic is **outside** the immutable version-one result manifest and is **not** additional ATLAS evidence.
+
+```bash
+python -m pytest -q tests/test_joint_association_audit.py
+python -m src.joint_association_audit --cells results/kti-nov18/tables/joint_cells.csv --out outputs/joint-association-audit.json
+```
+
 ## Reproduce from the immutable joint fractions
 
 ```python

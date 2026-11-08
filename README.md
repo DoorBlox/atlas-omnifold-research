@@ -32,7 +32,7 @@ Frozen selection: `pT_trackj1 > 5 GeV`; generator mass split `10.594606399536133
 | Joint log-odds | -0.0597334776 | +0.0522361448 |
 | Binary-indicator covariance `D` (new descriptive recheck) | -0.0001685161 | +0.0014603768 |
 
-A path-dependent marginal/association counterfactual is reported in [the association audit](docs/JOINT_ASSOCIATION_AUDIT.md). It is a different, **purely descriptive measure** and does not change the released four-cell values.
+A path-dependent marginal/association counterfactual is [documented here](docs/JOINT_ASSOCIATION_AUDIT.md) and reproduced by [source code](src/joint_association_audit.py) and [regression tests](tests/test_joint_association_audit.py). It is a different, **purely descriptive measure** and does not change the released four-cell values.
 
 ## Repeat the existing version-one release
 
