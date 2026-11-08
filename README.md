@@ -10,6 +10,9 @@ A reproducible, independent **downstream research analysis** of the [ATLAS 2024 
 
 ## Start here
 
+**Editorial update (8 Nov 2026):** A revised **12-page** Word draft with 64 edited passages, a 192-word abstract, the original three numerical tables/four figures, and unchanged numerical source data has been produced and render-audited. [Read the scientific/editorial revision checkpoint](docs/KTI_MANUSCRIPT_EDITORIAL_REVISION_2026_11_08.md). The revised binary is available only in the conversation, not in this public repository. Author/adviser review, Zotero finalization and submission checks are **pending**; scientific G15 remains **NO-GO**.
+
+
 **Current writing milestone (8 Nov 2026): a complete standalone Word manuscript draft now exists.** It has a 202-word abstract, three numerical tables, four embedded figures and 14 reference entries, with full IMRAD sections, conclusion and data/code declarations. The manuscript was inspected from the uploaded `Manuscript_Draft(1).docx` and recorded with SHA-256 and specific pending review tasks in the [manuscript-draft checkpoint](docs/KTI_MANUSCRIPT_DRAFT_CHECKPOINT_2026_11_08.md). **The binary DOCX is not in this public repository; the Google Doc ARTICLE tab is an earlier draft, not the same artifact.** Manuscript drafting has resumed and a full draft is produced; final Zotero-managed bibliography, reference/figure/layout audit, adviser review, journal suitability and author sign-off remain outstanding. Frozen science and G15 NO-GO are unchanged. The repository handoff has been updated for continuity.
 
 
