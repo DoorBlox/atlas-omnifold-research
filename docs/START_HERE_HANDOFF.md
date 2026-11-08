@@ -1,5 +1,10 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## 2026-11-08 — Scope reconciliation and publication plan (canonical)
+
+The primary KTI is now a **descriptive, reproducible four-cell secondary analysis** with the canonical title *A Reproducible Four-Cell Analysis of Leading Charged-Jet Mass and Track Multiplicity in ATLAS 2024 OmniFold Z+Jets Data*. The [single canonical scope/publication blueprint](../plans/KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md) records the two research questions and objectives, frozen ATLAS data and comparator distinctions, 29-source provisional covariance scope, internal gate meanings, exact scientific nonclaims, journal realism, manuscript architecture, work units B00–B08, dependencies, acceptance and rollback. The four tabs of the [school Google Doc](https://docs.google.com/document/d/1rTafCdT6ESCpH43HtrssArHpiUzVEhoYABzwQJewQ00/edit) were updated in place while preserving the school tables and guidance. The ARTICLE tab uses plain-language limitations, not G-code jargon. The older duplicate publication blueprint is a redirect to the canonical file. **Nov-18 numerical package done; full manuscript, Zotero audit, adviser review, visual figure/PDF QA and journal suitability are pending. G15 remains NO-GO.**
+
+
 
 ## 2026-11-08 — November 18 KTI numerical deliverables finished early; 107-test CI PASS
 
