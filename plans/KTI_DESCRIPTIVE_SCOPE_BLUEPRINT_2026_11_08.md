@@ -1,3 +1,5 @@
+> **Historical detailed scope blueprint (8 Nov 2026).** The currently maintained roadmap is [RESEARCH_PLAN.md](RESEARCH_PLAN.md), the current scientific status is [RESEARCH_STATUS.md](../docs/RESEARCH_STATUS.md), and the version-one numerical evidence is [results/README.md](../results/README.md). This historical blueprint remains intact for audit; status checkboxes below may predate the subsequent Word manuscript revision and joint-association recheck.
+
 # KTI scope-change blueprint — reproducible ATLAS four-cell joint analysis
 **Decision date:** 2026-11-08  
 **Status:** Adopted project working direction for the *descriptive* KTI; independent scientific/adviser and publication review pending.  
