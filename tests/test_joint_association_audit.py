@@ -59,7 +59,7 @@ def test_frozen_csv_roundtrip(tmp_path):
     assert "p_value" not in str(res)
 
 def test_repository_pinned_csv_if_present():
-    path=Path(__file__).resolve().parents[1]/"results/kti-nov18/tables/joint_cells.csv"
+    path=Path(__file__).resolve().parents[1]/"results/four-cell-v1/tables/joint_cells.csv"
     if not path.exists():pytest.skip("Frozen repository CSV unavailable in standalone test")
     res=analyze_csv(path)
     for sample in FROZEN:

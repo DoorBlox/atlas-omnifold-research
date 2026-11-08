@@ -1,46 +1,45 @@
-# Research status: current, authoritative
+# Current research status
 
-**Checked 8 November 2026.** This is the first place to look for scientific and editorial status. This file is intentionally short; the detailed primary source is the [immutable numerical bundle](../results/README.md). The former 60-kB append-only handoff is preserved in [the historical handoff](HANDOFF_HISTORY.md). **None of these documents predicts what will happen on November 18.**
+**As of 8 November 2026.** The project is an independent, reproducible **descriptive secondary analysis** of the [2024 ATLAS OmniFold Z+jets measurement](https://doi.org/10.1103/PhysRevLett.133.261803) and its [2024 event-weight release](https://doi.org/10.5281/zenodo.11507450). Read the [master handoff](START_HERE_HANDOFF.md) for the current manuscript and next actions.
 
-## Current project contract
+## Research questions
 
-**Working title:** *A Reproducible Four-Cell Analysis of Leading Charged-Jet Mass and Track Multiplicity in ATLAS 2024 OmniFold Z+Jets Data*.
+1. Which four-cell, low-mass marginal, low-multiplicity marginal and joint log-odds contrasts arise between unfolded real data and the **shared-event nominal generator**?
+2. How do four stated DD/Sherpa within-source assumptions affect **conditional** precision, and what can one comparison of unfolded pseudodata with **independent known truth** check?
 
-This is an independent, reproducible **descriptive secondary analysis** of the [ATLAS 2024 PRL](https://doi.org/10.1103/PhysRevLett.133.261803) and the [2024 Zenodo event-weight release](https://doi.org/10.5281/zenodo.11507450). It does **not** retrain OmniFold, measure new ATLAS events, establish generator compatibility, or approve a new two-dimensional systematic covariance prescription.
+The leading charged jet selection is `pT_trackj1 > 5 GeV`, split at mass `10.594606399536133 GeV` and constituent multiplicity `11`. Cells are LL/LH/HL/HH, mass first.
 
-**Exactly two questions:**
-1. Which normalized four-cell, mass-low marginal, multiplicity-low marginal and log-odds contrasts arise between real unfolded weights and the nominal generator under fixed generator-defined thresholds?
-2. How do the conditional uncertainty summaries respond to four stated DD/Sherpa correlation assumptions, and what does one independent known-target pseudodata comparison test or fail to test?
+## Completed evidence
 
-Selected events satisfy `pT_trackj1 > 5 GeV`; the fixed mass threshold is `10.594606399536133 GeV` and the leading-jet charged-constituent multiplicity threshold is `11`. Cell order is `LL/LH/HL/HH`, **mass first**. Multiplicity means **leading charged-jet constituents**, not the event-wide charged track count.
+Five CSV tables, four SVG figures and a reproducibility manifest are archived in [`results/four-cell-v1/`](../results/four-cell-v1/README.md), generated from frozen v1/v2 moments. The original numerical release was completed **8 November 2026**. The [migration record](RELEASE_MIGRATION.md) documents the move to its descriptive version-one directory and the unchanged numerical/figure contents.
 
-## Verified achievements
+| Observed contrast | Real vs shared nominal generator | Pseudodata vs independent truth |
+| --- | ---: | ---: |
+| Low-mass marginal | +0.0036800854 | −0.0229756608 |
+| Low-multiplicity marginal | −0.0146902523 | −0.0019636003 |
+| Joint log-odds difference | −0.0597334776 | +0.0522361448 |
+| Binary-indicator covariance difference `D` | −0.0001685161 | +0.0014603768 |
 
-- **Numerical milestone achieved 8 November 2026**: 5 frozen CSV tables, 4 SVG figures, 12 positive bundle checks, reproducibility manifest, generator and pseudo comparison. The folder `results/kti-nov18` is named after a **target school milestone**, not its completion date.
-- Prior frozen-code CI run [42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) passed **107 tests**. Tests show numerical consistency, not physical nuisance calibration.
-- Real unfolded minus nominal-generator: low-mass `+0.0036800854`, low-multiplicity `-0.0146902523`, joint log odds `-0.0597334776`; pseudo versus independent target: `-0.0229756608`, `-0.0019636003`, `+0.0522361448`.
-- Four DD/Sherpa conditional SE models: real log-odds SE `0.092321–0.146783`; pseudo `0.056651–0.112847`. These are **scenario-dependent**, not validated uncertainty intervals.
-- A v0.3 Word **review draft** incorporated the new D analysis: **13 rendered pages, 3 unchanged numerical tables, 4 unchanged figures, 14 unchanged bibliography entries**. The **current v0.5 full-rewrite Word manuscript** (SHA-256 `b414b97c8df7291394ea95d1f4937cf4e48d59c3bc287f05cb99c03f799f78ed`) has **12 render-verified pages**, all 64 editable paragraphs rewritten, 3 unchanged tables, 4 original image assets and 14 unchanged references; human author/adviser review is pending. No Turnitin score has been obtained for v0.5. The **preceding v0.4** has **12 visually inspected pages**, 3 unchanged tables, 4 unchanged figures, 14 unchanged reference entries and 13 further evidence-tied prose revisions. SHA-256: `6b29850f47da86417de50d1ea872f13e6066a6618ca7974e4bccaa3a6fab79f6`. Earlier v0.2 also had 12 pages. Neither Word file is in GitHub or synchronized to Google Doc ARTICLE. The latest file hash is recorded in [manuscript review](MANUSCRIPT_REVIEW.md).
-- An additional algebraic check distinguishes log odds from binary-indicator covariance `D` in [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md); its [code](../src/joint_association_audit.py) and [tests](../tests/test_joint_association_audit.py) are versioned separately. Check new-branch CI for these new tests; the earlier 107-test result predates them. This is supplemental descriptive analysis, **not** a new accepted uncertainty model or experimental validation.
+The real conditional log-odds SE varies from `0.092321` to `0.146783`; pseudodata from `0.056651` to `0.112847` across four source-correlation assumptions. The additional `D` and path-dependent log-odds decomposition are documented in the [association audit](JOINT_ASSOCIATION_AUDIT.md).
 
-## Current gate register
+## Current manuscript
 
-| Gate | Status | What it actually means |
+**v0.6:** `Manuscript_Four_Cell_Question_Driven_v0.6.docx` (SHA-256 `df2e459445bc753da113298512c7962c7e716860b255edf24d8a5a9edc245bdc`), 11-page render, 67 edited paragraphs with a one-question-per-paragraph purpose map. Three numerical tables, four embedded images, the displayed equation and 14 bibliography entries were preserved. [Manuscript review](MANUSCRIPT_REVIEW.md).
+
+The newest Turnitin report supplied by the author measured **64% AI-writing classification for v0.5**, following a 56% report for v0.4. The current v0.6 has not been assessed. The indicator is an uncertain classifier; scientific prose quality and author review are assessed separately.
+
+## Gate register
+
+| Gate | State | Evidence boundary |
 | --- | --- | --- |
-| G5 | **PROVISIONAL** | Reconstructed 29 components (25 systematic-labelled + 4 stochastic), but inclusion/source identities/dependencies not approved as the unique 2D experimental model |
-| G8 | **UNVERIFIED** | Repeated independent detector sampling and full unfolding coverage have not been demonstrated |
-| G11 | **ONE CHECK EXECUTED** | One known-target independent pseudodata comparison, not 25 independent pseudodata experiments |
-| G12 | **UNVERIFIED** | No uniquely justified primary two-dimensional DD/Sherpa and cross-source correlation prescription |
-| G15 | **NO-GO** | No calibrated real-data compatibility p-value, significance, generator acceptance/rejection or experimental-coverage statement |
+| G5 | PROVISIONAL | Source-family mapping and joint dependencies require justification |
+| G8 | UNVERIFIED | No validated independent full-unfolding repetition series |
+| G11 | ONE CASE EXECUTED | Single known-target pseudodata case |
+| G12 | UNVERIFIED | No accepted unique four-cell nuisance-correlation model |
+| G15 | NO-GO | No calibrated real-data generator-compatibility conclusion |
 
-Green software CI, a positive-semidefinite normalized 4×4 covariance, or a high/low AI-detector score cannot change those statuses.
+Reproducibility tests establish software and numerical consistency. A domain reviewer and experimental validation would be needed to expand beyond the descriptive scope.
 
-## Next actionable decisions
+## Open work
 
-1. **Now:** ask adviser to confirm whether a descriptive 2×2 secondary analysis meets the school research-paper requirement. Do not imply acceptance.
-2. **Now:** qualified author/adviser review of the v0.5 prose and the D/path-dependent log-odds interpretation inherited from v0.3. No fresh event-level data is required for that descriptive revision.
-3. **Before submission:** author/adviser review, verify all citations with Zotero and publisher records, verify figures and source claims, finalize attribution, contributions, conflicts, funding, AI assistance disclosure.
-4. **If formal inference is desired later:** independently justify covariance-source inclusion, full 2D dependencies and null calibration with actual repeated-unfolding validation. Without those new inputs, gate G15 stays closed. This is an **optional different research project**, not a hidden requirement for the descriptive KTI.
-5. **Submission/presentation date:** not assumed from a folder called `kti-nov18`. Verify independently with school/adviser.
-
-See [research issues](ISSUE_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md), [document register](REPORT_REGISTER.md), and [short handoff](START_HERE_HANDOFF.md).
+Adviser approval of scientific scope and final text; full Zotero source/citation reconciliation; submission policy, venue fit and required author/AI/funding declarations; final manuscript proof. [Issue register](ISSUE_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md), [document map](REPORT_REGISTER.md).

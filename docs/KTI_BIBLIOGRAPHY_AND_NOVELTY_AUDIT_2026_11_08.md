@@ -88,4 +88,4 @@ For each retained R01–R13, the **B. Citation List** school template wants thre
 
 **What remains to make the citation step truly complete:** (1) import chosen publisher-verified DOIs into the student's Zotero library, (2) generate APA 7 entries in the required school table including cited idea + in-text citation + actual Zotero entry, (3) verify sentence-level citation placement during *later* manuscript editing, (4) ask a subject-matter adviser to verify novelty and acceptability. This audit does **not** edit the ARTICLE/manuscript.
 
-**Related corrective audit:** [Executive Summary PDF fact-check](KTI_EXECUTIVE_SUMMARY_FACTCHECK_2026_11_08.md). **Frozen evidence:** [November 18 actual results](../results/kti-nov18/README.md). **Binding project plan:** [descriptive KTI blueprint](../plans/KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md).
+**Related corrective audit:** [Executive Summary PDF fact-check](KTI_EXECUTIVE_SUMMARY_FACTCHECK_2026_11_08.md). **Frozen evidence:** [verified four-cell release](../results/four-cell-v1/README.md). **Binding project plan:** [descriptive KTI blueprint](../plans/KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md).

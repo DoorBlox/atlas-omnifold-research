@@ -1,29 +1,47 @@
-# START HERE: ATLAS four-cell KTI
+# START HERE: four-cell OmniFold KTI
 
-**Latest verified research snapshot: 8 November 2026.** This is an actively maintained, short handoff, not a running transcript. The former **60-kB** handoff (including outdated instructions and old run IDs) is preserved in [HANDOFF_HISTORY.md](HANDOFF_HISTORY.md).
+**Current checkpoint: 8 November 2026.** This is the short continuation brief. The previous long discussion and development history remain in [HANDOFF_HISTORY.md](HANDOFF_HISTORY.md).
 
-## Fast start (read in order)
+## Study
 
-1. [Research status and gate register](RESEARCH_STATUS.md)
-2. [Immutable numerical evidence entry point](../results/README.md)
-3. [Current research and editorial issue register](ISSUE_REGISTER.md)
-4. [New joint-association arithmetic audit](JOINT_ASSOCIATION_AUDIT.md)
-5. [Current research plan](../plans/RESEARCH_PLAN.md)
-6. [Manuscript and AI/similarity report review](MANUSCRIPT_REVIEW.md)
-7. [Repository map](REPOSITORY_MAP.md) and [full document register](REPORT_REGISTER.md)
+Working title: *A Reproducible Four-Cell Analysis of Leading Charged-Jet Mass and Track Multiplicity in ATLAS 2024 OmniFold Z+Jets Data*.
 
-The selected 2024 ATLAS dataset is **Zenodo 11507450 (HDF5)**, **not** a distinct 2026 CERN dataset. Original ATLAS PRL DOI 10.1103/PhysRevLett.133.261803. Selected charged leading jet `pT_trackj1 > 5 GeV`, mass threshold `10.594606399536133 GeV`, leading-jet charged multiplicity threshold 11. Four cells LL/LH/HL/HH, mass first.
+This is an independent descriptive secondary analysis of the [ATLAS 2024 PRL](https://doi.org/10.1103/PhysRevLett.133.261803) using [Zenodo 2024 HDF5 event weights](https://doi.org/10.5281/zenodo.11507450).
 
-Frozen results were **completed 8 November**, though output folder `results/kti-nov18` references a November 18 target milestone. Existing source CI [42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) passed 107 tests; this should not be represented as new CI activity after the docs reorganization.
+- Selection: `pT_trackj1 > 5 GeV`, mass boundary `10.594606399536133 GeV`, leading-jet charged-constituent multiplicity boundary `11`.
+- Cell order: LL, LH, HL, HH (mass first).
+- Real comparator: shared-event nominal generator. Pseudodata comparator: independent known-target truth.
+- Real unfolded-minus-generator: `Δmass-low = +0.0036800854`, `Δmultiplicity-low = −0.0146902523`, `Δlog odds = −0.0597334776`, `ΔD = −0.0001685161`.
+- Pseudodata unfolded-minus-target: `−0.0229756608`, `−0.0019636003`, `+0.0522361448`, `+0.0014603768`, respectively.
 
-Real `Δmass-low = +0.0036800854`, `Δmultiplicity-low = -0.0146902523`, `Δlog-odds = -0.0597334776`. The separate pseudodata known-target comparator yields `-0.0229756608`, `-0.0019636003`, `+0.0522361448`. **New secondary algebra:** binary-indicator association covariance `D` changes `-0.0001685161` real and `+0.0014603768` pseudo; this modifies *interpretation*, not pinned results. Details and a reproducible standalone snippet in the [association audit](JOINT_ASSOCIATION_AUDIT.md).
+The canonical numerical release is [`results/four-cell-v1/`](../results/four-cell-v1/README.md): five CSV tables, four scientific SVG figures, reproducibility and SHA-256 checks. Its former date-based folder name was retired; [release migration record](RELEASE_MIGRATION.md) documents the preserved inputs and re-hashed reporting files.
 
-The **preceding** Word manuscript is `Manuscript_Four_Cell_Review_v0.3.docx`, SHA-256 **`53683d2136bc758a69e5384afe430adb7f92330b0393b7d74eb30d84f0b13cfd`** (13-page render, 3 unchanged numerical tables, 4 unchanged figures, new D and explicitly path-dependent log-odds recheck). **Current v0.5**: `Manuscript_Four_Cell_Full_Rewrite_v0.5.docx`, SHA-256 **`b414b97c8df7291394ea95d1f4937cf4e48d59c3bc287f05cb99c03f799f78ed`**. The 12-page Word draft includes a full rewrite of 64 editable paragraphs, all four source figures, all three numerical tables, the unchanged formal log-odds display, and 14 unchanged bibliography entries; final paragraphwise numerical/citation conservation and 0-issue accessibility audits passed. Figure 1 was resized for layout and Figure 2 moved immediately after Table 2. The DOCX is available in the conversation, **not in public GitHub**. The 56% AI writing score reported by the user pertains to **v0.4**; v0.5 has not been submitted to Turnitin. The earlier 69% AI and 2% similarity reports pertain to v0.2. The original descriptive scope, 2024 ATLAS provenance and **G15 NO-GO** are unchanged.
+## Manuscript
 
-**Preceding v0.4**: `Manuscript_Four_Cell_Review_v0.4.docx`, SHA-256 **`6b29850f47da86417de50d1ea872f13e6066a6618ca7974e4bccaa3a6fab79f6`**, rendered and visually inspected at **12 pages**, retaining the 3 original numerical tables, 4 byte-identical figures and 14 bibliography entries. Thirteen paragraphs were revised following the academic-humanizer guidance without modifying numbers or citations in edited paragraphs. The 69% AI-writing and 2% similarity reports refer to **v0.2**, not v0.4. The prior v0.2 is `Manuscript_Revised_Scientific_Editorial.docx`, SHA-256 `5f972d10df7a4a683bf700a585ccf843d74467450c4c43af5746d2b3a1c5678e`. **The DOCX is not in public GitHub and Google Doc ARTICLE is older text.** The revised Turnitin report states 69% AI-writing likelihood and 2% text similarity; neither number proves authorship or scientific validity. See [manuscript review](MANUSCRIPT_REVIEW.md).
+**Latest editable draft:** `Manuscript_Four_Cell_Question_Driven_v0.6.docx`, SHA-256 `df2e459445bc753da113298512c7962c7e716860b255edf24d8a5a9edc245bdc`.
 
-**G5 provisional, G8/G12 unverified, G11 one check, G15 NO-GO.** Never claim real-data calibrated significance, a model-validated experimental interval, ATLAS 2D approval, generator acceptance/rejection, or future journal acceptance. A descriptive KTI with transparent limitations is the currently adopted scope; specialist-journal originality is unconfirmed.
+- Rewritten around **one question per paragraph**. An editorial question map covers 67 edited prose, caption and heading paragraphs.
+- Removed redundant defensive qualifications: 95 explicit negation markers in v0.5 versus one in v0.6 across manuscript body and notes.
+- Three numerical tables, four embedded scientific figures, formal log-odds equation and 14 reference entries are unchanged.
+- Page-verified Word artifact, 11 pages; DOCX accessibility audit: zero reported issues.
+- The latest uploaded Turnitin AI-writing report gives **64% for v0.5**. The v0.6 draft has **no independent Turnitin result**. Detector outputs do not replace human review or permitted-AI disclosure.
 
-**Next action:** human author/adviser review of the fully rewritten v0.5 and its D/counterfactual interpretation, obtain adviser decision on acceptable descriptive KTI scope, then finish citation verification, declarations and final review. Do not start new multi-GB extraction merely to edit the document. Do not overwrite Google Doc ARTICLE or upload binary manuscripts to public GitHub without an explicit request.
+The Word manuscript and question-by-question edit report are conversation artifacts; the binary file is **not stored in this public repository**. The school's Google Doc ARTICLE tab is an earlier working draft.
 
-**Reusable continuation prompt:** Continue the descriptive 2024 ATLAS OmniFold KTI in `DoorBlox/atlas-omnifold-research`. Read `docs/START_HERE_HANDOFF.md`, `docs/RESEARCH_STATUS.md`, `docs/JOINT_ASSOCIATION_AUDIT.md`, `docs/ISSUE_REGISTER.md`, and `results/README.md`. Inspect current main and the latest CI independently. The Word draft is a conversation attachment, not in GitHub. Prioritize scientific manuscript review and the newly discovered distinction between `ΔL` and binary-indicator `ΔD`; no calibrated p-values. Preserve frozen data and scientific limitations.
+## Scientific gate status
+
+| Gate | State |
+| --- | --- |
+| G5 | PROVISIONAL source-family assumptions |
+| G8 | UNVERIFIED physical repeated-unfolding coverage |
+| G11 | ONE known-target pseudodata comparison executed |
+| G12 | UNVERIFIED accepted 2D nuisance-correlation prescription |
+| G15 | NO-GO calibrated generator significance or acceptance/rejection |
+
+Four DD/Sherpa scenarios quantify *conditional uncertainty sensitivity*. The reproducible numerical result and the experimental validation problem remain distinct.
+
+## Read next and act
+
+Read [research status](RESEARCH_STATUS.md), [issues](ISSUE_REGISTER.md), [manuscript review](MANUSCRIPT_REVIEW.md), [joint-association audit](JOINT_ASSOCIATION_AUDIT.md), and [current plan](../plans/RESEARCH_PLAN.md). Use the frozen CSVs over editable prose whenever a number disagrees.
+
+**Next task:** obtain author/adviser scientific and editorial sign-off on v0.6, complete Zotero citation and source-to-claim review, verify school/journal requirements and declarations, then prepare the final submission. Any formal inference extension requires independent covariance and repeated-unfolding validation.

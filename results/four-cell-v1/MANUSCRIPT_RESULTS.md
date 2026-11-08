@@ -88,4 +88,4 @@ The 2D DD and Sherpa hidden-variable nuisance correlations, the full neural-netw
 - Official ATLAS release, https://doi.org/10.5281/zenodo.11507450
 - Official supplemental User Guide, Section 2, recommendation 5; CERN 1D multifold_util.py source audit documented in the repository.
 - Derived snapshot provenance and source-run IDs: data/derived/phase7-v1/provenance.json and data/derived/phase7-v2/provenance.json.
-- Rebuild: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+- Rebuild: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1

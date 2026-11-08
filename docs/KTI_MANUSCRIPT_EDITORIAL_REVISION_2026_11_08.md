@@ -23,7 +23,7 @@
 ## Evidence limits — unchanged
 
 - **G5 PROVISIONAL** source-model scope; **G8 UNVERIFIED** repeated-unfolding physical coverage; **G11 one known-target pseudodata check**; **G12 UNVERIFIED** primary validated 2D nuisance correlation; **G15 NO-GO** real-data p-value, significance or generator acceptance/rejection.
-- The frozen source of truth remains [results/kti-nov18](../results/kti-nov18/README.md) (five CSV files, four figures, 12 checks, SHA-256 manifest), whose last relevant numerical CI run was **42442490666** with **107 passed tests**. **No fresh numerical CI was run in this editorial revision**.
+- The frozen source of truth remains [results/four-cell-v1](../results/four-cell-v1/README.md) (five CSV files, four figures, 12 checks, SHA-256 manifest), whose last relevant numerical CI run was **42442490666** with **107 passed tests**. **No fresh numerical CI was run in this editorial revision**.
 - Bibliography identity was spot-checked against journal/publisher metadata for key ATLAS, Canelli and Desai publications, but final **Zotero-managed, bidirectional, journal-format reference review is still pending**.
 
 ## Next actions and safety

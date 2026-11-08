@@ -1,4 +1,4 @@
-"""Regression tests for the frozen, descriptive KTI November-18 evidence bundle.
+"""Regression tests for the frozen, descriptive four-cell descriptive evidence release (v1).
 
 All numeric expectations below come from checksum-pinned ATLAS-derived CSVs,
 not illustrative values in an external Deep Research report.
@@ -30,7 +30,7 @@ def read_rows(path: Path) -> list[dict[str, str]]:
 
 @pytest.fixture(scope="module")
 def bundle(tmp_path_factory):
-    out = tmp_path_factory.mktemp("kti-nov18") / "bundle"
+    out = tmp_path_factory.mktemp("four-cell-v1") / "bundle"
     result = generate(V1, V2, out)
     return out, result
 
@@ -185,3 +185,69 @@ def test_no_real_data_significance_or_go_permission(bundle):
     report = (out / "MANUSCRIPT_RESULTS.md").read_text(encoding="utf-8")
     assert "not a calibrated" in report.lower()
     assert "G15 NO-GO" in report
+
+
+def test_repository_four_cell_release_matches_generated_manifest(bundle):
+    """Rebuild exact source products; permit only tightly bounded float rounding.
+
+    The original release preserves immutable scientific CSVs and their hashes.
+    Three derived floating-point CSVs vary in the least significant serialized decimals across environments
+    or summation orders. Require identical cells, labels, shape, and numerical
+    values at much tighter precision than any manuscript rounding.
+    """
+    import math
+    out, _ = bundle
+    stored = ROOT / "results" / "four-cell-v1"
+    manifest = json.loads((stored / "manifest.json").read_text(encoding="utf-8"))
+    rebuilt = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
+    assert {k: v for k, v in rebuilt.items() if k != "files"} == {
+        k: v for k, v in manifest.items() if k != "files"
+    }
+    assert set(manifest["files"]) == set(rebuilt["files"])
+    numerically_stable_csv = {
+        "tables/marginal_association.csv",
+        "tables/scenario_sensitivity.csv",
+        "tables/source_variance.csv",
+    }
+    for relative, expected_digest in manifest["files"].items():
+        frozen = (stored / relative).read_bytes()
+        generated = (out / relative).read_bytes()
+        assert hashlib.sha256(frozen).hexdigest() == expected_digest
+        assert hashlib.sha256(generated).hexdigest() == rebuilt["files"][relative]
+        if generated == frozen:
+            continue
+        assert relative in numerically_stable_csv, (
+            f"Unexpected drift in exact release file {relative}"
+        )
+        with (stored / relative).open(newline="", encoding="utf-8") as f:
+            expected_rows = list(csv.reader(f))
+        with (out / relative).open(newline="", encoding="utf-8") as f:
+            actual_rows = list(csv.reader(f))
+        assert len(expected_rows) == len(actual_rows), relative
+        assert expected_rows[0] == actual_rows[0], relative
+        for row_index, (expected_row, actual_row) in enumerate(
+                zip(expected_rows[1:], actual_rows[1:]), start=2):
+            assert len(expected_row) == len(actual_row), (relative, row_index)
+            for column_index, (a, z) in enumerate(zip(expected_row, actual_row)):
+                try:
+                    x, y = float(a), float(z)
+                except ValueError:
+                    assert a == z, (relative, row_index, column_index, a, z)
+                else:
+                    assert math.isfinite(x) and math.isfinite(y)
+                    assert math.isclose(x, y, rel_tol=1e-9, abs_tol=1e-18), (
+                        relative, row_index, column_index, x, y
+                    )
+
+
+def test_no_retired_release_paths_in_active_project_files():
+    """Keep active project instructions tied to the canonical four-cell version."""
+    exempt = {ROOT / "docs" / "HANDOFF_HISTORY.md",
+              ROOT / "docs" / "RELEASE_MIGRATION.md"}
+    for parent in ("docs", "plans", "results", "src", "tests", ".github"):
+        for path in (ROOT / parent).rglob("*"):
+            if not path.is_file() or path in exempt:
+                continue
+            if path.suffix.lower() not in {".md", ".txt", ".py", ".yml", ".yaml", ".json"}:
+                continue
+            assert ("kti-" + "nov18") not in path.read_text(encoding="utf-8"), str(path)

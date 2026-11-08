@@ -31,8 +31,8 @@ The former exploratory four-variable, cross-fitted classifier two-sample test (C
 - Source inventory: **29 project covariance components = 25 systematic-labelled + 4 stochastic** (finite evaluation MC, data bootstrap, MC-training bootstrap, NN ensemble); the official **1D** pseudo example selects **15 project-equivalent families**, not an official 2D 15-source prescription. Exact 25-label-to-paper identity mapping is **not independently verified**.
 - Four *prespecified* DD/Sherpa source-correlation sensitivity models (both full, DD four-bin only, Sherpa four-bin only, both four-bin). Model-conditional joint log-odds SE: **real 0.092321–0.146783**, **pseudo 0.056651–0.112847**. Under the full/full model, Sherpa hidden-variable contributes **~96.02%** of real and **~87.85%** of pseudo *modelled joint log-odds variance*; not a physical probability or verified uncertainty.
 - Real generator and unfolded measurement share event support: use **paired** finite-evaluation-MC covariance. Pseudo known-target truth is **independent**: include its finite-MC precision. The normalized four-cell covariance is **4×4, rank three in the contrast subspace**. Replicas use **R−1** sample covariance; real/pseudo data-bootstrap counts **100/25**; NN ensemble covariance of mean includes **/R**.
-- Permanent results: [results/kti-nov18](../results/kti-nov18) (5 CSV tables, 4 SVG figures, Methods/Results draft, 12 true QA checks, JSON and SHA-256 manifest), merged [PR #3](https://github.com/DoorBlox/atlas-omnifold-research/pull/3). [CI 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) **107 tests passed**; full derived workflow steps succeeded. The last three commits after that run touched documentation only; do not imply a new code rerun.
-- Primary result table is [joint_cells.csv](../results/kti-nov18/tables/joint_cells.csv), not the illustrative tables in the external Deep Research report. [Fact-check](../docs/PHASE7_DEEP_RESEARCH_REPORT_10_FACTCHECK.md). For future conflicts, precedence is **frozen CSV + checksums → source code and CI → generated manuscript results → editable Google Doc → external report examples**.
+- Permanent results: [results/four-cell-v1](../results/four-cell-v1) (5 CSV tables, 4 SVG figures, Methods/Results draft, 12 true QA checks, JSON and SHA-256 manifest), merged [PR #3](https://github.com/DoorBlox/atlas-omnifold-research/pull/3). [CI 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) **107 tests passed**; full derived workflow steps succeeded. The last three commits after that run touched documentation only; do not imply a new code rerun.
+- Primary result table is [joint_cells.csv](../results/four-cell-v1/tables/joint_cells.csv), not the illustrative tables in the external Deep Research report. [Fact-check](../docs/PHASE7_DEEP_RESEARCH_REPORT_10_FACTCHECK.md). For future conflicts, precedence is **frozen CSV + checksums → source code and CI → generated manuscript results → editable Google Doc → external report examples**.
 
 ## 3. Claim ladder, boundaries, and internal scientific gates
 
@@ -70,8 +70,8 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 
 ### B00 — Freeze the new scientific contract [DONE]
 - **Goal:** align title, RQ1/RQ2, estimands, sources, and prohibited claims.
-- **Prerequisites:** verified frozen v1/v2 and Nov-18 results bundle.
-- **Files:** this blueprint; [docs/PHASE7_GO_EVIDENCE_REQUIREMENTS.md](../docs/PHASE7_GO_EVIDENCE_REQUIREMENTS.md); [results/kti-nov18/results.json](../results/kti-nov18/results.json).
+- **Prerequisites:** verified frozen v1/v2 and four-cell results bundle.
+- **Files:** this blueprint; [docs/PHASE7_GO_EVIDENCE_REQUIREMENTS.md](../docs/PHASE7_GO_EVIDENCE_REQUIREMENTS.md); [results/four-cell-v1/results.json](../results/four-cell-v1/results.json).
 - **Implementation:** adopt Section 1–3 scope and source hierarchy; archive C2ST as historical.
 - **Acceptance/evidence:** exact source IDs, fractions, fixed thresholds and gate wording agree with results.json; no real p-value.
 - **Rollback:** restore prior plan through Git history; never silently alter pinned numerical data.
@@ -86,7 +86,7 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 
 ### B02 — Preserve numerical and figure evidence [DONE for descriptive milestone]
 - **Goal:** immutable, recomputable source-backed tables/figures.
-- **Prerequisites:** B00. **Files:** [results/kti-nov18](../results/kti-nov18), [src/phase7_kti_bundle.py](../src/phase7_kti_bundle.py), [tests/test_phase7_kti_bundle.py](../tests/test_phase7_kti_bundle.py), frozen v1/v2.
+- **Prerequisites:** B00. **Files:** [results/four-cell-v1](../results/four-cell-v1), [src/phase7_kti_bundle.py](../src/phase7_kti_bundle.py), [tests/test_phase7_kti_bundle.py](../tests/test_phase7_kti_bundle.py), frozen v1/v2.
 - **Implementation:** use existing five CSVs, four SVGs, manifest and checks. No re-extraction or arbitrary simulation.
 - **Acceptance/evidence:** [CI 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666): 107 tests; bundle 12 true checks, 5 tables, 4 figures. Rebuild from pinned moments if code changes.
 - **Rollback:** restore source code/data to frozen commit; do not mutate published outputs without updated hashes and review.
@@ -101,7 +101,7 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 
 ### B04 — Full standalone manuscript draft PRODUCED; integration and visual QA PENDING
 - **Goal:** school-ready IMRAD narrative whose Results exactly reproduce the pinned numbers and whose Discussion interprets without overclaiming.
-- **Prerequisites:** **B01 + B02 + B03**. **Files/interfaces:** Google Doc ARTICLE tab; [MANUSCRIPT_RESULTS.md](../results/kti-nov18/MANUSCRIPT_RESULTS.md); four SVG figures; school/journal style guide.
+- **Prerequisites:** **B01 + B02 + B03**. **Files/interfaces:** Google Doc ARTICLE tab; [MANUSCRIPT_RESULTS.md](../results/four-cell-v1/MANUSCRIPT_RESULTS.md); four SVG figures; school/journal style guide.
 - **Implementation:** unify title/abstract/objectives/conclusion; strengthen literature-supported introduction and physics motivation; insert 4 figures/essential tables with captions, units and provenance; present real and pseudo separately; remove internal gate codes; explicitly state model-conditional uncertainty and lack of calibrated p-values; check originality/attribution and rendering.
 - **Acceptance/evidence:** adviser can trace every numerical sentence to a table; each figure/table cited in Results; no unsupported “significant”, “agreement”, “closure passed” or “ATLAS-approved”; PDF/page inspection and peer review.
 - **Rollback:** preserve working article revision and previous image/table placements; revert only edited sections.

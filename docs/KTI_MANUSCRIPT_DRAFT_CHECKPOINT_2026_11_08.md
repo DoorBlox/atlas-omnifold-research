@@ -28,7 +28,7 @@ Observed unfolded-minus-reference contrasts:
 | Leading-jet multiplicity-low marginal | -0.0146902523 | -0.0019636003 |
 | Joint log-odds | -0.0597334776 | +0.0522361448 |
 
-Real DD/Sherpa correlation-scenario **model-conditional** log-odds standard errors span **0.092321–0.146783**, not an experimentally calibrated confidence interval. Frozen source of truth: [five CSV tables, four SVG figures, numerical manifest](../results/kti-nov18/README.md); [CI 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) reported **107 passing tests** for the numerical code; no numerical code or generated results were changed to create this manuscript checkpoint.
+Real DD/Sherpa correlation-scenario **model-conditional** log-odds standard errors span **0.092321–0.146783**, not an experimentally calibrated confidence interval. Frozen source of truth: [five CSV tables, four SVG figures, numerical manifest](../results/four-cell-v1/README.md); [CI 42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) reported **107 passing tests** for the numerical code; no numerical code or generated results were changed to create this manuscript checkpoint.
 
 The research gate status is unchanged: **G5 provisional; G8 physical repeated-unfolding coverage unverified; G11 one known-target pseudodata comparison executed; G12 an accepted 2D correlation prescription unverified; G15 NO-GO**. **Never** describe the current numbers as a calibrated real-data p-value, significance, official ATLAS 2D covariance, or a generator acceptance/rejection conclusion.
 
@@ -50,7 +50,7 @@ The Word draft has **three** numerical tables, even though an earlier blueprint 
 
 ## 4. Next specific actions
 
-1. Independently review the Word draft against [`results/kti-nov18`](../results/kti-nov18/README.md): every number, comparator, table and caption must trace to the frozen CSV/figure and source notes.
+1. Independently review the Word draft against [`results/four-cell-v1`](../results/four-cell-v1/README.md): every number, comparator, table and caption must trace to the frozen CSV/figure and source notes.
 2. Obtain adviser feedback on whether a descriptive student reproducibility/secondary analysis satisfies the KTI's goals, and on the scientific novelty and source-assumption wording.
 3. Complete Zotero import/output and a bidirectional citation–reference check. The repository's [13-paper DOI and novelty audit](KTI_BIBLIOGRAPHY_AND_NOVELTY_AUDIT_2026_11_08.md) is a verification basis, **not a finalized Zotero library**.
 4. Resolve author/affiliation, acknowledgments, contributions, funding, conflicts, licensing/attribution, AI-assistance declaration and actual school/journal requirements.
@@ -60,6 +60,6 @@ The Word draft has **three** numerical tables, even though an earlier blueprint 
 
 ## 5. Resume / priority instructions
 
-First read [master handoff](START_HERE_HANDOFF.md), the [canonical scope blueprint](../plans/KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md), this checkpoint, and the [fixed evidence bundle](../results/kti-nov18/README.md). **Work on manuscript review and submission readiness, not fresh large-scale extraction or an uncalibrated p-value.** If the Word attachment is unavailable, state that constraint and request the exact document rather than treating the older Google Doc ARTICLE as identical.
+First read [master handoff](START_HERE_HANDOFF.md), the [canonical scope blueprint](../plans/KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md), this checkpoint, and the [fixed evidence bundle](../results/four-cell-v1/README.md). **Work on manuscript review and submission readiness, not fresh large-scale extraction or an uncalibrated p-value.** If the Word attachment is unavailable, state that constraint and request the exact document rather than treating the older Google Doc ARTICLE as identical.
 
 **Verification for this checkpoint:** manuscript inventory and SHA were checked locally; numerical results, repo source and prior CI were inspected. GitHub changes here are documentation only; **no fresh CI success is claimed**.

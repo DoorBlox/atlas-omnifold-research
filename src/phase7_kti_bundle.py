@@ -7,7 +7,7 @@ evaluate or publish a real-data compatibility p-value (G15 NO-GO).
 
 Usage:
     python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 \
-        --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+        --v2 data/derived/phase7-v2 --out outputs/four-cell-v1
 """
 from __future__ import annotations
 
@@ -458,7 +458,7 @@ def _markdown_results(result: dict, joint_rows: list[dict],
         "data/derived/phase7-v2/provenance.json.",
         "- Rebuild: python -m src.phase7_kti_bundle "
         "--v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 "
-        "--out outputs/kti-nov18",
+        "--out outputs/four-cell-v1",
         "",
     ]
     return "\n".join(lines)
@@ -603,7 +603,7 @@ def generate(v1: Path, v2: Path, out: Path) -> dict:
         "no_real_data_significance_permission": True,
     }
     result = {
-        "status": "CHECKSUM_VERIFIED_DESCRIPTIVE_KTI_NOV18_BUNDLE",
+        "status": "CHECKSUM_VERIFIED_DESCRIPTIVE_FOUR_CELL_V1_BUNDLE",
         "G5": "PROVISIONAL", "G8": "UNVERIFIED", "G12": "UNVERIFIED",
         "G15": "NO_GO", "inference_permission": "NO_GO",
         "bin_spec": spec, "scenario_order": list(MODEL_NAMES),
@@ -644,7 +644,7 @@ def generate(v1: Path, v2: Path, out: Path) -> dict:
     _write_text(out/"checks.json", json.dumps(checks, indent=2, sort_keys=True))
     _write_text(out/"results.json", json.dumps(result, indent=2, sort_keys=True))
     _write_text(out/"README.md", "\n".join([
-        "# ATLAS 2024 OmniFold KTI — November 18 evidence bundle",
+        "# ATLAS 2024 OmniFold KTI — four-cell descriptive release (v1)",
         "",
         "Actual, checksum-verified normalized 2×2 results from frozen ATLAS 2024",
         "derived moments. This is a descriptive secondary analysis, not an",
@@ -653,7 +653,7 @@ def generate(v1: Path, v2: Path, out: Path) -> dict:
         "## Reproduce without downloading the original multi-GB ATLAS archive",
         "",
         "    python -m pytest -q tests/test_phase7_kti_bundle.py",
-        "    python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18",
+        "    python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1",
         "",
         "Inputs: checksum-pinned data/derived/phase7-v1 and phase7-v2.",
         "Output: 5 machine-readable CSV tables, 4 SVG vector figures,",
@@ -681,7 +681,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--v1", type=Path, default=Path("data/derived/phase7-v1"))
     parser.add_argument("--v2", type=Path, default=Path("data/derived/phase7-v2"))
-    parser.add_argument("--out", type=Path, default=Path("outputs/kti-nov18"))
+    parser.add_argument("--out", type=Path, default=Path("outputs/four-cell-v1"))
     args = parser.parse_args()
     report = generate(args.v1, args.v2, args.out)
     print(json.dumps({

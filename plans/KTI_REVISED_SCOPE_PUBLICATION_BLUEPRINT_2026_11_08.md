@@ -7,7 +7,7 @@ This file was an additional working draft covering the same scope, numerical evi
 **Use these current sources of truth:**
 
 - [Canonical scope, scientific claim ladder, G5/G8/G11/G12/G15 meaning, work units, dependencies and manuscript requirements](KTI_DESCRIPTIVE_SCOPE_BLUEPRINT_2026_11_08.md).
-- [Verified November 18 numerical bundle](../results/kti-nov18/README.md) — five tables, four figures, 12 checks, 107 passing tests.
+- [Verified four-cell numerical release](../results/four-cell-v1/README.md) — five tables, four figures, 12 checks, 107 passing tests.
 - [Scientific evidence requirements and inferential NO-GO](../docs/PHASE7_GO_EVIDENCE_REQUIREMENTS.md).
 - [Living four-tab Google Doc: RESEARCH PLAN, TARGET JOURNALS AND READING SOURCES, IMRAD, ARTICLE](https://docs.google.com/document/d/1rTafCdT6ESCpH43HtrssArHpiUzVEhoYABzwQJewQ00/edit).
 
