@@ -73,11 +73,12 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 - **Acceptance/evidence:** exact source IDs, fractions, fixed thresholds and gate wording agree with results.json; no real p-value.
 - **Rollback:** restore prior plan through Git history; never silently alter pinned numerical data.
 
-### B01 — Reconcile the four-tab school Google Doc [IN PROGRESS]
+### B01 — Reconcile the four-tab school Google Doc [DONE FOR WORKING DRAFT; ADVISER REVIEW PENDING]
 - **Goal:** RESEARCH PLAN, TIMELINE, IMRAD, ARTICLE, and journal/reading tabs all describe *one* descriptive study without internal gate jargon in publishable prose.
 - **Prerequisites:** B00. **Affected interface:** [school Google Doc](https://docs.google.com/document/d/1rTafCdT6ESCpH43HtrssArHpiUzVEhoYABzwQJewQ00/edit) (tab IDs RESEARCH PLAN t.0; JOURNALS t.o0j30s19884j; IMRAD t.eh0d0wgxdlkt; ARTICLE t.ehvbmc6f60r1).
-- **Implementation:** preserve template questions/tables and historical context; replace 11 plan answer cells; correct September/October attribution (source extractions were **7–8 November**, not October); update November status and next actions; add plain-language limitations, publishability assessment and source hierarchy; add a specific IMRAD outline; remove G-code jargon from article-facing text; mark journal fees/indexing provisional.
+- **Implementation:** preserve template questions/tables and historical context; replace 12 plan answer cells; correct September/October attribution (source extractions were **7–8 November**, not October); update November status and next actions; add plain-language limitations, publishability assessment and source hierarchy; add a specific IMRAD outline; remove G-code jargon from article-facing text; mark journal fees/indexing provisional.
 - **Acceptance/evidence:** read back all four tabs; title/RQ/objective/method/limits agree; original table dimensions and template instructions preserved; exact source numbers and references consistent; no false acceptance/closure claim.
+- **8 Nov readback:** RESEARCH PLAN retained the original 13×4 and 4×3 tables, with two RQs and two matched objectives; IMRAD uses the same 17-word title; ARTICLE has a 154-word abstract, five keywords, four source-backed figure links, plain-language limitations and no internal G-code labels; journal candidates are explicitly unverified. References, actual embedded figures, final page layout and adviser approval remain pending.
 - **Rollback:** Google Docs version history; apply scoped edits only and record revision. Do not delete original research-plan tab.
 
 ### B02 — Preserve numerical and figure evidence [DONE for descriptive milestone]
@@ -152,7 +153,7 @@ Each work unit is self-contained enough for a new session; no new raw extraction
 - **No silent source drift:** if external research conflicts with frozen numerical results, inspect primary data and code before editing; never copy illustrative tables.
 - **No permission to submit:** plan authorizes drafting and editing requested files, not external journal submission, public preprint posting, or claims of ATLAS endorsement.
 
-**Next executable step:** B01 Google Doc reconciliation and readback, then B03 DOI/venue verification, followed by B04 manuscript figure/reference integration.
+**Next executable step:** B03 independent DOI/Zotero/novelty/venue verification (and adviser B05 scientific review); then B04 figure/table insertion, visual PDF QA and manuscript integration. B01 Google Doc scope reconciliation is complete for the working draft; adviser approval remains pending.
 
 ## 8. Manuscript content map and publication ethics
 
