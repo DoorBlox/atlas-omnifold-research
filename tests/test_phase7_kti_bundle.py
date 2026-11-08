@@ -197,3 +197,16 @@ def test_repository_four_cell_release_matches_generated_manifest(bundle):
     for relative, expected_digest in manifest["files"].items():
         assert hashlib.sha256((out / relative).read_bytes()).hexdigest() == expected_digest
         assert hashlib.sha256((stored / relative).read_bytes()).hexdigest() == expected_digest
+
+
+def test_no_retired_release_paths_in_active_project_files():
+    """Keep active project instructions tied to the canonical four-cell version."""
+    exempt = {ROOT / "docs" / "HANDOFF_HISTORY.md",
+              ROOT / "docs" / "RELEASE_MIGRATION.md"}
+    for parent in ("docs", "plans", "results", "src", "tests", ".github"):
+        for path in (ROOT / parent).rglob("*"):
+            if not path.is_file() or path in exempt:
+                continue
+            if path.suffix.lower() not in {".md", ".txt", ".py", ".yml", ".yaml", ".json"}:
+                continue
+            assert "kti-nov18" not in path.read_text(encoding="utf-8"), str(path)
