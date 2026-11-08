@@ -6,7 +6,7 @@
 
 The present student KTI is a reproducible descriptive secondary analysis of leading charged-jet mass and constituent multiplicity using the 2024 ATLAS 24D OmniFold release. It has **two RQs**, one fixed 2×2 grid, marginal and joint association descriptions, one separately specified known-target pseudodata example, and four explicitly *conditional* DD/Sherpa correlation sensitivity models. There is **no approved calibrated generator p-value** and no official 2D covariance claim.
 
-The selected numerical bundle was already completed on **8 Nov 2026** even though its historical directory says `kti-nov18`. **No November 18 future event, outcome, deadline, acceptance or activity is assumed** from that name.
+The version-one four-cell numerical evidence was completed on **8 November 2026** and is available at [`results/four-cell-v1`](../results/four-cell-v1/README.md). Its name is independent of a future school schedule.
 
 ## Remaining work, in priority order
 
@@ -25,6 +25,6 @@ W1 may be addressed from existing CSVs. **W2, W5, W6, and W7 require human or ex
 
 ## Safety and rollback
 
-Every new empirical quantity must be clearly separated from the released pinned numbers and labeled as derived or exploratory. Do not change `results/kti-nov18`, `data/derived`, the original HDF5 DOI, or the original main inference gate through editing. If a future analysis alters bins or uncertainty assumptions, create a versioned release with tests, provenance and manifest. A writing change never reopens G15 by implication.
+Every new empirical quantity must be clearly separated from the released pinned numbers and labeled as derived or exploratory. Do not change `results/four-cell-v1`, `data/derived`, the original HDF5 DOI, or the original main inference gate through editing. If a future analysis alters bins or uncertainty assumptions, create a versioned release with tests, provenance and manifest. A writing change never reopens G15 by implication.
 
 Current [research status](../docs/RESEARCH_STATUS.md), [issues](../docs/ISSUE_REGISTER.md), [manuscript review](../docs/MANUSCRIPT_REVIEW.md), [results](../results/README.md).
