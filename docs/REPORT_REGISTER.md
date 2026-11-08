@@ -39,7 +39,7 @@ The research accumulated many append-only phase-7 reports during debugging. **Th
 ## Name policy from now on
 
 - **Current living documents:** short semantic names in upper snake case, without dates: `RESEARCH_STATUS.md`, `ISSUE_REGISTER.md`, `RESEARCH_PLAN.md`.
-- **Immutable source evidence:** versioned artifact paths; do not rename `results/kti-nov18/` or its manifest-covered files without version migration tests. Treat `Nov18` as a historical milestone label, not a date of creation.
+- **Versioned evidence:** the canonical release is `results/four-cell-v1/`, protected by an updated SHA-256 manifest and reproduction tests. The former path and its commit remain in Git history, with [migration details](RELEASE_MIGRATION.md).
 - **Historical reports:** retain original dated or `PHASE7_` names for provenance, index them here, and do not promote them as current working instructions.
 - **Git commits:** one coherent change per commit, e.g. `docs(research): consolidate current state and legacy handoff`, `docs(science): audit joint association parameterization`, `fix(repro): verify frozen release manifest`. Do not rewrite old public commit messages or force-push shared history to change their prose.
 - **New numerical releases:** `results/four-cell-v2/` only after changed inputs, equations, model, or figure source need a truly new release; explain the delta, produce new hashes and tests. Do not create a v2 merely because a school date has passed.
