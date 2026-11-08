@@ -1,6 +1,8 @@
 name: ATLAS Phase 7 lightweight scientific checks
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
     paths:
@@ -22,6 +24,7 @@ on:
       - "src/phase7_sherpa_2d_smoothing.py"
       - "src/phase7_source_accounting.py"
       - "src/phase7_kti_bundle.py"
+      - "src/joint_association_audit.py"
       - "src/phase7_official_excerpts.py"
       - "tests/test_phase7_snapshot.py"
       - "tests/test_phase7_divisor_audit.py"
@@ -42,6 +45,7 @@ on:
       - "tests/test_phase7_sherpa_2d_smoothing.py"
       - "tests/test_phase7_source_accounting.py"
       - "tests/test_phase7_kti_bundle.py"
+      - "tests/test_joint_association_audit.py"
       - ".github/workflows/atlas-phase7-lite.yml"
   workflow_dispatch:
 
@@ -63,7 +67,7 @@ jobs:
         run: python -m pip install "numpy>=1.26,<3" "pytest>=8,<10" "h5py>=3.10,<4"
       - name: Validate stored snapshot and new calculation regressions
         run: |
-          python -m pytest -q tests/test_phase7_snapshot.py tests/test_phase7_divisor_audit.py tests/test_phase7_interaction.py tests/test_phase7_target_mc.py tests/test_phase7_crosscov_bounds.py tests/test_phase7_model_sensitivity.py tests/test_phase7_calibration.py tests/test_phase7_replica_manifest.py tests/test_phase7_reference_audit.py tests/test_phase7_v2_reconstruct.py tests/test_phase7_twopoint_protocol.py tests/test_phase7_official_helper_audit.py tests/test_phase7_joint_reference.py tests/test_phase7_conditional_null.py tests/test_phase7_empirical_replica_null.py tests/test_phase7_replica_projection_audit.py tests/test_phase7_sherpa_2d_smoothing.py tests/test_phase7_source_accounting.py tests/test_phase7_kti_bundle.py
+          python -m pytest -q tests/test_phase7_snapshot.py tests/test_phase7_divisor_audit.py tests/test_phase7_interaction.py tests/test_phase7_target_mc.py tests/test_phase7_crosscov_bounds.py tests/test_phase7_model_sensitivity.py tests/test_phase7_calibration.py tests/test_phase7_replica_manifest.py tests/test_phase7_reference_audit.py tests/test_phase7_v2_reconstruct.py tests/test_phase7_twopoint_protocol.py tests/test_phase7_official_helper_audit.py tests/test_phase7_joint_reference.py tests/test_phase7_conditional_null.py tests/test_phase7_empirical_replica_null.py tests/test_phase7_replica_projection_audit.py tests/test_phase7_sherpa_2d_smoothing.py tests/test_phase7_source_accounting.py tests/test_phase7_kti_bundle.py tests/test_joint_association_audit.py
           python -m src.phase7_snapshot verify --root data/derived/phase7-v1
       - name: Evaluate covariance denominator correction without raw data
         run: python -m src.phase7_divisor_audit --snapshot data/derived/phase7-v1 --out outputs/divisor
@@ -91,8 +95,10 @@ jobs:
         run: python -m src.phase7_sherpa_2d_smoothing --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/sherpa-2d-smoothing
       - name: Audit paper 25 systematics plus four stochastic terms versus 15 notebook terms
         run: python -m src.phase7_source_accounting --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs/source-accounting
-      - name: Generate checksum-pinned Nov 18 KTI results, four SVG figures and five numerical tables
+      - name: Generate pinned historical four-cell evidence bundle (completed 8 Nov 2026)
         run: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+      - name: Audit the additional binary-indicator association coordinate
+        run: python -m src.joint_association_audit --out outputs/joint-association-audit.json
       - name: Probe CERN official helper source without executing fetched code
         run: python -m src.phase7_official_helper_audit --out outputs/official-helper
       - name: Extract official function bodies for human source-method reconciliation
