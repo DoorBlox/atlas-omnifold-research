@@ -26,7 +26,7 @@ This representation shows exactly which part of a **four-cell joint distribution
 
 ## Exact observed descriptive calculations
 
-Inputs: [versioned fractions](../results/kti-nov18/tables/joint_cells.csv), **real unfolded versus shared nominal generator** and, independently, **unfolded pseudodata versus independently sampled known truth**. Source inputs and distinctions remain unchanged.
+Inputs: [versioned fractions](../results/four-cell-v1/tables/joint_cells.csv), **real unfolded versus shared nominal generator** and, independently, **unfolded pseudodata versus independently sampled known truth**. Source inputs and distinctions remain unchanged.
 
 | Quantity | Real unfolded | Real nominal generator | Pseudo unfolded | Independent target |
 | --- | ---: | ---: | ---: | ---: |
@@ -64,7 +64,7 @@ The same computations are implemented in [`src/joint_association_audit.py`](../s
 
 ```bash
 python -m pytest -q tests/test_joint_association_audit.py
-python -m src.joint_association_audit --cells results/kti-nov18/tables/joint_cells.csv --out outputs/joint-association-audit.json
+python -m src.joint_association_audit --cells results/four-cell-v1/tables/joint_cells.csv --out outputs/joint-association-audit.json
 ```
 
 ## Reproduce from the immutable joint fractions
@@ -72,7 +72,7 @@ python -m src.joint_association_audit --cells results/kti-nov18/tables/joint_cel
 ```python
 import csv, math
 from pathlib import Path
-rows = list(csv.DictReader(Path("results/kti-nov18/tables/joint_cells.csv").open()))
+rows = list(csv.DictReader(Path("results/four-cell-v1/tables/joint_cells.csv").open()))
 for sample in ("real", "pseudo"):
     selected = {r["cell"]: r for r in rows if r["sample"] == sample}
     def coords(key):
