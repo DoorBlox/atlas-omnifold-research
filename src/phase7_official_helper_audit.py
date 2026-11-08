@@ -1,9 +1,10 @@
-"""Fail-closed primary-source probe and independently testable 1D reference ports.
+"""Fail-closed primary CERN-source probe and independent 1D numerical ports.
 
-The ports below reproduce formulas claimed by an *independent* GitHub port,
-not an authenticated revision of CERN's multifold_util.py. They are NOT a
-validated two-dimensional covariance prescription or a significance test.
-Only the remote source's text/AST is inspected; downloaded code is NEVER run.
+The Hessian, R-1 sample covariance and 1D smoothing formulas were reconciled
+against a SHA-256-pinned CERN multifold_util.py source snapshot in CI run
+42390285792. The mutable upstream master URL is NOT an immutable CERN commit,
+and none of these ports defines an official 2D covariance or p-value.
+Only fetched source text/AST is inspected; remote Python is NEVER executed.
 """
 from __future__ import annotations
 
@@ -49,7 +50,7 @@ def matches_reviewed_primary_source(result: dict) -> bool:
 
 
 def covariance_port(differences, mean=None):
-    """SECONDARY-port hypothesis: Hessian sum or unbiased replica covariance."""
+    """Numerical port of pinned CERN Hessian sum or R-1 replica covariance."""
     arr = np.asarray(differences, dtype=float)
     if arr.ndim != 2 or arr.shape[0] == 0 or arr.shape[1] == 0:
         raise ValueError("Expected a nonempty 2D source-by-bin matrix")
@@ -65,12 +66,12 @@ def covariance_port(differences, mean=None):
 
 
 def smooth_1d_port(signed_shift, bin_centers):
-    """SECONDARY-port 1D Gaussian smoothing; *never* flatten 2D for inference.
+    """Source-aligned signed 1D Gaussian smoother; NEVER flatten 2D for inference.
 
-    The secondary implementation uses coordinate log(centers) if the first
-    center is positive, otherwise linear centers; kernel sigma = range/10.
-    The operation acts on a SIGNED 1D shift prior to forming its outer product.
-    These are secondary claims until the CERN function body is retrieved.
+    The hash-pinned CERN function uses log(centers) when the first center is
+    positive, otherwise linear centers; Gaussian width is coordinate range/10.
+    This port is independently tested against the inspected function formula,
+    but no physical two-dimensional bin-center kernel is source-specified.
     """
     y = np.asarray(signed_shift, dtype=float)
     centers = np.asarray(bin_centers, dtype=float)
