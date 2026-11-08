@@ -12,7 +12,7 @@ The selected numerical bundle was already completed on **8 Nov 2026** even thoug
 
 | Work ID | Owner/review | Task | Completion evidence |
 | --- | --- | --- | --- |
-| W1 | Analysis + human HEP review | Reconcile the `D`-versus-log-odds algebra with the manuscript's Discussion; decide whether to include the exploratory coordinate check | Correctly reproduced source fractions; reviewer-approved interpretation |
+| W1 | Analysis + human HEP review | Review the newly amended v0.3 `D`-versus-log-odds interpretation; author/adviser decide the scientific suitability | Correctly reproduced source fractions; reviewer-approved interpretation |
 | W2 | Student/adviser | Confirm descriptive KTI meets school's actual novelty, citation and writing criteria | Written adviser decision, documented requirements |
 | W3 | Student/editor | Revise scientific prose based on W1; retain all original numerical values and explain conditional uncertainty succinctly | DOCX diff, line-by-line CSV and figure consistency check |
 | W4 | Student/Zotero | Verify 14 reference-list entries, each in-text citation, source-to-claim support and legitimate venue formatting | Bidirectional citation inventory and exported Zotero bibliography |

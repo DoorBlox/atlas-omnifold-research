@@ -1,0 +1,5 @@
+# Reference identity and Zotero import work
+
+The 13 scholarly works and one original dataset citation in the current [v0.3 Word draft](../docs/MANUSCRIPT_REVIEW.md) contain **14 distinct DOI identifiers**. The exact identifiers extracted from its reference paragraphs are in [doi-seeds.txt](doi-seeds.txt). Use Zotero's **Add Item by Identifier** to import and then verify each work's authors, title, year, volume, identifier, dataset type and source-to-claim fit. After import, generate the required journal/school style and reconcile **every in-text citation both ways**. The list is an **import checklist, not a Zotero export** or a completed audit.
+
+The [existing DOI/novelty audit](../docs/KTI_BIBLIOGRAPHY_AND_NOVELTY_AUDIT_2026_11_08.md) identified an unrelated 2018 JHEP DOI in a rejected external report; that DOI is not in this list. The proper experimental citation is the [2024 ATLAS PRL](https://doi.org/10.1103/PhysRevLett.133.261803); the properly distinguished dataset is [2024 Zenodo 11507450](https://doi.org/10.5281/zenodo.11507450), not the different 2026 CERN release.

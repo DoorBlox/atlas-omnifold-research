@@ -20,7 +20,7 @@ Selected events satisfy `pT_trackj1 > 5 GeV`; the fixed mass threshold is `10.59
 - Prior frozen-code CI run [42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) passed **107 tests**. Tests show numerical consistency, not physical nuisance calibration.
 - Real unfolded minus nominal-generator: low-mass `+0.0036800854`, low-multiplicity `-0.0146902523`, joint log odds `-0.0597334776`; pseudo versus independent target: `-0.0229756608`, `-0.0019636003`, `+0.0522361448`.
 - Four DD/Sherpa conditional SE models: real log-odds SE `0.092321–0.146783`; pseudo `0.056651–0.112847`. These are **scenario-dependent**, not validated uncertainty intervals.
-- Full standalone manuscript revision produced on 8 November: **12 pages, 3 unchanged numerical tables, 4 unchanged figures, 14 references**; Word attachment not in GitHub, Google Doc ARTICLE not yet synchronized. The latest file hash is recorded in [manuscript review](MANUSCRIPT_REVIEW.md).
+- A v0.3 Word **review draft** now incorporates the new D analysis: **13 rendered pages, 3 unchanged numerical tables, 4 unchanged figures, 14 unchanged bibliography entries**. The earlier v0.2 had 12 pages. Neither Word file is in GitHub or synchronized to Google Doc ARTICLE. The latest file hash is recorded in [manuscript review](MANUSCRIPT_REVIEW.md).
 - An independent additional algebraic check now distinguishes log odds from the binary indicator covariance `D` in [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md). This is supplemental descriptive analysis, **not** a new accepted uncertainty model or experimental validation.
 
 ## Current gate register
@@ -38,7 +38,7 @@ Green software CI, a positive-semidefinite normalized 4×4 covariance, or a high
 ## Next actionable decisions
 
 1. **Now:** ask adviser to confirm whether a descriptive 2×2 secondary analysis meets the school research-paper requirement. Do not imply acceptance.
-2. **Now:** reconcile the newly observed `ΔD` finding with the manuscript's claim about association, and perform qualified scientific review. No fresh event-level data is required for that descriptive revision.
+2. **Now:** qualified author/adviser review of the new D and path-dependent log-odds interpretation already inserted into v0.3. No fresh event-level data is required for that descriptive revision.
 3. **Before submission:** author/adviser review, verify all citations with Zotero and publisher records, verify figures and source claims, finalize attribution, contributions, conflicts, funding, AI assistance disclosure.
 4. **If formal inference is desired later:** independently justify covariance-source inclusion, full 2D dependencies and null calibration with actual repeated-unfolding validation. Without those new inputs, gate G15 stays closed. This is an **optional different research project**, not a hidden requirement for the descriptive KTI.
 5. **Submission/presentation date:** not assumed from a folder called `kti-nov18`. Verify independently with school/adviser.

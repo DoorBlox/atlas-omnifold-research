@@ -12,6 +12,7 @@ The research accumulated many append-only phase-7 reports during debugging. **Th
 | [ISSUE_REGISTER.md](ISSUE_REGISTER.md) | Open issues, resolved-scope decisions, blocked inference |
 | [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md) | New marginal-vs-association algebra audit |
 | [MANUSCRIPT_REVIEW.md](MANUSCRIPT_REVIEW.md) | DOCX identity, Turnitin interpretation, human review requirements |
+| [../references/README.md](../references/README.md) | 14 DOI Zotero import seeds and pending metadata verification |
 | [REPOSITORY_MAP.md](REPOSITORY_MAP.md) | Where data, scripts, tests, reports and workflows live |
 | [../plans/RESEARCH_PLAN.md](../plans/RESEARCH_PLAN.md) | Forward roadmap without fictitious deadline |
 | [../results/README.md](../results/README.md) | Stable versioned numerical evidence entry |

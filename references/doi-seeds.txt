@@ -1,0 +1,16 @@
+# Import seeds extracted from 14 unique bibliography entries in v0.3.
+# NOT Zotero-generated references; check DOI metadata and each cited claim.
+10.1103/PhysRevLett.124.182001
+10.1088/1748-0221/17/01/P01024
+10.1103/PhysRevD.84.054001
+10.1140/epjc/s10052-019-7162-0
+10.5281/zenodo.11507450
+10.1103/PhysRevD.109.112016
+10.1103/PhysRevLett.133.261803
+10.1016/j.physletb.2025.139680
+10.1016/j.physrep.2011.03.005
+10.1140/epjc/s10052-025-15265-9
+10.1016/0168-9002(95)00274-X
+10.1140/epjc/s10052-025-14835-1
+10.1007/JHEP07(2017)091
+10.1016/j.physrep.2019.11.001
