@@ -1,6 +1,6 @@
 # Research status: current, authoritative
 
-**Checked 8 November 2026.** This is the first place to look for scientific and editorial status. This file is intentionally short; the detailed primary source is the [immutable numerical bundle](../results/README.md). The former 60-kB append-only handoff is preserved in [the historical handoff](HANDOFF_HISTORY.md). **None of these documents predicts what will happen on November 18.**
+**Checked 8 November 2026.** This is the first place to look for scientific and editorial status. This file is intentionally short; the detailed primary source is the [immutable numerical bundle](../results/README.md). The former 60-kB append-only handoff is preserved in [the historical handoff](HANDOFF_HISTORY.md).
 
 ## Current project contract
 
@@ -16,7 +16,7 @@ Selected events satisfy `pT_trackj1 > 5 GeV`; the fixed mass threshold is `10.59
 
 ## Verified achievements
 
-- **Numerical milestone achieved 8 November 2026**: 5 frozen CSV tables, 4 SVG figures, 12 positive bundle checks, reproducibility manifest, generator and pseudo comparison. The folder `results/kti-nov18` is named after a **target school milestone**, not its completion date.
+- **Numerical milestone achieved 8 November 2026**: 5 frozen CSV tables, 4 SVG figures, 12 positive bundle checks, reproducibility manifest, generator and pseudo comparison. The canonical numerical release is [`results/four-cell-v1`](../results/four-cell-v1/README.md).
 - Prior frozen-code CI run [42442490666](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42442490666) passed **107 tests**. Tests show numerical consistency, not physical nuisance calibration.
 - Real unfolded minus nominal-generator: low-mass `+0.0036800854`, low-multiplicity `-0.0146902523`, joint log odds `-0.0597334776`; pseudo versus independent target: `-0.0229756608`, `-0.0019636003`, `+0.0522361448`.
 - Four DD/Sherpa conditional SE models: real log-odds SE `0.092321–0.146783`; pseudo `0.056651–0.112847`. These are **scenario-dependent**, not validated uncertainty intervals.
@@ -41,6 +41,6 @@ Green software CI, a positive-semidefinite normalized 4×4 covariance, or a high
 2. **Now:** qualified author/adviser review of the v0.5 prose and the D/path-dependent log-odds interpretation inherited from v0.3. No fresh event-level data is required for that descriptive revision.
 3. **Before submission:** author/adviser review, verify all citations with Zotero and publisher records, verify figures and source claims, finalize attribution, contributions, conflicts, funding, AI assistance disclosure.
 4. **If formal inference is desired later:** independently justify covariance-source inclusion, full 2D dependencies and null calibration with actual repeated-unfolding validation. Without those new inputs, gate G15 stays closed. This is an **optional different research project**, not a hidden requirement for the descriptive KTI.
-5. **Submission/presentation date:** not assumed from a folder called `kti-nov18`. Verify independently with school/adviser.
+5. **Submission/presentation date:** verify the official schedule with the school or adviser.
 
 See [research issues](ISSUE_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md), [document register](REPORT_REGISTER.md), and [short handoff](START_HERE_HANDOFF.md).
