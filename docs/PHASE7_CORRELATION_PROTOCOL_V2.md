@@ -11,7 +11,7 @@ The official publication states:
 1. The default recommended treatment is **fully correlated systematic source uncertainties across bins**.
 2. **Two-point** unfolding sources need special care because their internal correlations are not known. For **four bins**, the guide explicitly discusses treating source-bin contributions as **four separate nuisance components** (fully uncorrelated across those bins) as a possible alternative.
 3. **Any correlation assumption must be checked using the pseudo-measurement against known truth before drawing conclusions from real data.** The guide further recommends bin support with at least 5,000 effective MC events, data statistical precision below 15%, and jet pT greater than 5 GeV. Our frozen 2x2 analysis implemented these support/selection gates.
-4. More sophisticated *smoothly varying* decorrelations are potential alternatives, but the guide does not supply a unique analytic 2D smoothing rule. The exact `multifold_util.smooth_uncertainty` implementation remains unverified due CERN GitLab access restrictions.
+4. More sophisticated *smoothly varying* decorrelations are potential alternatives, but the guide does not supply a unique analytic 2D smoothing rule. The exact `multifold_util.smooth_uncertainty` implementation **was subsequently retrieved and SHA-256 verified** in [CI 42390285792](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42390285792); its 1D kernel does **not** specify any 2D smoother. This supersedes the historical access limitation.
 
 **Important:** The published guide motivates alternatives but does not automatically turn our chosen normalized 2x2 transformation into an ATLAS-approved covariance or grant a calibrated compatibility p-value.
 
