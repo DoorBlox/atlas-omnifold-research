@@ -22,6 +22,7 @@ on:
       - "src/phase7_sherpa_2d_smoothing.py"
       - "src/phase7_source_accounting.py"
       - "src/phase7_kti_bundle.py"
+      - "src/joint_association_audit.py"
       - "src/phase7_official_excerpts.py"
       - "tests/test_phase7_snapshot.py"
       - "tests/test_phase7_divisor_audit.py"
@@ -42,6 +43,7 @@ on:
       - "tests/test_phase7_sherpa_2d_smoothing.py"
       - "tests/test_phase7_source_accounting.py"
       - "tests/test_phase7_kti_bundle.py"
+      - "tests/test_joint_association_audit.py"
       - ".github/workflows/atlas-phase7-lite.yml"
   workflow_dispatch:
 
@@ -91,8 +93,10 @@ jobs:
         run: python -m src.phase7_sherpa_2d_smoothing --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/sherpa-2d-smoothing
       - name: Audit paper 25 systematics plus four stochastic terms versus 15 notebook terms
         run: python -m src.phase7_source_accounting --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs/source-accounting
-      - name: Generate checksum-pinned Nov 18 KTI results, four SVG figures and five numerical tables
+      - name: Generate pinned historical four-cell evidence bundle (completed 8 Nov 2026)
         run: python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/kti-nov18
+      - name: Audit the additional binary-indicator association coordinate
+        run: python -m src.joint_association_audit --out outputs/joint-association-audit.json
       - name: Probe CERN official helper source without executing fetched code
         run: python -m src.phase7_official_helper_audit --out outputs/official-helper
       - name: Extract official function bodies for human source-method reconciliation
