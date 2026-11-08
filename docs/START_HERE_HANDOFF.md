@@ -1,6 +1,20 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
 
+## 2026-11-08 — Independent Deep Research critically adjudicated; exact source-family accounting verified
+
+**[CI run 42438782622](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42438782622) PASSED, 98 tests** (previously 91); the new source-family reconciliation executed against checksum-pinned v1 real and pseudodata products, **without any ATLAS archive download**. Code: src/phase7_source_accounting.py; seven new tests: tests/test_phase7_source_accounting.py; report artifact: source_family_accounting.json under outputs/source-accounting. **The external Deep Research narrative contains several material mistakes**, reviewed point by point in [PHASE7_DEEP_RESEARCH_ADJUDICATION_2026_11_08.md](PHASE7_DEEP_RESEARCH_ADJUDICATION_2026_11_08.md).
+
+**New source-count result:** the project's **29 frozen covariance matrices consist of 25 systematic-labelled terms plus four stochastic terms** (finite evaluation MC, data bootstrap, MC-training bootstrap, NN ensemble). The 25 published ATLAS systematic components and our 25 systematic-labelled names are **arithmetically consistent but not proven identical one-for-one**. The official pseudodata 1D comparison example selects **15 project-equivalent names** (4 stochastic + 11 systematic), omitting **14** systematic terms. Actual 15/29 covariance trace shares are **0.5589331297637549 real** and **0.6172799515656057 pseudodata**; they are **not supposed to equal 1**. Deep Research incorrectly attributed the extra four to two-point sources and incorrectly required 25 vs 29 trace equality.
+
+**Other critical corrections:** the normalized 2×2 table requires a **4×4 rank-three shape covariance**, not a 2×2 covariance; source shifts require correct count-to-shape Jacobian; the CERN helper does **not** hardcode 29 source families; DD/Sherpa four-bin decorrelation is an *alternative*, not automatically the preferred primary; the factorized two-level 2D Sherpa kernel is numerical identity while the ~1% changes were from arbitrary 1D flattening; real unfolded vs nominal generator **shares event support** and needs paired finite-MC cross moments. The Deep Research assertion that matching NN seeds captures training dependence is unverified, and fixed-weight bootstrap is not full-unfolding physical coverage.
+
+**Science status unchanged: G5 PROVISIONAL; G8 CONDITIONAL TOYS ONLY / PHYSICAL COVERAGE UNVERIFIED; G11 ONE KNOWN-TARGET CLOSURE EXECUTED; G12 PRIMARY 2D MODEL UNVERIFIED; G15 NO-GO. No real-data p-value or sigma.** Next substantive dependency is independent justification of the 2D correlation/estimand and an actual null-sampling design, **not more identical Gaussian toys**. Continue descriptive KTI while gate remains closed.
+
+---
+
+
+
 ## Latest verified Sherpa 2D smoothing limitation and no-repeat workflow (2026-11-07)
 
 **[Run 42391936651](https://github.com/DoorBlox/atlas-omnifold-research/actions/runs/42391936651) PASSED — 91 tests**, all on frozen v1/v2 2×2 signed moments; **no original ATLAS archive download**. New bounded test src/phase7_sherpa_2d_smoothing.py and matching tests use the CERN 1D smooth_uncertainty width rule (full bin-center range / 10), but deliberately do **not** claim that any 2D kernel is official. For a hypothetical factorized **two-level by two-level** Gaussian kernel, the axis off-diagonal weight equals exp(-50)/(1+exp(-50)) = **1.92874985e-22**; the 2D smoothing is numerical **identity on both saved signed Sherpa shifts**. Conversely arbitrarily flattening four categories onto fictitious 1D centers changes Sherpa covariance by **0.708151% pseudo and 1.820378% real**, but is order-dependent and physically inappropriate; it is **not used in inference**. See [source-aligned method evidence](PHASE7_SOURCE_ALIGNED_JOINT_AND_CONDITIONAL_TOYS.md). These results do not fix DD/Sherpa 2D nuisance correlations or validate any 2D model.
