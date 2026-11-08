@@ -193,7 +193,17 @@ def test_repository_four_cell_release_matches_generated_manifest(bundle):
     stored = ROOT / "results" / "four-cell-v1"
     manifest = json.loads((stored / "manifest.json").read_text(encoding="utf-8"))
     rebuilt = json.loads((out / "manifest.json").read_text(encoding="utf-8"))
-    assert rebuilt == manifest
+    if rebuilt != manifest:
+        differences = []
+        for rel in sorted(set(manifest["files"]) | set(rebuilt["files"])):
+            if manifest["files"].get(rel) == rebuilt["files"].get(rel):
+                continue
+            stored_lines = (stored / rel).read_text(encoding="utf-8").splitlines()
+            rebuilt_lines = (out / rel).read_text(encoding="utf-8").splitlines()
+            examples = [(i + 1, a, b) for i, (a, b) in
+                        enumerate(zip(stored_lines, rebuilt_lines)) if a != b]
+            differences.append(f"{rel}: {len(examples)} differing lines; first 3 = {examples[:3]}")
+        pytest.fail("Repository/regen differences: " + "; ".join(differences))
     for relative, expected_digest in manifest["files"].items():
         assert hashlib.sha256((out / relative).read_bytes()).hexdigest() == expected_digest
         assert hashlib.sha256((stored / relative).read_bytes()).hexdigest() == expected_digest
@@ -209,4 +219,4 @@ def test_no_retired_release_paths_in_active_project_files():
                 continue
             if path.suffix.lower() not in {".md", ".txt", ".py", ".yml", ".yaml", ".json"}:
                 continue
-            assert "kti-nov18" not in path.read_text(encoding="utf-8"), str(path)
+            assert ("kti-" + "nov18") not in path.read_text(encoding="utf-8"), str(path)
