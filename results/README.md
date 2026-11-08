@@ -25,6 +25,6 @@ python -m pytest -q tests/test_phase7_kti_bundle.py
 python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1
 ```
 
-The standard output directory is `outputs/four-cell-v1`. A new regression test compares the regenerated report, numerical files and SHA-256 manifest to the committed release.
+The standard output directory is `outputs/four-cell-v1`. The regression test verifies the committed SHA-256 manifest, regenerates ten files byte-for-byte, and compares three derived floating-point CSVs to machine precision (relative tolerance 1e-12). Their committed numerical data and hashes are preserved.
 
 **Interpretation:** G5 provisional; G8 physical repeated-unfolding validation not demonstrated; G11 one known-target comparison; G12 accepted two-dimensional source model not established; G15 calibrated generator p-value **NO-GO**. See [status](../docs/RESEARCH_STATUS.md) and [issues](../docs/ISSUE_REGISTER.md).
