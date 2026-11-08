@@ -1,60 +1,51 @@
-# Manuscript review, writing integrity and submission readiness
+# Manuscript: current review and writing integrity
 
-**Reviewed 8 November 2026.** The user provided the full revised Word draft and two Turnitin report PDFs. The reports refer to **the revised draft**, not a newly trained physics model. The actual manuscript is an attached conversation file, not a repository file.
+**Latest draft:** `Manuscript_Four_Cell_Question_Driven_v0.6.docx` (8 November 2026).  
+**SHA-256:** `df2e459445bc753da113298512c7962c7e716860b255edf24d8a5a9edc245bdc`.  
+**Delivery:** editable Word file in the original conversation; the public GitHub repository retains the supporting numerical evidence and this review record. The school's Google Doc ARTICLE tab remains an earlier working draft.
 
-## Version identification
+## What changed in v0.6
 
-- **Original** `Manuscript_Draft(1).docx`: SHA-256 `c2b64c4e9eb19f9da9f9fdcd431b3255cf99be55256299c40dfbc32ac56e457d`, 13-page first draft per earlier document rendering.
-- **Previous editorial v0.2** `Manuscript_Revised_Scientific_Editorial.docx`: SHA-256 `5f972d10df7a4a683bf700a585ccf843d74467450c4c43af5746d2b3a1c5678e`, 12 pages.
-- **Preceding scientific review v0.3** `Manuscript_Four_Cell_Review_v0.3.docx`: SHA-256 **`53683d2136bc758a69e5384afe430adb7f92330b0393b7d74eb30d84f0b13cfd`**, 13-page reviewed render. It adds the D association-coordinate and path-dependent counterfactual analysis; all three tables, four byte-identical figures, and fourteen bibliography entries are unchanged. DOCX render and accessibility audit completed (0 high/medium/low issues). Files live in the conversation, not GitHub.
-- **Important distinction:** The uploaded PDF `Manuscript_Revised_Scientific_Editorial.pdf` and `Manuscript_Revised_Scientific_Editorial.docx.pdf` are **not the same file** (different hashes and purposes; the second is a Turnitin similarity-report wrapper). Do not use a previous checkpoint's PDF hash to identify an edited DOCX. The **DOCX hash** is the correct identity of the editable manuscript.
-- **Google Doc ARTICLE** at [school document](https://docs.google.com/document/d/1rTafCdT6ESCpH43HtrssArHpiUzVEhoYABzwQJewQ00/edit) is **older working text**, not the final Word version. Do not overwrite without author direction.
+The author identified an unhelpful writing pattern in v0.5: each scientific claim was often followed by a defensive 'X, not Y' statement. The 8 November Turnitin report additionally classified **64% of v0.5** as likely AI-written. Those observations prompted a structural rewrite focused on **paragraph purpose**, supported by the installed `academic-humanizer` skill.
 
-## Turnitin reports: observed results, not a revision goal
+- A question map assigns one answerable scientific question to each of **67 edited prose, caption and heading paragraphs**; the underlying structure remains Abstract, Introduction, Methods, Results, Discussion, Conclusion, and References.
+- Abstract and Introduction establish the joint-distribution question. Methods define the estimands and covariance assumptions. Results present the cell, marginal and sensitivity numbers. Discussion interprets them and consolidates scientific limits in Section 4.5.
+- The editorial audit counted **95 repeated negation markers** across v0.5 body/notes versus **one** in v0.6, while retaining the required scientific limitations.
+- The body/prose word count decreased from **4,866** to **4,223** whitespace-delimited words. This excludes the reference list and table cell contents.
+- Final render: **11 pages**. Table 1 follows the Results introduction; original figure placements and caption associations were inspected. Accessibility audit: **0 high, 0 medium, 0 low** issues.
 
-- **AI-writing report:** `69%` marked as likely AI-generated/AI-revised text in the revised manuscript (same score as the earlier 13-page first-draft report).
-- **Similarity report:** **`2%` overall similarity**, bibliographic text excluded. A low similarity percentage says little about authorship or novelty.
-- The report itself and [Turnitin's guidance](https://guides.turnitin.com/hc/en-us/articles/22774058814093-Using-the-AI-Writing-Report) caution that AI classification can misidentify human/AI writing and **must not be the sole basis of misconduct decisions**.
-- The project has openly used AI to research and draft scientific prose. **Do not present AI assistance as absent, claim a detector pass, or optimize prose merely to manipulate a score.** The author must inspect every technical claim and apply the institution's disclosure policy.
+### Scientific integrity tests
 
-## Assessment of the scientific narrative
+- **Three original numerical tables:** all cell texts verified identical to v0.5.
+- **Four embedded scientific figures:** identical media bytes.
+- **14 bibliography paragraphs:** identical.
+- **Displayed log-odds equation:** identical.
+- **In-text author/year citation identities:** original fingerprint preserved.
+- **Numerical outputs and experimental assumptions:** the frozen four-cell comparison and DD/Sherpa conditional estimates retain their reported values. Repeated mentions of numbers were condensed where they added no analysis.
+- Data/code availability now uses the canonical [`results/four-cell-v1`](../results/four-cell-v1/README.md) path and `outputs/four-cell-v1` generator output directory, reflecting the [release migration](RELEASE_MIGRATION.md).
 
-**Strengths:** all reported central four-cell fractions and three-scalar contrasts were traced to the immutable CSVs; the paper distinguishes real-generator from independent pseudodata truth; 29 source families, count-to-shape normalization and four DD/Sherpa sensitivity models are stated; numerical caveats prevent unsupported p-values.
+The rewrite was reviewed for coherence and visual integrity. Scientific interpretation, journal fit and author declarations still require a human author/adviser decision.
 
-**Scientific correction now required:** The original Discussion treats `ΔL=-0.059733` as the third association coordinate. This is a valid parameterization, **but** the separate binary-indicator covariance `D=p_LL-MN` changes by only `-0.0001685161` in the real comparison. A specified counterfactual path attributes `-0.0553563718` of the log-odds difference to adjusted marginals with reference `D` held fixed; the remainder is `-0.0043771058`. That does not establish significance or a mechanism. See [joint association audit](JOINT_ASSOCIATION_AUDIT.md). The new v0.3 Word draft includes this as an explicitly exploratory descriptive supplementary result; human author/adviser validation remains pending.
+## How to interpret the Turnitin report
 
-**What remains genuinely unresolved:** source covariance for full physical experimental inference, independent repeated-unfolding validation, rigorous novelty for specialist physics journals, and final school/venue policy fit. The first two cannot be solved just by rewriting, changing filenames or selecting a preferred model; see [issue register](ISSUE_REGISTER.md).
+The supplied Turnitin PDF for **v0.5** reports **64%** likely AI-generated or AI-revised writing. The previous user-reported score for **v0.4** was 56%. Earlier reports on v0.2 showed 69% AI-writing and 2% text similarity. These percentages refer to different text versions; **v0.6 has no new Turnitin result**. A classifier score is an uncertain screening outcome. Editorial work is evaluated by evidence, precision, paragraph organization and transparent author responsibility, alongside the institution's disclosure policy.
 
-## Editing standards for the next manuscript revision
+## Scientific boundaries still requiring review
 
-Follow the user's requested [academic-humanizer skill](https://github.com/AIScientists-Dev/academic-humanizer): precise, restrained academic wording; explicit evidence next to claims; eliminate generic hype, repetitive limitations, vague connectives and excess clause stacking. Preserve formal statistical terms and all equations, numerical values, citation identities and genuine scientific hedging. Prefer original reasoning about a particular result over generic discussion.
+The work remains a descriptive secondary use of the [2024 ATLAS OmniFold release](https://doi.org/10.5281/zenodo.11507450). An accepted physical two-dimensional DD/Sherpa source-correlation prescription, a complete source-label mapping and independent full-unfolding coverage have yet to be verified. Formal generator acceptance/rejection remains outside the present study (**G15 NO-GO**). See [research status](RESEARCH_STATUS.md), [issue register](ISSUE_REGISTER.md), and [joint association audit](JOINT_ASSOCIATION_AUDIT.md).
 
-**A scholarly voice is not an AI-detector score.** Any edits should be justified by clarity, factual traceability and author control, with a transparent edit history. Retain author/adviser review and AI-use disclosure as required.
+## Prior working files
 
-## Submission checklist
+| Version | Purpose | Editable file |
+| --- | --- | --- |
+| v0.5 | Full initial rewrite; source of the supplied 64% Turnitin report | `Manuscript_Four_Cell_Full_Rewrite_v0.5.docx` |
+| v0.4 | Earlier evidence-focused editing | `Manuscript_Four_Cell_Review_v0.4.docx` |
+| v0.3 | Added D and counterfactual association calculations | `Manuscript_Four_Cell_Review_v0.3.docx` |
+| v0.2 | Initial scientific/editorial pass | `Manuscript_Revised_Scientific_Editorial.docx` |
+| v0.1 | First full manuscript | `Manuscript_Draft(1).docx` |
 
-- [x] Working full Word draft exists (not in GitHub).
-- [x] Three numerical tables and four figures in the revised DOCX preserved during the earlier editorial pass.
-- [x] Separate numerical source and pseudodata comparator distinctions recorded.
-- [x] Added D and path-dependent counterfactual to v0.3 and checked arithmetic against frozen fractions.
-- [ ] Author/adviser approve additional D association decomposition and interpretation.
-- [ ] Independently review scientific uncertainty methods with qualified HEP/statistics adviser.
-- [x] Extracted 14 unique manuscript DOIs into [reference import seeds](../references/README.md).
-- [ ] Import/verify references with Zotero, bidirectional in-text/reference checks, correct venue style.
-- [ ] Verify all figure/table captions, labels, pages, unit symbols and attribution in final PDF.
-- [ ] Confirm school deadline, manuscript language, permitted AI assistance, author contributions, funding/conflicts, license.
-- [ ] Human author and adviser approve and sign off on actual final submission.
+The version table documents chronology; each binary document remains a separately supplied conversation artifact. The repo retains the earlier checkpoints and historical handoff for reconstruction.
 
-**No journal acceptance, novelty-first claim, calibrated generator verdict or improved detection score is claimed.**
+## Next author actions
 
-## Previous manuscript: evidence-preserving academic editing (v0.4)
-
-**`Manuscript_Four_Cell_Review_v0.4.docx`** (SHA-256 `6b29850f47da86417de50d1ea872f13e6066a6618ca7974e4bccaa3a6fab79f6`), 12 pages after removal of an unnecessary forced break before Table 2. Thirteen passages were rewritten under the `academic-humanizer` skill's academic criteria: specific claims backed by tables/figures, shorter sentences, less repeated caveat language, no em-dash sentence constructions and no unsupported novelty. Per-paragraph automated checks found all numeric tokens and author–year citations preserved; all 3 table matrices, 4 embedded images and 14 bibliography paragraphs are unchanged from v0.3. The final DOCX was rendered to 12 page images and visually reviewed; the accessibility audit recorded 0 high/medium/low issues. All 14 bibliography works have in-text author–year mentions. This is not a final claim-to-source audit or Zotero-generated bibliography.
-
-The **Turnitin 69% AI-writing** and **2% similarity** results refer to **v0.2**, not the new v0.4. No new detector result or reduced score is claimed. Author/adviser review and any required AI-use disclosure remain outstanding.
-
-## Current manuscript: full rewrite (v0.5; 8 November 2026)
-
-The editable `Manuscript_Four_Cell_Full_Rewrite_v0.5.docx`, SHA-256 **`b414b97c8df7291394ea95d1f4937cf4e48d59c3bc287f05cb99c03f799f78ed`**, is the **current** author-review draft. A complete academic-humanizer audit and rewrite covered all **64** editable prose/caption/note paragraphs. The prior v0.4 document was retained unchanged as the baseline. Original numerical tokens and citation tokens were verified **paragraph by paragraph**; all **three table cell matrices**, **four embedded media files**, **14 references** and the mathematical log-odds display remain unchanged. Figure 1 display width was reduced to 5.75 inches (original image unchanged), Figure 2 moved after Table 2, and bibliography spacing adjusted to avoid orphaned content. The final DOCX was rendered and inspected on **12 pages**; accessibility reported 0 high/medium/low issues. A separate editorial audit and change report was generated as a conversation artifact, not committed here.
-
-The user reported **56% AI-writing classification on v0.4**. There is no Turnitin measurement for v0.5 and no claimed decrease. Detection scores are not evidence of authorship or research integrity; human author review and appropriate institutional disclosure remain necessary. The fixed five-table four-figure GitHub evidence bundle and scientific G15 NO-GO status were **not altered** by the rewriting.
+Confirm every sentence and technical interpretation, including the exploratory D/log-odds decomposition. Complete Zotero metadata and bidirectional claim/citation checks, affiliation and contributions, funding and conflicts, the required AI-assistance disclosure, and final submission formatting. Adviser/independent scientific review must precede any journal submission.
