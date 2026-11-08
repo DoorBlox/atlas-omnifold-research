@@ -20,6 +20,7 @@ on:
       - "src/phase7_empirical_replica_null.py"
       - "src/phase7_replica_projection_audit.py"
       - "src/phase7_sherpa_2d_smoothing.py"
+      - "src/phase7_source_accounting.py"
       - "src/phase7_official_excerpts.py"
       - "tests/test_phase7_snapshot.py"
       - "tests/test_phase7_divisor_audit.py"
@@ -38,6 +39,7 @@ on:
       - "tests/test_phase7_empirical_replica_null.py"
       - "tests/test_phase7_replica_projection_audit.py"
       - "tests/test_phase7_sherpa_2d_smoothing.py"
+      - "tests/test_phase7_source_accounting.py"
       - ".github/workflows/atlas-phase7-lite.yml"
   workflow_dispatch:
 
@@ -59,7 +61,7 @@ jobs:
         run: python -m pip install "numpy>=1.26,<3" "pytest>=8,<10" "h5py>=3.10,<4"
       - name: Validate stored snapshot and new calculation regressions
         run: |
-          python -m pytest -q tests/test_phase7_snapshot.py tests/test_phase7_divisor_audit.py tests/test_phase7_interaction.py tests/test_phase7_target_mc.py tests/test_phase7_crosscov_bounds.py tests/test_phase7_model_sensitivity.py tests/test_phase7_calibration.py tests/test_phase7_replica_manifest.py tests/test_phase7_reference_audit.py tests/test_phase7_v2_reconstruct.py tests/test_phase7_twopoint_protocol.py tests/test_phase7_official_helper_audit.py tests/test_phase7_joint_reference.py tests/test_phase7_conditional_null.py tests/test_phase7_empirical_replica_null.py tests/test_phase7_replica_projection_audit.py tests/test_phase7_sherpa_2d_smoothing.py
+          python -m pytest -q tests/test_phase7_snapshot.py tests/test_phase7_divisor_audit.py tests/test_phase7_interaction.py tests/test_phase7_target_mc.py tests/test_phase7_crosscov_bounds.py tests/test_phase7_model_sensitivity.py tests/test_phase7_calibration.py tests/test_phase7_replica_manifest.py tests/test_phase7_reference_audit.py tests/test_phase7_v2_reconstruct.py tests/test_phase7_twopoint_protocol.py tests/test_phase7_official_helper_audit.py tests/test_phase7_joint_reference.py tests/test_phase7_conditional_null.py tests/test_phase7_empirical_replica_null.py tests/test_phase7_replica_projection_audit.py tests/test_phase7_sherpa_2d_smoothing.py tests/test_phase7_source_accounting.py
           python -m src.phase7_snapshot verify --root data/derived/phase7-v1
       - name: Evaluate covariance denominator correction without raw data
         run: python -m src.phase7_divisor_audit --snapshot data/derived/phase7-v1 --out outputs/divisor
@@ -85,6 +87,8 @@ jobs:
         run: python -m src.phase7_replica_projection_audit --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/replica-projection
       - name: Test limited factorized 2D Sherpa Gaussian-kernel alternative (not approved inference)
         run: python -m src.phase7_sherpa_2d_smoothing --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/sherpa-2d-smoothing
+      - name: Audit paper 25 systematics plus four stochastic terms versus 15 notebook terms
+        run: python -m src.phase7_source_accounting --real-dir data/derived/phase7-v1/real --pseudo-dir data/derived/phase7-v1/pseudo --out outputs/source-accounting
       - name: Probe CERN official helper source without executing fetched code
         run: python -m src.phase7_official_helper_audit --out outputs/official-helper
       - name: Extract official function bodies for human source-method reconciliation
