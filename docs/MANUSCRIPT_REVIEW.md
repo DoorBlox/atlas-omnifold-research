@@ -47,8 +47,14 @@ Follow the user's requested [academic-humanizer skill](https://github.com/AIScie
 
 **No journal acceptance, novelty-first claim, calibrated generator verdict or improved detection score is claimed.**
 
-## Latest manuscript: evidence-preserving academic editing (v0.4)
+## Previous manuscript: evidence-preserving academic editing (v0.4)
 
 **`Manuscript_Four_Cell_Review_v0.4.docx`** (SHA-256 `6b29850f47da86417de50d1ea872f13e6066a6618ca7974e4bccaa3a6fab79f6`), 12 pages after removal of an unnecessary forced break before Table 2. Thirteen passages were rewritten under the `academic-humanizer` skill's academic criteria: specific claims backed by tables/figures, shorter sentences, less repeated caveat language, no em-dash sentence constructions and no unsupported novelty. Per-paragraph automated checks found all numeric tokens and author–year citations preserved; all 3 table matrices, 4 embedded images and 14 bibliography paragraphs are unchanged from v0.3. The final DOCX was rendered to 12 page images and visually reviewed; the accessibility audit recorded 0 high/medium/low issues. All 14 bibliography works have in-text author–year mentions. This is not a final claim-to-source audit or Zotero-generated bibliography.
 
 The **Turnitin 69% AI-writing** and **2% similarity** results refer to **v0.2**, not the new v0.4. No new detector result or reduced score is claimed. Author/adviser review and any required AI-use disclosure remain outstanding.
+
+## Current manuscript: full rewrite (v0.5; 8 November 2026)
+
+The editable `Manuscript_Four_Cell_Full_Rewrite_v0.5.docx`, SHA-256 **`8f5f5d9879d8dcfdee4a80630547a40d782dbd9cc7c3526dd688c3c6c7d5c83f`**, is the **current** author-review draft. A complete academic-humanizer audit and rewrite covered all **64** editable prose/caption/note paragraphs. The prior v0.4 document was retained unchanged as the baseline. Original numerical tokens and citation tokens were verified **paragraph by paragraph**; all **three table cell matrices**, **four embedded media files**, **14 references** and the mathematical log-odds display remain unchanged. Figure 1 display width was reduced to 5.75 inches (original image unchanged), Figure 2 moved after Table 2, and bibliography spacing adjusted to avoid orphaned content. The final DOCX was rendered and inspected on **12 pages**; accessibility reported 0 high/medium/low issues. A separate editorial audit and change report was generated as a conversation artifact, not committed here.
+
+The user reported **56% AI-writing classification on v0.4**. There is no Turnitin measurement for v0.5 and no claimed decrease. Detection scores are not evidence of authorship or research integrity; human author review and appropriate institutional disclosure remain necessary. The fixed five-table four-figure GitHub evidence bundle and scientific G15 NO-GO status were **not altered** by the rewriting.
