@@ -46,7 +46,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write # Trusted main/dispatch only; one-time review-branch evidence publication
+  contents: read
 
 jobs:
   derived:
@@ -97,17 +97,6 @@ jobs:
         run: python -m src.phase7_official_helper_audit --out outputs/official-helper
       - name: Extract official function bodies for human source-method reconciliation
         run: python -m src.phase7_official_excerpts
-      - name: Publish Nov 18 evidence to review branch only when explicitly requested
-        if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '[atlas-publish-kti]') }}
-        run: |
-          test -f outputs/kti-nov18/manifest.json
-          mkdir -p results/kti-nov18
-          cp -a outputs/kti-nov18/. results/kti-nov18/
-          git add results/kti-nov18
-          if ! git diff --cached --quiet; then
-            git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m '[atlas-lite] Publish verified KTI Nov 18 evidence'
-            git push origin HEAD:refs/heads/kti-nov18-evidence
-          fi
       - name: Upload only small derived audit reports
         if: always()
         uses: actions/upload-artifact@v4
