@@ -1,5 +1,17 @@
 # START HERE — ATLAS OmniFold Z+jets KTI research handoff
 
+## 8 November 2026 — CURRENT: manuscript scientific/editorial revision completed; author review required
+
+A revised standalone Word file **`Manuscript_Revised_Scientific_Editorial.docx`** (SHA-256 **`5f972d10df7a4a683bf700a585ccf843d74467450c4c43af5746d2b3a1c5678e`**) was produced after reviewing the full prior 13-page manuscript and the author's AI-writing screening report. It is a **12-page** render-checked revision with a **192-word abstract, 3 unchanged numerical tables, 4 byte-identical figures and 14 unchanged reference entries**. **64 prose/heading/caption paragraphs** were rewritten for specific, direct, less repetitive scientific interpretation; Figure 2 was relocated after Table 2, and Table 2 no longer splits across pages. Document accessibility audit reported zero issues. **Word binary and rendered PDF are conversation artifacts, NOT committed to public GitHub, and Google Docs ARTICLE was not overwritten.** [Detailed revision and verification checkpoint](KTI_MANUSCRIPT_EDITORIAL_REVISION_2026_11_08.md).
+
+**Scientific gates unchanged: G5 provisional, G8/G12 unverified, G11 one pseudodata comparison, G15 NO-GO.** The frozen five-table/four-figure evidence bundle, source moments and existing 107-test CI are unchanged. AI-writing detection is not a reliable authorship measure; rewriting was to improve scientific communication, not to guarantee a detector score. **Next:** human author/adviser review; independent physics/statistical assessment, Zotero bibliography, declaration and journal/school checks. Do not claim this draft has passed peer review or is submission-ready.
+
+**Current new-session prompt:**
+> Continue the KTI's manuscript editorial and adviser-review stage. Read `docs/START_HERE_HANDOFF.md`, `docs/KTI_MANUSCRIPT_EDITORIAL_REVISION_2026_11_08.md`, the scope blueprint and `results/kti-nov18`. The latest edited Word artifact is `Manuscript_Revised_Scientific_Editorial.docx` (SHA-256 `5f972d10df7a4a683bf700a585ccf843d74467450c4c43af5746d2b3a1c5678e`), available from the conversation, **not GitHub**. Verify the artifact and review its sources, math and disclosure; keep G15 NO-GO. Do not overwrite the school Google Doc ARTICLE or upload the manuscript to GitHub without authorization.
+
+---
+
+
 ## 8 November 2026 — LATEST: full Word manuscript draft produced; resume editorial review
 
 **This section supersedes the earlier same-day 'writing paused' note below.** Following the source/bibliography audit, the student obtained a complete standalone **`Manuscript_Draft(1).docx`**, so manuscript writing is **no longer paused**. Direct inspection of the supplied Word artifact found **202-word abstract, approximately 5,760 whitespace-delimited words including reference/table content, 3 numerical tables, 4 embedded figures, 14 reference entries**, and complete Introduction, Methods, Results, Discussion, Conclusion, availability and declaration sections. The artifact SHA-256 is **`c2b64c4e9eb19f9da9f9fdcd431b3255cf99be55256299c40dfbc32ac56e457d`**, size 551,763 bytes. A previous render reported 13 pages, but journal/school layout and citation QA remain to be performed independently.
