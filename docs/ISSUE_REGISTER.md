@@ -1,6 +1,6 @@
 # Scientific and editorial issue register
 
-**Snapshot:** 8 November 2026. This file distinguishes **a problem resolved for a descriptive KTI** from **scientific validation still impossible with the frozen public inputs**. A work unit marked *done* is not permission to inflate a claim.
+**Scientific baseline:** 8 November 2026; **continuity/writing checked:** 9 November 2026. This file distinguishes **a problem resolved for a descriptive KTI** from **scientific validation still impossible with the frozen public inputs**. A work unit marked *done* is not permission to inflate a claim.
 
 | ID | Concern | Disposition | Evidence and next action |
 | --- | --- | --- | --- |
@@ -13,9 +13,11 @@
 | SCI-07 | Novelty for a specialist HEP journal | **NOT ESTABLISHED**; limited, defensible novelty is reproducible, transparent reuse and sensitivity case study | [bibliography and novelty audit](KTI_BIBLIOGRAPHY_AND_NOVELTY_AUDIT_2026_11_08.md) |
 | ED-01 | Citation/reference consistency | **PENDING**: bibliography DOI checks were partial; Zotero library and every in-text/reference bidirectional match still require audit | [manuscript review](MANUSCRIPT_REVIEW.md) |
 | ED-02 | Complete school/journal template, author identity and AI disclosure | **PENDING HUMAN SIGNOFF**; school/adviser/venue policies have not been confirmed | [writing/integrity review](MANUSCRIPT_REVIEW.md) |
-| ED-03 | Repetitive academic language and paragraph purpose | **v0.6 EDITED, AWAITING AUTHOR REVIEW**: 67 paragraphs each mapped to one question, 643 redundant prose words removed; negation markers 95→1. Latest supplied Turnitin 64% applies to v0.5; v0.6 has no detector result | [manuscript review](MANUSCRIPT_REVIEW.md) |
+| ED-03 | Manuscript language, paragraph purpose and version identity | **AUTHOR REVISION SELECTED**: user-rewritten prose received localized science checks and Word equation formatting; exact file/hash registered. Older v0.6 language metrics are historical. Adviser/venue review pending | [manuscript review](MANUSCRIPT_REVIEW.md), [artifact registry](ARTIFACT_REGISTRY.md) |
 | OPS-01 | Misleading date-based release name | **RESOLVED BY MIGRATION**: canonical result path, generator, tests and workflow use `four-cell-v1`; manifest updated for renamed reporting labels | [migration record](RELEASE_MIGRATION.md) |
 | OPS-02 | Append-only 60-kB handoff and duplicate blueprints | **DOCUMENTATION RESOLVED**: short handoff, status, issues and roadmap as current docs; original preserved for audit | [history](HANDOFF_HISTORY.md), [document map](REPORT_REGISTER.md), [roadmap](../plans/RESEARCH_PLAN.md) |
+
+| OPS-03 | Author manuscript bytes are outside public GitHub | **IDENTITY VERIFIED / PRIVATE COPY REQUIRED**: source SHA and lineage recorded; downloadable ZIP exists in this conversation. The owner still needs a durable private backup | [artifact registry](ARTIFACT_REGISTRY.md) |
 
 ### Epistemic rule
 
