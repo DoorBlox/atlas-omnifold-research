@@ -12,10 +12,10 @@ The version-one four-cell numerical evidence was completed on **8 November 2026*
 
 | Work ID | Owner/review | Task | Completion evidence |
 | --- | --- | --- | --- |
-| W1 | Analysis + human HEP review | Review the current v0.6 `D`-versus-log-odds interpretation; author/adviser decide the scientific suitability | Correctly reproduced source fractions; reviewer-approved interpretation |
+| W1 | Analysis + human HEP review | Review the author-selected formatted DOCX's `D`-versus-log-odds interpretation; author/adviser decide the scientific suitability | Correctly reproduced source fractions; reviewer-approved interpretation |
 | W2 | Student/adviser | Confirm descriptive KTI meets school's actual novelty, citation and writing criteria | Written adviser decision, documented requirements |
-| W3 | Student/editor | Review and approve v0.6 question-led prose and conditional uncertainty wording; complete targeted corrections if needed | DOCX diff, line-by-line CSV and figure consistency check |
-| W4 | Student/Zotero | Verify 14 reference-list entries, each in-text citation, source-to-claim support and legitimate venue formatting | Bidirectional citation inventory and exported Zotero bibliography |
+| W3 | Student/editor | Author-selected science-checked Word-equation draft prepared; adviser/author final review and any targeted corrections remain | DOCX diff, line-by-line CSV and figure consistency check |
+| W4 **NEXT READY** | Student/Zotero | Verify 14 reference-list entries, each in-text citation, source-to-claim support and legitimate venue formatting | Bidirectional citation inventory and exported Zotero bibliography |
 | W5 | Student/adviser | Supply human authorship, affiliation, contributions, funding/conflict, data-license attribution and AI assistance disclosure | Author-approved declarations |
 | W6 | Independent reviewer | Review domain novelty, DD/Sherpa assumptions and claim calibration | Signed/acknowledged scientific/editorial review record |
 | W7 | Student | Produce submission-format Word/PDF and slides following real school instructions | Visually inspected manuscript and slide package |
@@ -28,3 +28,7 @@ W1 may be addressed from existing CSVs. **W2, W5, W6, and W7 require human or ex
 Every new empirical quantity must be clearly separated from the released pinned numbers and labeled as derived or exploratory. Do not change `results/four-cell-v1`, `data/derived`, the original HDF5 DOI, or the original main inference gate through editing. If a future analysis alters bins or uncertainty assumptions, create a versioned release with tests, provenance and manifest. A writing change never reopens G15 by implication.
 
 Current [research status](../docs/RESEARCH_STATUS.md), [issues](../docs/ISSUE_REGISTER.md), [manuscript review](../docs/MANUSCRIPT_REVIEW.md), [results](../results/README.md).
+
+## Current author manuscript and continuity
+
+The user-selected Word document is `ATLAS_Four_Cell_Science_Checked_Formatted_Equations.docx` (SHA-256 `e4d3e49b19e0c683bff7340769d4c646f2c1b13791551a941308aeb0182f8e62`), which supersedes assistant v0.6. Verify the private source file using [ARTIFACT_REGISTRY](../docs/ARTIFACT_REGISTRY.md) and [WRITING_WORKFLOW](../docs/WRITING_WORKFLOW.md) before editing. W4 is the next safe citation/claim audit; W1, W2, W5 and W6 require real human or specialist review. [Current state](../docs/CURRENT_STATE.md).
