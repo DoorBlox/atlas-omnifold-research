@@ -1,0 +1,38 @@
+name: Research documentation integrity
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "CHATGPT_HANDOFF.md"
+      - "docs/**"
+      - "plans/**"
+      - "scripts/validate_research_docs.py"
+      - ".github/workflows/research-docs-integrity.yml"
+  push:
+    branches: [main]
+    paths:
+      - "README.md"
+      - "AGENTS.md"
+      - "CHATGPT_HANDOFF.md"
+      - "docs/**"
+      - "plans/**"
+      - "scripts/validate_research_docs.py"
+      - ".github/workflows/research-docs-integrity.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  research-docs-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check current handoff, Markdown links, artifact identity and frozen release
+        run: python scripts/validate_research_docs.py
