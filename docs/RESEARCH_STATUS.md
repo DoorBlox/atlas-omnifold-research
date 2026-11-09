@@ -1,6 +1,6 @@
 # Current research status
 
-**As of 8 November 2026.** The project is an independent, reproducible **descriptive secondary analysis** of the [2024 ATLAS OmniFold Z+jets measurement](https://doi.org/10.1103/PhysRevLett.133.261803) and its [2024 event-weight release](https://doi.org/10.5281/zenodo.11507450). Read the [master handoff](START_HERE_HANDOFF.md) for the current manuscript and next actions.
+**Numerical baseline: 8 November 2026. Writing and continuity reviewed: 9 November 2026.** The project is an independent, reproducible **descriptive secondary analysis** of the [2024 ATLAS OmniFold Z+jets measurement](https://doi.org/10.1103/PhysRevLett.133.261803) and its [2024 event-weight release](https://doi.org/10.5281/zenodo.11507450). Read the [active ChatGPT handoff](../CHATGPT_HANDOFF.md) for the current manuscript and next actions.
 
 ## Research questions
 
@@ -24,9 +24,10 @@ The real conditional log-odds SE varies from `0.092321` to `0.146783`; pseudodat
 
 ## Current manuscript
 
-**v0.6:** `Manuscript_Four_Cell_Question_Driven_v0.6.docx` (SHA-256 `df2e459445bc753da113298512c7962c7e716860b255edf24d8a5a9edc245bdc`), 11-page render, 67 edited paragraphs with a one-question-per-paragraph purpose map. Three numerical tables, four embedded images, the displayed equation and 14 bibliography entries were preserved. [Manuscript review](MANUSCRIPT_REVIEW.md).
+The author selected `ATLAS_Four_Cell_Science_Checked_Formatted_Equations.docx` (SHA-256 `e4d3e49b19e0c683bff7340769d4c646f2c1b13791551a941308aeb0182f8e62`). It follows the author's own rewritten prose, focused scientific checks and editable Word equation formatting. Three tables and four figures come from the frozen analysis. It **supersedes the assistant v0.6**. The Word bytes remain a private downloadable artifact and are not committed to public GitHub. [Artifact registry](ARTIFACT_REGISTRY.md) · [review status](MANUSCRIPT_REVIEW.md) · [writing workflow](WRITING_WORKFLOW.md).
 
-The newest Turnitin report supplied by the author measured **64% AI-writing classification for v0.5**, following a 56% report for v0.4. The current v0.6 has not been assessed. The indicator is an uncertain classifier; scientific prose quality and author review are assessed separately.
+Prior AI-writing classifier reports concern earlier versions. There is no claimed detector score or adviser approval for the latest formatted author file. Final citation verification and human scientific/editorial review remain open.
+
 
 ## Gate register
 
