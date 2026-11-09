@@ -9,6 +9,7 @@ on:
       - "CHATGPT_HANDOFF.md"
       - "docs/**"
       - "plans/**"
+      - "references/**"
       - "scripts/validate_research_docs.py"
       - ".github/workflows/research-docs-integrity.yml"
   push:
@@ -19,6 +20,7 @@ on:
       - "CHATGPT_HANDOFF.md"
       - "docs/**"
       - "plans/**"
+      - "references/**"
       - "scripts/validate_research_docs.py"
       - ".github/workflows/research-docs-integrity.yml"
 
