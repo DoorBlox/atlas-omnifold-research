@@ -7,16 +7,28 @@ The research accumulated many append-only phase-7 reports during debugging. **Th
 | Path | Use |
 | --- | --- |
 | [README.md](../README.md) | 1-page public project overview |
-| [START_HERE_HANDOFF.md](START_HERE_HANDOFF.md) | Concise new-session handoff |
+| [../CHATGPT_HANDOFF.md](../CHATGPT_HANDOFF.md) | Active short ChatGPT handoff; former START_HERE is a pointer |
+| [CURRENT_STATE.md](CURRENT_STATE.md) | Four-track research, science, writing and submission status |
+| [ARTIFACT_REGISTRY.md](ARTIFACT_REGISTRY.md) | SHA-identified author DOCX and private backup/recovery |
+| [DOCUMENTATION_PROTOCOL.md](DOCUMENTATION_PROTOCOL.md) | File ownership and update rules |
+| [RESEARCH_WORKFLOW.md](RESEARCH_WORKFLOW.md) / [WRITING_WORKFLOW.md](WRITING_WORKFLOW.md) | Research and author-led manuscript checklists |
+| [CHATGPT_TOOL_PLAYBOOK.md](CHATGPT_TOOL_PLAYBOOK.md) | Connected services and task-specific skills |
+| [DECISIONS.md](DECISIONS.md) / [PROJECT_HISTORY.md](PROJECT_HISTORY.md) | Binding decisions and concise chronological index |
 | [RESEARCH_STATUS.md](RESEARCH_STATUS.md) | Current verified scientific and writing state |
 | [ISSUE_REGISTER.md](ISSUE_REGISTER.md) | Open issues, resolved-scope decisions, blocked inference |
 | [JOINT_ASSOCIATION_AUDIT.md](JOINT_ASSOCIATION_AUDIT.md) | New marginal-vs-association algebra audit |
-| [MANUSCRIPT_REVIEW.md](MANUSCRIPT_REVIEW.md) | Latest v0.6 DOCX identity, editorial QA, Turnitin interpretation and human review requirements |
+| [MANUSCRIPT_REVIEW.md](MANUSCRIPT_REVIEW.md) | Current author-selected DOCX identity, source-supported review and remaining scientific issues |
 | [../references/README.md](../references/README.md) | 14 DOI Zotero import seeds and pending metadata verification |
 | [REPOSITORY_MAP.md](REPOSITORY_MAP.md) | Where data, scripts, tests, reports and workflows live |
 | [../plans/RESEARCH_PLAN.md](../plans/RESEARCH_PLAN.md) | Forward roadmap without fictitious deadline |
 | [../results/README.md](../results/README.md) | Stable versioned numerical evidence entry |
 | [HANDOFF_HISTORY.md](HANDOFF_HISTORY.md) | Unabridged prior append-only handoff, preserved as historical evidence |
+
+## Archived continuity and manuscript-review snapshots
+
+- [START_HERE_PRE_CHATGPT_2026-11-09.md](START_HERE_PRE_CHATGPT_2026-11-09.md) — original short research handoff, unchanged.
+- [MANUSCRIPT_REVIEW_V06_HISTORY.md](MANUSCRIPT_REVIEW_V06_HISTORY.md) — complete older v0.6 editorial review, unchanged.
+- [RUNBOOK_PHASE7_HISTORY.md](RUNBOOK_PHASE7_HISTORY.md) — original expensive-preflight operations runbook, unchanged.
 
 ## Scientific method audit reports (historical but potentially useful)
 

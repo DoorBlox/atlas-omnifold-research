@@ -1,56 +1,36 @@
-# Phase 7 execution runbook
+# Current ATLAS research reproducibility and recovery runbook
 
-## Current scope
+**Use this page for current work.** The former Phase 7 preflight guide is preserved [verbatim](RUNBOOK_PHASE7_HISTORY.md). It includes optional 3.6 GB archive downloads and historical inference work; those steps are unnecessary for current manuscript or documentation tasks. Read [root handoff](../CHATGPT_HANDOFF.md) and [current state](CURRENT_STATE.md) first.
 
-This repository starts with a **real, downloadable official archive / HDF5 schema preflight**, followed by audited mathematics primitives and tests. It does **not** implement the official heterogeneous covariance source mapping, 2D pseudodata closure, or ATLAS final test yet. These are scientific blocker gates, not TODOs to hide.
+## Check the frozen four-cell release
 
-## Actions instructions
+The canonical release is [`results/four-cell-v1/`](../results/four-cell-v1/README.md), backed by [derived v1](../data/derived/phase7-v1) and [v2](../data/derived/phase7-v2) input moments. Verify/rebuild with:
 
-1. Go to the repository's **Actions** tab.
-2. Select **ATLAS Phase 7 preflight**.
-3. Choose **Run workflow**, stage **smoke**. This tests the Python environment without downloading data.
-4. Once that succeeds, run again with stage **schema**. This downloads the official ~3.6 GB archive, verifies the published MD5, selectively extracts the real and pseudodata central HDF5 files and audits the schema.
-5. Open the run's **Artifacts** section and download `phase7-preflight-...` containing `schema_preflight.json`. Share that file for reconciliation with the official ATLAS source code.
+```bash
+python -m pip install -r requirements.txt
+python -m pytest -q tests/test_phase7_kti_bundle.py tests/test_joint_association_audit.py
+python -m src.phase7_kti_bundle --v1 data/derived/phase7-v1 --v2 data/derived/phase7-v2 --out outputs/four-cell-v1
+```
 
-Do not enable **include_target** on the standard runner without checking free space first. The standard Linux runner has a nominal 14 GB disk allowance, and pre-installed software and archive extraction share that space.
+This tests numerical consistency and source-dependent covariance arithmetic. Historic [PR #5](https://github.com/DoorBlox/atlas-omnifold-research/pull/5) passed 116 code tests. Recheck live main and CI before citing a result for later changes. Preserve the committed five CSVs, four figures and SHA-256 manifest; a new projection belongs in a **new release version**.
 
-## Interpretation rules
+## Validate current documentation
 
-- Smoke PASS = software primitives are testable, **not ATLAS scientific validation**.
-- Schema PASS = official archive MD5 and actual HDF5 structure were read, **not 2D measurement inference**.
-- G5 (source-wise uncertainty family mapping), G8 (calibration), and G11 (official 2D closure) remain unresolved.
-- G15 remains **NO-GO** until all critical gates pass.
-- Never upload or commit the Zenodo archive or large HDF5 datasets to GitHub.
-- GitHub Actions usage for a private repository can consume billing minutes.
+```bash
+python scripts/validate_research_docs.py
+```
 
-## Official dataset
+The dependency-free validator verifies active Markdown links, the selected author DOCX hash as metadata, and all 13 permanently pinned release file hashes. The [research-docs-integrity workflow](../.github/workflows/research-docs-integrity.yml) runs this check for relevant PRs. This is a **documentation and byte-integrity test**, not proof of physical covariance or publisher compliance.
 
-Zenodo: https://zenodo.org/records/11507450
+## Recover the manuscript
 
-Published archive MD5: `9b838510f41e1d5a8b26d7f3c5b2ca42`.
+1. Read [ARTIFACT_REGISTRY](ARTIFACT_REGISTRY.md): selected `ATLAS_Four_Cell_Science_Checked_Formatted_Equations.docx` with recorded SHA-256.
+2. Locate the **private user-owned** Word file or downloadable private ZIP from the ChatGPT conversation. The public GitHub repository does **not** hold the manuscript's bytes.
+3. Check the file hash (for example, `sha256sum filename.docx`) and preserve its original before editing.
+4. Use [WRITING_WORKFLOW](WRITING_WORKFLOW.md) to verify paragraph purpose, exact source claims, 3 tables, 4 figures, editable Word equations, citation consistency and actual page rendering.
 
-## Next scientific coding stage
+## Scientific and execution boundaries
 
-After a schema run, map actual measured/generator weight columns and uncertainty families to the official ATLAS implementation. Construct the *nominal-generator-only* frozen thresholds and four-cell support before projecting all source-specific variations. Only run 2D closure with the official pseudodata target once this mapping is verified.
+**G5 PROVISIONAL, G8 UNVERIFIED, G11 ONE known-target example, G12 UNVERIFIED, G15 NO-GO.** The four DD/Sherpa scenarios are model-conditional. A passing software test cannot establish experimental repeated-unfolding coverage.
 
-A successful setup is not a physics finding.
-
-
-## Provisional real 2×2 covariance stage (2026-11-07)
-
-On the Actions tab, manually choose `covariance`, or commit a change with `[atlas-covariance]` in the message. This stage downloads the checked official archive, extracts **only** the nominal real-data file plus the real-data Sherpa and non-DY alternative samples, and runs `python -m src.phase7_covariance`.
-
-It exports `real_2x2_cells.csv`, `source_manifest.csv`, `source_covariances.npz`, `covariance_total.npy`, `bin_spec_covariance.json`, and `provisional_covariance_status.json`. These are measurements and **provisional** uncertainty results, NOT an ATLAS-calibrated p-value. The 2D treatment of two-point modelling is not yet independently validated. Do not infer generator agreement/disagreement from the sign or size of uncalibrated differences.
-
-The workflow posts a run link and completion status to [research issue #1](../issues/1) through the connected GitHub Actions bot so run IDs can be discovered without manual copying. A successful software-only CI does not mean the tagged covariance stage was executed: inspect each individual job step.
-
-The official high-statistics pseudodata target is not extracted by this covariance stage. Its 2D closure, source correlation sensitivity and finite-covariance calibration remain outstanding (G8, G11, G12). The research-wide G15 stays **NO-GO**.
-
-
-## Official 2x2 pseudodata target closure (2026-11-07)
-
-The `closure` GitHub Actions stage was added. It selects the real nominal HDF5 file (only to define the frozen generator thresholds), the three pseudodata unfolding HDF5 files, and the independent high-statistics `pseudodata/target.h5`. It uses `target.weight_mc` as the known truth and `pseudodata/multifold.h5::weights_nominal` for the pseudo-measurement. All datasets use exactly the same `pT_trackj1 > 5 GeV` selection and four generator-defined cells. The target is streamed to avoid loading the multi-GB data into memory.
-
-Run the stage with a commit containing `[atlas-closure]`, or select it from manual `workflow_dispatch`. Generated outputs: `pseudo_bin_spec.json`, `pseudo_closure_cells.csv`, `pseudo_source_manifest.csv`, `pseudo_source_covariances.npz`, `pseudo_covariance_total.npy`, `pseudo_covariance_sensitivity.csv`, `pseudo_closure_status.json`.
-
-**Scientific limits:** One pseudodata known-target comparison is not a coverage study. The Mahalanobis quadratic is deliberately marked UNCALIBRATED, not a p-value. The six amplitude-sensitivity variants are stress tests, not documented alternative ATLAS correlation prescriptions. The provisional DD and Sherpa covariance terms remain unvalidated; G8/G12/G15 remain NO-GO or UNVERIFIED. The `closure` stage does not execute the final real-measurement-versus-generator inference.
+Use a full original Zenodo archive extraction only for a justified new source question after checking storage and CI cost. Old preflight commands and historical caveats remain in [RUNBOOK_PHASE7_HISTORY](RUNBOOK_PHASE7_HISTORY.md); original deep-research reports remain in [REPORT_REGISTER](REPORT_REGISTER.md). No invisible background work is implied.
