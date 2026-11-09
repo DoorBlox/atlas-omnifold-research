@@ -1,5 +1,7 @@
 # ATLAS OmniFold Z+jets: reproducible four-cell analysis
 
+**Continue in ChatGPT:** [active handoff](CHATGPT_HANDOFF.md) · [current state](docs/CURRENT_STATE.md) · [research workflow](docs/RESEARCH_WORKFLOW.md) · [author-led writing workflow](docs/WRITING_WORKFLOW.md) · [artifact registry](docs/ARTIFACT_REGISTRY.md).
+
 [![ATLAS Phase 7 lightweight scientific checks](https://github.com/DoorBlox/atlas-omnifold-research/actions/workflows/atlas-phase7-lite.yml/badge.svg)](https://github.com/DoorBlox/atlas-omnifold-research/actions/workflows/atlas-phase7-lite.yml)
 
 This independent student project examines the **joint distribution of leading charged-jet mass and charged-constituent multiplicity** using the [2024 ATLAS OmniFold Z+jets measurement](https://doi.org/10.1103/PhysRevLett.133.261803) and [its public event-weight release](https://doi.org/10.5281/zenodo.11507450). The analysis reconstructs four normalized cells and compares unfolded real data with a shared-event nominal generator. A second example compares unfolded pseudodata with independent known-target truth.
@@ -31,7 +33,7 @@ The repository stores frozen derived moments and a compact result release. The s
 
 ## Manuscript
 
-**Current draft:** `Manuscript_Four_Cell_Question_Driven_v0.6.docx` (11 pages, 3 numerical tables, 4 figures, 14 references). Each edited paragraph has a defined analytical question; the full paragraph map and change report accompany the Word file in the author conversation. The author's latest Turnitin report classified 64% of the **previous v0.5** draft as likely AI-written. The new draft has not been screened. [Manuscript review and writing integrity](docs/MANUSCRIPT_REVIEW.md).
+**Current author-selected draft:** `ATLAS_Four_Cell_Science_Checked_Formatted_Equations.docx` (SHA-256 `e4d3e49b19e0c683bff7340769d4c646f2c1b13791551a941308aeb0182f8e62`). This is the author's rewritten prose, with focused scientific checking and proper Word equations; it contains three numerical tables, four figures and 14 reference entries. Older assistant v0.6 is preserved as history. [File identity and recovery](docs/ARTIFACT_REGISTRY.md) · [review](docs/MANUSCRIPT_REVIEW.md).
 
 The full editable manuscript remains a conversation artifact. The school Google Doc ARTICLE tab contains an earlier working draft.
 
