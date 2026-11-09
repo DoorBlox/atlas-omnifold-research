@@ -14,8 +14,10 @@ The codebase retains historical `phase7_` module names for compatibility; the pr
 | [tests/test_phase7_kti_bundle.py](../tests/test_phase7_kti_bundle.py) | Frozen numeric expectations and model invariants | Existing tests are numerical checks |
 | [results/README.md](../results/README.md) | Stable result index | Stable pointer to the pinned scientific release |
 | [results/four-cell-v1](../results/four-cell-v1) | Version-one four-cell numerical evidence | CSV/SVG contents retained, new release labels and manifest hashes verified |
-| [.github/workflows/atlas-phase7-lite.yml](../.github/workflows/atlas-phase7-lite.yml) | No-download derived regression workflow | Uses old output dirname because of historical compatibility |
+| [.github/workflows/atlas-phase7-lite.yml](../.github/workflows/atlas-phase7-lite.yml) | No-download derived regression workflow | Uses current four-cell-v1 output path and frozen v1/v2 inputs |
 | [.github/workflows/atlas-phase7.yml](../.github/workflows/atlas-phase7.yml) | Expensive full original-event workflow | Avoid without an explicit reason requiring new event moments |
+| [../CHATGPT_HANDOFF.md](../CHATGPT_HANDOFF.md) | One active ChatGPT continuation checkpoint | Replace after verified task, archive details |
+| [ARTIFACT_REGISTRY.md](ARTIFACT_REGISTRY.md) | Identity, custody and recovery for current author DOCX | Private bytes remain outside GitHub |
 | [docs/REPORT_REGISTER.md](REPORT_REGISTER.md) | Classifies 20+ historical method and manuscript reports | New issues belong in short current register |
 | [plans/RESEARCH_PLAN.md](../plans/RESEARCH_PLAN.md) | Current forward research plan | Keep binding scope and editorial tasks here |
 
