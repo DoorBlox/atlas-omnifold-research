@@ -25,6 +25,7 @@ ACTIVE = [
     "docs/PROJECT_HISTORY.md", "docs/RESEARCH_STATUS.md",
     "docs/MANUSCRIPT_REVIEW.md", "docs/REPORT_REGISTER.md",
     "docs/ISSUE_REGISTER.md", "plans/RESEARCH_PLAN.md",
+    "references/README.md",
 ]
 REQUIRED_HISTORY = [
     "docs/HANDOFF_HISTORY.md",
@@ -73,6 +74,10 @@ def main() -> int:
     handoff = (ROOT / "CHATGPT_HANDOFF.md").read_text(encoding="utf-8")
     if "G15" not in handoff or "NO-GO" not in handoff:
         raise SystemExit("Scientific G15 boundary missing in handoff")
+
+    ref_text = (ROOT / "references/README.md").read_text(encoding="utf-8")
+    if "latest [v0.6 Word draft]" in ref_text:
+        raise SystemExit("References README incorrectly describes v0.6 as latest")
 
     manifest_path = ROOT / "results/four-cell-v1/manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
